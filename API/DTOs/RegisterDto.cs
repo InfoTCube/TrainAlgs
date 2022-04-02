@@ -7,19 +7,20 @@ public class RegisterDto
     [Required]
     public string? Username { get; set; }
     [Required]
-    public string? Name { get; set; }
+    public string? FirstName { get; set; }
     [Required]
-    public string? Surname { get; set; }
-    [Required]
+    public string? LastName { get; set; }
+    
     public DateTime DateOfBirth { get; set; }
     [Required]
     [EmailAddress]
     public string? Email { get; set; }
-    [Required]
-    public string? City { get; set; }
-    [Required]
+    
     public string? Country { get; set; }
     [Required]
-    [StringLength(32, MinimumLength = 4)]
+    [StringLength(32, ErrorMessage = "Password must be between 7 and 32 characters", MinimumLength = 7)]
     public string? Password { get; set; }
+    [Required]
+    [Compare("Password")]
+    public string? ConfirmPassword { get; set; }
 }
