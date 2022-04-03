@@ -13,8 +13,7 @@ import { AccountService } from '../services/account.service';
 export class NavComponent implements OnInit, AfterViewInit {
   dropdownPopoverShow: boolean = false;
   @ViewChild("btnDropdownRef", { static: false }) btnDropdownRef: ElementRef;
-  @ViewChild("popoverDropdownRef", { static: false })
-  popoverDropdownRef: ElementRef;
+  @ViewChild("popoverDropdownRef", { static: false }) popoverDropdownRef: ElementRef;
 
   constructor(public accountService: AccountService, private router: Router) { }
 

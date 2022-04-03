@@ -1,0 +1,11 @@
+<div *ngIf="member" class="max-w-sm w-full lg:w-full lg:flex m-8">
+    <div class="border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-800 rounded p-10 flex flex-col justify-between leading-normal">
+      <div>
+        <div class="text-gray-900 dark:text-white font-bold text-5xl mb-2">{{member.username}}</div>
+        <p class="text base text-gray-900 dark:text-white">Describtion: {{member.description}}</p>
+        <p class="text-gray-900 dark:text-white text-base">Country: {{member.country}}</p>
+        <p class="text-gray-900 dark:text-white text-base">Member since: {{member.created}}</p>
+        <p class="text-gray-900 dark:text-white text-base">Last active: {{member.lastActive}}</p>
+      </div>
+    </div>
+</div>

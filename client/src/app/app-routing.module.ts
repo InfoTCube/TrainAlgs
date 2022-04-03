@@ -5,6 +5,7 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { AuthGuard } from './guards/auth.guard';
 import { UnauthGuard } from './guards/unauth.guard';
 import { HomeComponent } from './home/home.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: 'server-error', component: ServerErrorComponent},
+  {path: 'members/:username', component: MemberDetailComponent},
   {
     path: '',
     runGuardsAndResolvers: 'always',
@@ -27,7 +29,7 @@ const routes: Routes = [
       {path: 'sign_in', component: SignInComponent}
     ]
   },
-  {path: '**', component: HomeComponent, pathMatch: 'full'}
+  {path: '**', component: NotFoundComponent, pathMatch: 'full'}
 ];
 
 @NgModule({

@@ -5,6 +5,7 @@ namespace API.DTOs;
 public class RegisterDto
 {
     [Required]
+    [StringLength(32, ErrorMessage = "Username must be between 3 and 32 characters", MinimumLength = 3)]
     public string? Username { get; set; }
     [Required]
     public string? FirstName { get; set; }
