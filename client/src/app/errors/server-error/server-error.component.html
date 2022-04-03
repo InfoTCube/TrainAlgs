@@ -1,0 +1,19 @@
+<div class="relative flex items-top justify-center bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
+    <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
+        <div class="flex items-center pt-8 sm:justify-start sm:pt-0">
+            <div class="text-center">
+                <h1 class="text-7xl text-extrabold text-gray-900 dark:text-white">500</h1>
+                <h1 class="text-xl text-extrabold text-gray-900 dark:text-white">Internal Server Error</h1>
+                <ng-container *ngIf="error">
+                    <h5>Error: {{error.message}}</h5>
+                    <p>What to do next?</p>
+                    <div>
+                        <button class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" routerLink="/">Return to home page</button>
+                        <button class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" routerLink="https://github.com/InfoTCube/TrainAlgs/issues">Create issue on Github</button>
+                    </div>
+                    <code class="mt-5 bg-gray-200 dark:bg-gray-700">{{error.details}}</code>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
