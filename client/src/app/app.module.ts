@@ -17,6 +17,7 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { TasksComponent } from './tasks/tasks/tasks.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     HomeComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    MemberDetailComponent
+    MemberDetailComponent,
+    TasksComponent
   ],
   imports: [
     BrowserModule,

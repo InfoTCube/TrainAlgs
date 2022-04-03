@@ -15,6 +15,8 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, int, IdentityUser
     {
     }
 
+    public DbSet<AlgTask> Tasks { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
