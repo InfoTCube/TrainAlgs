@@ -17,7 +17,7 @@
 ## Team
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/InfoTCube/InfoTCube"><img src="https://avatars.githubusercontent.com/u/59064153?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tymoteusz Marzec</b></sub></a><br /><sub><b>Funder & Fullstack dev</b></sub></br><a href="https://github.com/InfoTCube/TrainAlgs/commits?author=InfoTCube" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/InfoTCube"><img src="https://avatars.githubusercontent.com/u/59064153?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tymoteusz Marzec</b></sub></a><br /><sub><b>Funder & Fullstack dev</b></sub></br><a href="https://github.com/InfoTCube/TrainAlgs/commits?author=InfoTCube" title="Code">💻</a></td>
     <td align="center"><a href="#"><img src="https://img.redro.pl/obrazy/question-icon-vector-question-mark-sign-help-icon-700-171195145.jpg" width="100px;" alt=""/><br /><sub><b>You can be here</b></sub></a><br /><sub><b>Frontend dev</b></sub></br><a href="https://github.com/InfoTCube/TrainAlgs/commits" title="Code">💻</a></td>
     <td align="center"><a href="#"><img src="https://img.redro.pl/obrazy/question-icon-vector-question-mark-sign-help-icon-700-171195145.jpg" width="100px;" alt=""/><br /><sub><b>You can be here</b></sub></a><br /><sub><b>Backend dev</b></sub></br><a href="https://github.com/InfoTCube/TrainAlgs/commits" title="Code">💻</a></td>
     <td align="center"><a href="#"><img src="https://img.redro.pl/obrazy/question-icon-vector-question-mark-sign-help-icon-700-171195145.jpg" width="100px;" alt=""/><br /><sub><b>You can be here</b></sub></a><br /><sub><b>Fullstack dev</b></sub></br><a href="https://github.com/InfoTCube/TrainAlgs/commits" title="Code">💻</a></td>
