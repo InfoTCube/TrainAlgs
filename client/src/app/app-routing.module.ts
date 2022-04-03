@@ -8,11 +8,13 @@ import { HomeComponent } from './home/home.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { TasksComponent } from './tasks/tasks/tasks.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: 'server-error', component: ServerErrorComponent},
+  {path: 'tasks', component: TasksComponent},
   {path: 'members/:username', component: MemberDetailComponent},
   {
     path: '',
