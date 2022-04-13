@@ -12,9 +12,9 @@ import { TasksComponent } from './tasks/tasks/tasks.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'tasks', component: TasksComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: 'server-error', component: ServerErrorComponent},
-  {path: 'tasks', component: TasksComponent},
   {path: 'members/:username', component: MemberDetailComponent},
   {
     path: '',

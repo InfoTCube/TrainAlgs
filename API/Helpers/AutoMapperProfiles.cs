@@ -12,5 +12,6 @@ public class AutoMapperProfiles : Profile
         CreateMap<AlgTask, TaskDto>()
             .ForMember(user => user.AuthorUsername, opt => opt.MapFrom(src => 
                 src.Author.UserName));
+        CreateMap<TaskDto, AlgTask>();
     }
 }

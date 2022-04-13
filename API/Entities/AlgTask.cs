@@ -11,5 +11,7 @@ namespace API.Entities
         public string? ContentUrl { get; set; }
         public AppUser? Author { get; set; }
         public int AuthorId { get; set; }
+        public int MemoryLimit { get; set; }
+        public ICollection<TestGroup>? TestGroups { get; set; }
     }
 }

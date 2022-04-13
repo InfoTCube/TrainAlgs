@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { delay } from 'rxjs';
 import { User } from './Models/user';
 import { AccountService } from './services/account.service';
 
@@ -8,6 +9,7 @@ import { AccountService } from './services/account.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  title = 'client';
 
   ngOnInit(): void {
     this.setCurrentUser();

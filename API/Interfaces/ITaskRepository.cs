@@ -7,6 +7,7 @@ namespace API.Interfaces
     public interface ITaskRepository
     {
         void Update(AlgTask task);
+        Task AddTaskAsync(AlgTask task);
         Task<AlgTask> GetTaskByIdAsync(int id);
         Task<TaskDto> GetTaskByNameTagAsync(string nameTag);
         Task<PagedList<TaskDto>> GetTasksAsync(ElementParams elementParams);

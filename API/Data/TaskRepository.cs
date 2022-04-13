@@ -18,6 +18,11 @@ namespace API.Data
             _mapper = mapper;
         }
 
+        public async Task AddTaskAsync(AlgTask task)
+        {
+            await _context.Tasks.AddAsync(task);
+        }
+
         public async Task<AlgTask> GetTaskByIdAsync(int id)
         {
             return await _context.Tasks.FindAsync(id);

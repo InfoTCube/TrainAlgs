@@ -1,11 +1,12 @@
 using API.Entities;
+using API.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;
 public class Seed
 {
-    public static async Task SeedRoles(UserManager<AppUser> userManager,
-        RoleManager<AppRole> roleManager) 
+    public static async Task SeedRoles(RoleManager<AppRole> roleManager) 
     {
         if(roleManager.Roles.Any()) return;
 
