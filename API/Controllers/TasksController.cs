@@ -6,45 +6,50 @@ using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace API.Controllers;
+public class TasksController : BaseApiController
 {
-    public class TasksController : BaseApiController
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
+    public TasksController(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
-        public TasksController(IUnitOfWork unitOfWork, IMapper mapper)
-        {
-            _mapper = mapper;
-            _unitOfWork = unitOfWork;
-        }
+        _mapper = mapper;
+        _unitOfWork = unitOfWork;
+    }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<TaskDto>>> GetTasks([FromQuery] ElementParams elementParams)
-        {
-            var tasks = await _unitOfWork.TaskRepository.GetTasksAsync(elementParams);
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<TaskDto>>> GetTasks([FromQuery] ElementParams elementParams)
+    {
+        var tasks = await _unitOfWork.TaskRepository.GetTasksAsync(elementParams);
 
-            Response.AddPaginationHeader(tasks.CurrentPage, tasks.PageSize,
-                tasks.TotalCount, tasks.TotalPages);
+        Response.AddPaginationHeader(tasks.CurrentPage, tasks.PageSize,
+            tasks.TotalCount, tasks.TotalPages);
 
-            return Ok(tasks);
-        }
+        return Ok(tasks);
+    }
 
-        [HttpGet("{nameTag}")]
-        public async Task<ActionResult<TaskDto>> GetTask(string nameTag)
-        {
-            return await _unitOfWork.TaskRepository.GetTaskByNameTagAsync(nameTag);
-        }
+    [HttpGet("{nameTag}")]
+    public async Task<ActionResult<TaskDto>> GetTask(string nameTag)
+    {
+        return await _unitOfWork.TaskRepository.GetTaskByNameTagAsync(nameTag);
+    }
 
-        [HttpPost]
-        public async Task<ActionResult<TaskDto>> AddTask(TaskDto taskDto)
-        {
-            AlgTask task = _mapper.Map<AlgTask>(taskDto);
-            task.Author = await _unitOfWork.UserRepository.GetUserByUsernameAsync("info");
+    [HttpPost]
+    public async Task<ActionResult<NewTaskDto>> AddTask(NewTaskDto taskDto)
+    {
+        if(await TaskExists(taskDto.NameTag)) return BadRequest("Task with the same name tag already exist");
 
-            await _unitOfWork.TaskRepository.AddTaskAsync(task);
-            await _unitOfWork.Complete();
+        AlgTask task = _mapper.Map<AlgTask>(taskDto);
+        task.Author = await _unitOfWork.UserRepository.GetUserByUsernameAsync("info");
 
-            return taskDto;
-        }
+        await _unitOfWork.TaskRepository.AddTaskAsync(task);
+        await _unitOfWork.Complete();
+
+        return taskDto;
+    }
+
+    private async Task<bool> TaskExists(string nameTag)
+    {
+        return (await _unitOfWork.TaskRepository.GetTaskByNameTagAsync(nameTag) is not null);
     }
 }
