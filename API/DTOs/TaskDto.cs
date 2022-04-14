@@ -7,5 +7,6 @@ namespace API.DTOs
         public string? ContentUrl { get; set; }
         public string? AuthorUsername { get; set; }
         public int MemoryLimit { get; set; }
+        public ICollection<TestGroupDto>? TestGroups { get; set; }
     }
 }

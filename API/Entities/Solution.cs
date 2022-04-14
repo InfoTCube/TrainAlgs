@@ -1,7 +1,5 @@
-namespace API.Entities
+namespace API.Entities;
+public class Solution
 {
-    public class Solution
-    {
-        
-    }
+    
 }

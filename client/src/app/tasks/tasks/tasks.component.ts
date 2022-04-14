@@ -22,7 +22,7 @@ export class TasksComponent implements OnInit {
     this.loadTasks();
   }
 
-  loadTasks() {
+  async loadTasks() {
     this.tasksService.getTasks(this.taskParams).subscribe(response => {
       this.tasks = response.result;
       this.pagination = response.pagination;
