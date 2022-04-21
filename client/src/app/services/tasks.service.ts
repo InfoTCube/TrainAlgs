@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PaginatedResult } from '../Models/pagination';
+import { ListedTask } from '../Models/listedTask';
 import { Task } from '../Models/task';
 import { TaskParams } from '../Models/taskParams';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
@@ -12,7 +13,7 @@ import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 })
 export class TasksService {
   baseUrl = environment.apiUrl;
-  tasks: Task[] = [];
+  tasks: ListedTask[] = [];
   
 
   constructor(private http: HttpClient) { }
@@ -20,14 +21,14 @@ export class TasksService {
   getTasks(taskParams: TaskParams) {
     let params = getPaginationHeaders(taskParams.pageNumber, taskParams.pageSize)
 
-    return getPaginatedResult<Task[]>(this.baseUrl + 'tasks', params, this.http).pipe(
+    return getPaginatedResult<ListedTask[]>(this.baseUrl + 'tasks', params, this.http).pipe(
       map(response => {
         return response;
       })
     );
   }
 
-  getTask(name: string) {
-    return this.http.get<Task>(this.baseUrl + 'tasks/' + name);
+  getTask(nameTag: string) {
+    return this.http.get<Task>(this.baseUrl + 'tasks/' + nameTag);
   }
 }

@@ -10,6 +10,6 @@ namespace API.Interfaces
         Task AddTaskAsync(AlgTask task);
         Task<AlgTask> GetTaskByIdAsync(int id);
         Task<TaskDto> GetTaskByNameTagAsync(string nameTag);
-        Task<PagedList<TaskDto>> GetTasksAsync(ElementParams elementParams);
+        Task<PagedList<ListedTaskDto>> GetTasksAsync(ElementParams elementParams);
     }
 }

@@ -18,7 +18,7 @@ public class TasksController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<TaskDto>>> GetTasks([FromQuery] ElementParams elementParams)
+    public async Task<ActionResult<IEnumerable<ListedTaskDto>>> GetTasks([FromQuery] ElementParams elementParams)
     {
         var tasks = await _unitOfWork.TaskRepository.GetTasksAsync(elementParams);
 

@@ -13,8 +13,12 @@ public class AutoMapperProfiles : Profile
         CreateMap<Test, TestDto>();
         CreateMap<NewTestGroupDto, TestGroup>();
         CreateMap<TestGroup, TestGroupDto>();
-            //.ForMember(t => t.Tests, opt => opt.MapFrom(td => td.Tests));
         CreateMap<AlgTask, TaskDto>()
+            .ForMember(user => user.AuthorUsername, opt => opt.MapFrom(src => 
+                src.Author.UserName))
+            .ForMember(test => test.TestGroups, opt => opt.MapFrom(src => 
+                src.TestGroups.Where(tg => tg.Number == 0)));
+        CreateMap<AlgTask, ListedTaskDto>()
             .ForMember(user => user.AuthorUsername, opt => opt.MapFrom(src => 
                 src.Author.UserName));
         CreateMap<NewTaskDto, AlgTask>();

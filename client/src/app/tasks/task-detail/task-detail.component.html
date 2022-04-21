@@ -1,0 +1,39 @@
+<p>task-detail works!</p>
+{{task.name}}
+
+<div *ngIf="task.testGroups" class="content-center flex items-center justify-center pb-4">
+    <div>
+        <h1 class="text-gray-900 dark:text-white text-center">Example tests</h1>
+        <div class="full relative overflow-x-auto shadow-md rounded-lg">
+            <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
+                <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            #
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Input
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Output
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let test of task.testGroups[0].tests" class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                            {{test.number}}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{test.input}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{test.output}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+  

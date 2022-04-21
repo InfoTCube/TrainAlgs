@@ -36,13 +36,13 @@ namespace API.Data
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<PagedList<TaskDto>> GetTasksAsync(ElementParams elementParams)
+        public async Task<PagedList<ListedTaskDto>> GetTasksAsync(ElementParams elementParams)
         {
             var query = _context.Tasks
-                .ProjectTo<TaskDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<ListedTaskDto>(_mapper.ConfigurationProvider)
                 .AsNoTracking();
 
-            return await PagedList<TaskDto>.CreateAsync(query, elementParams.PageNumber, elementParams.PageSize);
+            return await PagedList<ListedTaskDto>.CreateAsync(query, elementParams.PageNumber, elementParams.PageSize);
         }
 
         public void Update(AlgTask task)
