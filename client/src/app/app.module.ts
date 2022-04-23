@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { TasksComponent } from './tasks/tasks/tasks.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgxSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MarkdownModule.forRoot()
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

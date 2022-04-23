@@ -10,6 +10,7 @@ import { TasksService } from 'src/app/services/tasks.service';
 })
 export class TaskDetailComponent implements OnInit {
   task: Task;
+  markdown = '';
 
   constructor(private route: ActivatedRoute, private tasksService: TasksService) { }
 
@@ -20,6 +21,7 @@ export class TaskDetailComponent implements OnInit {
   getTask() {
     this.tasksService.getTask(this.route.snapshot.paramMap.get('nameTag')).subscribe(response => {
       this.task = response;
+      this.markdown = response.contentUrl;
     })
   }
 
