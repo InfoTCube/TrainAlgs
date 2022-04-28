@@ -11,6 +11,7 @@ import { TasksService } from 'src/app/services/tasks.service';
 export class TaskDetailComponent implements OnInit {
   task: Task;
   markdown = '';
+  tab='problemStatement';
 
   constructor(private route: ActivatedRoute, private tasksService: TasksService) { }
 
@@ -21,8 +22,24 @@ export class TaskDetailComponent implements OnInit {
   getTask() {
     this.tasksService.getTask(this.route.snapshot.paramMap.get('nameTag')).subscribe(response => {
       this.task = response;
-      this.markdown = response.contentUrl;
+      this.markdown = this.replaceInlineCode(response.contentUrl);
     })
   }
 
+  replaceInlineCode(md: string) : string {
+    let matchString = '.';
+    while(matchString != null) {
+      let match = md.match(/(?=`)`(?!`)[^`]*(?=`)`(?!`)/);
+      if(match == null) {
+        matchString = null;
+        continue;
+      }
+      md = `${md.substring(0, match.index)} <span class="bg-gray-700 p-1 rounded-md">${match[0].substring(1, match[0].length-1)}</span> ${md.substring(match.index+match[0].length+1)}`;
+    }
+    return md;
+  }
+
+  changeTab(name: string) {
+    this.tab = name;
+  }
 }
