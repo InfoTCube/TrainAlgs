@@ -1,4 +1,4 @@
-<div *ngIf="task" class="px-8 py-4">
+<div *ngIf="task" class="px-8 pb-4">
     <div class="border-b border-gray-200 dark:border-gray-700 mb-10">
         <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
             <li class="mr-2 cursor-pointer">      
@@ -33,7 +33,7 @@
 
         <markdown class="prose dark:prose-invert max-w-none text-xl text-gray-900 dark:text-white" [data]="markdown"></markdown>
 
-        <div *ngIf="task.testGroups" class="content-center flex items-center justify-left mt-6 pb-4">
+        <div *ngIf="task.testGroups.length > 0" class="content-center flex items-center justify-left mt-6 pb-4">
             <div>
                 <h1 class="text-gray-900 dark:text-white text-center">Example tests</h1>
                 <div class="full relative overflow-x-auto shadow-md rounded-lg">

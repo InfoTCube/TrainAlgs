@@ -4,6 +4,7 @@ using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -31,16 +32,19 @@ public class TasksController : BaseApiController
     [HttpGet("{nameTag}")]
     public async Task<ActionResult<TaskDto>> GetTask(string nameTag)
     {
-        return await _unitOfWork.TaskRepository.GetTaskByNameTagAsync(nameTag);
+        var task = await _unitOfWork.TaskRepository.GetTaskByNameTagAsync(nameTag);
+        return _mapper.Map<TaskDto>(task);
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult<NewTaskDto>> AddTask(NewTaskDto taskDto)
     {
         if(await TaskExists(taskDto.NameTag)) return BadRequest("Task with the same name tag already exist");
 
         AlgTask task = _mapper.Map<AlgTask>(taskDto);
-        task.Author = await _unitOfWork.UserRepository.GetUserByUsernameAsync("info");
+        string username = User.GetUsername();
+        task.Author = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
 
         await _unitOfWork.TaskRepository.AddTaskAsync(task);
         await _unitOfWork.Complete();

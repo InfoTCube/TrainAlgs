@@ -16,6 +16,7 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, int, IdentityUser
     }
 
     public DbSet<AlgTask> Tasks { get; set; }
+    public DbSet<Solution> Solutions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

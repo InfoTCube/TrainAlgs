@@ -3,6 +3,7 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220429111028_Solutions")]
+    partial class Solutions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.3");
@@ -426,13 +428,13 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.Solution", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "Author")
-                        .WithMany("Solutions")
+                        .WithMany()
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("API.Entities.AlgTask", "Task")
-                        .WithMany("Solutions")
+                        .WithMany()
                         .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -524,8 +526,6 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.AlgTask", b =>
                 {
-                    b.Navigation("Solutions");
-
                     b.Navigation("TestGroups");
                 });
 
@@ -536,8 +536,6 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
-                    b.Navigation("Solutions");
-
                     b.Navigation("Tasks");
 
                     b.Navigation("UserRoles");

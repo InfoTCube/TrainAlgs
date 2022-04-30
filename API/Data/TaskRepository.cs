@@ -28,11 +28,10 @@ namespace API.Data
             return await _context.Tasks.FindAsync(id);
         }
 
-        public async Task<TaskDto> GetTaskByNameTagAsync(string nameTag)
+        public async Task<AlgTask> GetTaskByNameTagAsync(string nameTag)
         {
             return await _context.Tasks
                 .Where(task => task.NameTag == nameTag)
-                .ProjectTo<TaskDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
         }
 

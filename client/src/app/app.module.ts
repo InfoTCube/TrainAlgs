@@ -20,6 +20,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { TasksComponent } from './tasks/tasks/tasks.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { MarkdownModule } from 'ngx-markdown';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MarkdownModule } from 'ngx-markdown';
     ServerErrorComponent,
     MemberDetailComponent,
     TasksComponent,
-    TaskDetailComponent
+    TaskDetailComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

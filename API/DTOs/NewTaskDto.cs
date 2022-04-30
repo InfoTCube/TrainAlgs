@@ -1,10 +1,16 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace API.DTOs;
 public class NewTaskDto
 {
+    [Required]
     public string? Name { get; set; }
+    [Required]
     public string? NameTag { get; set; }
-    public string? ContentUrl { get; set; }
+    [Required]
+    public string? Content { get; set; }
     public string? AuthorUsername { get; set; }
+    [Required]
     public int MemoryLimit { get; set; }
     public ICollection<NewTestGroupDto>? TestGroups { get; set; }
 }

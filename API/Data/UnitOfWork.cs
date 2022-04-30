@@ -16,6 +16,8 @@ public class UnitOfWork : IUnitOfWork
 
     public ITaskRepository TaskRepository => new TaskRepository(_context, _mapper);
 
+    public ISolutionRepository SolutionRepository => new SolutionRepository(_context, _mapper);
+
     public async Task<bool> Complete()
     {
         return await _context.SaveChangesAsync() > 0;

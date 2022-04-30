@@ -5,13 +5,13 @@
                 <h1 class="text-7xl text-extrabold text-gray-900 dark:text-white">500</h1>
                 <h1 class="text-xl text-extrabold text-gray-900 dark:text-white">Internal Server Error</h1>
                 <ng-container *ngIf="error">
-                    <h5>Error: {{error.message}}</h5>
-                    <p>What to do next?</p>
+                    <h5 class="text-gray-900 dark:text-white">Error: {{error.message}}</h5>
+                    <p class="text-gray-900 dark:text-white">What to do next?</p>
                     <div>
-                        <button class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" routerLink="/">Return to home page</button>
-                        <button class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" routerLink="https://github.com/InfoTCube/TrainAlgs/issues">Create issue on Github</button>
+                        <button class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 m-2" routerLink="/">Return to home page</button>
+                        <button class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 m-2" onclick="location.href='https://github.com/InfoTCube/TrainAlgs/issues';">Create issue on Github</button>
                     </div>
-                    <code class="mt-5 bg-gray-200 dark:bg-gray-700">{{error.details}}</code>
+                    <code class="mt-5 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white">{{error.details}}</code>
                 </ng-container>
             </div>
         </div>

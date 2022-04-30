@@ -3,6 +3,7 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220429104017_contentUrlToContent")]
+    partial class contentUrlToContent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.3");
@@ -170,42 +172,6 @@ namespace API.Data.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("API.Entities.Solution", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Code")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Language")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Points")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("TaskId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.HasIndex("TaskId");
-
-                    b.ToTable("Solutions");
-                });
-
             modelBuilder.Entity("API.Entities.Test", b =>
                 {
                     b.Property<int>("Id")
@@ -257,56 +223,6 @@ namespace API.Data.Migrations
                     b.HasIndex("AlgTaskId");
 
                     b.ToTable("TestGroups");
-                });
-
-            modelBuilder.Entity("API.Entities.TestGroupSolution", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Number")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Points")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("SolutionId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SolutionId");
-
-                    b.ToTable("TestGroupSolutions");
-                });
-
-            modelBuilder.Entity("API.Entities.TestSolution", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Error")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Number")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("TestGroupId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Time")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TestGroupId");
-
-                    b.ToTable("TestSolutions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -423,25 +339,6 @@ namespace API.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("API.Entities.Solution", b =>
-                {
-                    b.HasOne("API.Entities.AppUser", "Author")
-                        .WithMany("Solutions")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Entities.AlgTask", "Task")
-                        .WithMany("Solutions")
-                        .HasForeignKey("TaskId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-
-                    b.Navigation("Task");
-                });
-
             modelBuilder.Entity("API.Entities.Test", b =>
                 {
                     b.HasOne("API.Entities.TestGroup", "TestGroup")
@@ -462,28 +359,6 @@ namespace API.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("AlgTask");
-                });
-
-            modelBuilder.Entity("API.Entities.TestGroupSolution", b =>
-                {
-                    b.HasOne("API.Entities.Solution", "Solution")
-                        .WithMany("TestGroups")
-                        .HasForeignKey("SolutionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Solution");
-                });
-
-            modelBuilder.Entity("API.Entities.TestSolution", b =>
-                {
-                    b.HasOne("API.Entities.TestGroupSolution", "TestGroup")
-                        .WithMany("Tests")
-                        .HasForeignKey("TestGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TestGroup");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -524,8 +399,6 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.AlgTask", b =>
                 {
-                    b.Navigation("Solutions");
-
                     b.Navigation("TestGroups");
                 });
 
@@ -536,24 +409,12 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
-                    b.Navigation("Solutions");
-
                     b.Navigation("Tasks");
 
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("API.Entities.Solution", b =>
-                {
-                    b.Navigation("TestGroups");
-                });
-
             modelBuilder.Entity("API.Entities.TestGroup", b =>
-                {
-                    b.Navigation("Tests");
-                });
-
-            modelBuilder.Entity("API.Entities.TestGroupSolution", b =>
                 {
                     b.Navigation("Tests");
                 });

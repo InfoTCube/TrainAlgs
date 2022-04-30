@@ -11,4 +11,5 @@ public class AppUser : IdentityUser<int>
     public string? Country { get; set; }
     public string? Description { get; set; }
     public ICollection<AlgTask>? Tasks { get; set; }
+    public ICollection<Solution>? Solutions { get; set; }
 }

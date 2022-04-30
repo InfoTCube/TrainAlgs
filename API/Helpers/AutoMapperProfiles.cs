@@ -22,5 +22,17 @@ public class AutoMapperProfiles : Profile
             .ForMember(user => user.AuthorUsername, opt => opt.MapFrom(src => 
                 src.Author.UserName));
         CreateMap<NewTaskDto, AlgTask>();
+        CreateMap<TestGroupSolution, TestGroupSolutionDto>();
+        CreateMap<TestSolution, TestSolutionDto>();
+        CreateMap<Solution, SolutionDto>()
+            .ForMember(user => user.AuthorUsername, opt => opt.MapFrom(src => 
+                src.Author.UserName))
+            .ForMember(solution => solution.AlgTaskTag, opt => opt.MapFrom(src => 
+                src.Task.NameTag));
+        CreateMap<Solution, ListedSolutionDto>()
+            .ForMember(user => user.AuthorUsername, opt => opt.MapFrom(src => 
+                src.Author.UserName))
+            .ForMember(solution => solution.AlgTaskTag, opt => opt.MapFrom(src => 
+                src.Task.NameTag));   
     }
 }

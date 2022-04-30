@@ -22,7 +22,7 @@ export class TaskDetailComponent implements OnInit {
   getTask() {
     this.tasksService.getTask(this.route.snapshot.paramMap.get('nameTag')).subscribe(response => {
       this.task = response;
-      this.markdown = this.replaceInlineCode(response.contentUrl);
+      this.markdown = this.replaceInlineCode(response.content);
     })
   }
 
