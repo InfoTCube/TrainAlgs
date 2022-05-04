@@ -23,6 +23,7 @@ export class TaskDetailComponent implements OnInit {
     this.tasksService.getTask(this.route.snapshot.paramMap.get('nameTag')).subscribe(response => {
       this.task = response;
       this.markdown = this.replaceInlineCode(response.content);
+      console.log(response.exampleTestGroup.tests)
     })
   }
 
@@ -34,7 +35,7 @@ export class TaskDetailComponent implements OnInit {
         matchString = null;
         continue;
       }
-      md = `${md.substring(0, match.index)} <span class="bg-gray-700 p-1 rounded-md">${match[0].substring(1, match[0].length-1)}</span> ${md.substring(match.index+match[0].length+1)}`;
+      md = `${md.substring(0, match.index)}<span class="bg-gray-300 dark:bg-gray-700 p-1 rounded-md">${match[0].substring(1, match[0].length-1)}</span>${md.substring(match.index+match[0].length)}`;
     }
     return md;
   }

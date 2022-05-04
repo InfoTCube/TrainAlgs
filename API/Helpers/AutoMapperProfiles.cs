@@ -16,8 +16,8 @@ public class AutoMapperProfiles : Profile
         CreateMap<AlgTask, TaskDto>()
             .ForMember(user => user.AuthorUsername, opt => opt.MapFrom(src => 
                 src.Author.UserName))
-            .ForMember(test => test.TestGroups, opt => opt.MapFrom(src => 
-                src.TestGroups.Where(tg => tg.Number == 0)));
+            .ForMember(task => task.ExampleTestGroup, opt => opt.MapFrom(src => 
+                src.TestGroups.FirstOrDefault(tg => tg.Number == 0)));
         CreateMap<AlgTask, ListedTaskDto>()
             .ForMember(user => user.AuthorUsername, opt => opt.MapFrom(src => 
                 src.Author.UserName));

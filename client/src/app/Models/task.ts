@@ -6,5 +6,5 @@ export interface Task {
     content: string;
     authorUsername: string;
     memoryLimit: number;
-    testGroups: TestGroup[];
+    exampleTestGroup: TestGroup;
 }

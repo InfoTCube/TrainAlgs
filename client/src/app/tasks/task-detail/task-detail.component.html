@@ -33,7 +33,7 @@
 
         <markdown class="prose dark:prose-invert max-w-none text-xl text-gray-900 dark:text-white" [data]="markdown"></markdown>
 
-        <div *ngIf="task.testGroups.length > 0" class="content-center flex items-center justify-left mt-6 pb-4">
+        <div *ngIf="task.exampleTestGroup" class="content-center flex items-center justify-left mt-6 pb-4">
             <div>
                 <h1 class="text-gray-900 dark:text-white text-center">Example tests</h1>
                 <div class="full relative overflow-x-auto shadow-md rounded-lg">
@@ -52,7 +52,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let test of task.testGroups[0].tests" class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700">
+                            <tr *ngFor="let test of task.exampleTestGroup.tests" class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                     {{test.number}}
                                 </th>
@@ -73,6 +73,38 @@
         <p>Here you will see your submissions in the future</p>
     </div>
     <div *ngIf="tab == 'submit'">
-        <p>Here you would be able to submit your code in the future</p>
+        <form #submit="ngForm" class="mt-8 space-y-6" (ngSubmit)="submit()">
+            <div>
+                <h1 class="text-2xl text-gray-900 dark:text-white">File:</h1>
+                <div class="mb-1 w-96">
+                    <input class="form-control
+                    block w-full pr-3 py-1.5 text-base font-normal text-gray-900 dark:text-white rounded transition
+                    ease-in-out focus:bg-gray-600 focus:border-blue-600 focus:outline-none dark:dark-file-input" 
+                    accept=".cpp,.cc" name="file" [(ngModel)]="model.file" type="file" id="file">
+                </div>
+                <p class="mb-3 text-sm text-gray-500" id="file_input_help">.cpp or .cc files</p>
+            </div>
+            <div>
+                <h1 class="text-2xl text-gray-900 dark:text-white">Code:</h1>
+                <textarea class="form-control rounded-md bg-gray-200 dark:text-gray-900 dark:bg-gray-700 dark:text-white" name="code" id="code" cols="70" rows="10" [(ngModel)]="model.code"></textarea>
+            </div>
+            <div>
+                <h1 class="text-2xl text-gray-900 dark:text-white">Programming language:</h1>
+                <select id="countries" class="w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="CPP">C++</option>
+                    <option value="PY" disabled>Python</option>
+                    <option value="CS" disabled>C#</option>
+                </select>
+            </div>
+    
+            <div>
+              <button type="submit" class="w-64 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800">
+                <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                    <svg class="h-5 w-5 text-blue-300 group-hover:text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" fill="currentColor" aria-hidden="true">  <line x1="22" y1="2" x2="11" y2="13" />  <polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
+                </span>
+                Submit
+              </button>
+            </div>
+          </form>
     </div>
 </div>
