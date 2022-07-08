@@ -1,5 +1,7 @@
+using JudgeAPI.DTOs;
+
 namespace JudgeAPI.Interfaces;
 public interface ICppService
 {
-    Task<string> CompileCpp(string code);
+    Task<SolutionDto> RunCpp(AlgTaskDto algTask);
 }

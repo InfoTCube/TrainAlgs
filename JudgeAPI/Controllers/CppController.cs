@@ -14,7 +14,7 @@ public class CppController : BaseApiController
     [HttpPost("TestTaskCpp")]
     public async Task<ActionResult<SolutionDto>> TestTaskCpp(AlgTaskDto algTask)
     {
-        string errors = await _cppService.CompileCpp(algTask.Code);
-        return BadRequest();
+        SolutionDto solution = await _cppService.RunCpp(algTask);
+        return solution;
     }
 }
