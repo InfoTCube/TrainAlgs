@@ -54,15 +54,43 @@ public class CppService : ICppService
 
                 foreach(var t in tg.Tests) 
                 {
+                    string error = string.Empty;
+                    double time = 0;
+                    using var cts = new CancellationTokenSource();
                     var outputBuilder = new StringBuilder();
-                    var result = await (t.Input | Cli.Wrap($"{path}") | outputBuilder)
-                    .ExecuteBufferedAsync();
+                    cts.CancelAfter(TimeSpan.FromMilliseconds(t.TimeLimit));
+                    try
+                    {
+                        var result = await (t.Input | Cli.Wrap($"{path}") | outputBuilder)
+                            .ExecuteBufferedAsync(cts.Token);
+                        Console.WriteLine($"{uniqueId} - {outputBuilder.ToString()} -- {result.ExitCode} -- {result.ExitTime} -- {result.RunTime}");
+                        time = result.RunTime.TotalMilliseconds;
+                    }
+                    catch(Exception e)
+                    {
+                        if(e.Message.Substring(Math.Max(0, e.Message.Length - 27)) == "was killed by user request.") // check for TLE
+                            error = "TLE";
+                        else
+                            error = "RE";
+                        
+                        System.Console.WriteLine(e.Message);
+                    }
+                    
                     string output = outputBuilder.ToString();
-                    Console.WriteLine($"{uniqueId} - {output} -- {result.ExitCode} -- {result.ExitTime} -- {result.RunTime}");
+
                     var test = new TestSolutionDto { Number = t.Number };
+                    test.Time = (int)time;
                     if(output == t.Output) 
                     {
                         test.Status = "Ok";
+                    }
+                    else if(error == "TLE")
+                    {
+                        test.Status = "Time limit exceeded";
+                    }
+                    else if(error == "RE")
+                    {
+                        test.Status = "Runtime error";
                     }
                     else
                     {
@@ -72,10 +100,8 @@ public class CppService : ICppService
                     testGroup.Tests?.Add(test);
                 }
 
-                if(testGroup.Tests.Count() == tg.Tests.Count())
-                {
+                if(testGroup.Tests.Where(s => s.Status == "Ok").Count() == tg.Tests.Count()) // give points if all tests from group succeed
                     testGroup.Points = tg.Points;
-                }
 
                 solution.TestGroups.Add(testGroup);
             }
@@ -86,6 +112,19 @@ public class CppService : ICppService
         }
 
         File.Delete(path); File.Delete($"{path}.cpp"); // clean trash
+
+        solution.Points = solution.TestGroups.Sum(x => x.Points);
+        solution.Status = "Preliminary checking: ";
+        if(solution.TestGroups.Where(n => n.Number == 0)
+            .FirstOrDefault().Tests
+            .Where(s => s.Status == "Ok").Count() == solution.TestGroups.Where(n => n.Number == 0).FirstOrDefault().Tests.Count())
+        {
+            solution.Status += "Ok";
+        }
+        else
+        {
+            solution.Status += "Error";
+        }
 
         return solution;
     }
