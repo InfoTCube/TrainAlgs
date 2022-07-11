@@ -10,11 +10,11 @@
                 </a>
             </li>
             <li class="mr-2 cursor-pointer">
-                <a *ngIf="tab == 'submissions'" class="inline-flex p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500 group" aria-current="page">
-                    <svg class="mr-2 w-5 h-5 text-blue-600 dark:text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>Submissions
+                <a *ngIf="tab == 'solutions'" class="inline-flex p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500 group" aria-current="page">
+                    <svg class="mr-2 w-5 h-5 text-blue-600 dark:text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>Solutions
                 </a>
-                <a *ngIf="tab != 'submissions'" (click)="changeTab('submissions')" class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group" aria-current="page">
-                    <svg class="mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>Submissions
+                <a *ngIf="tab != 'solutions'" (click)="changeTab('solutions')" class="inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group" aria-current="page">
+                    <svg class="mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>Solutions
                 </a>
             </li>
             <li class="mr-2 cursor-pointer">
@@ -69,13 +69,13 @@
             </div>
         </div>
     </div>
-    <div *ngIf="tab == 'submissions'">
-        <p>Here you will see your submissions in the future</p>
+    <div *ngIf="tab == 'solutions'">
+        <app-solutions [taskTag]="task.nameTag"></app-solutions>
     </div>
     <div *ngIf="tab == 'submit'">
-        <form #submit="ngForm" class="mt-8 space-y-6" (ngSubmit)="submit()">
+        <form #submit="ngForm" class="mt-8 space-y-6" (ngSubmit)="submitSolution()">
             <div>
-                <h1 class="text-2xl text-gray-900 dark:text-white">File:</h1>
+                <h1 for="file" class="text-2xl text-gray-900 dark:text-white">File:</h1>
                 <div class="mb-1 w-96">
                     <input class="form-control
                     block w-full pr-3 py-1.5 text-base font-normal text-gray-900 dark:text-white rounded transition
@@ -85,12 +85,12 @@
                 <p class="mb-3 text-sm text-gray-500" id="file_input_help">.cpp or .cc files</p>
             </div>
             <div>
-                <h1 class="text-2xl text-gray-900 dark:text-white">Code:</h1>
-                <textarea class="form-control rounded-md bg-gray-200 dark:text-gray-900 dark:bg-gray-700 dark:text-white" name="code" id="code" cols="70" rows="10" [(ngModel)]="model.code"></textarea>
+                <h1 for="code" class="text-2xl text-gray-900 dark:text-white">Code:</h1>
+                <textarea class="form-control rounded-md bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-white" name="code" id="code" cols="70" rows="10" [(ngModel)]="model.code"></textarea>
             </div>
             <div>
-                <h1 class="text-2xl text-gray-900 dark:text-white">Programming language:</h1>
-                <select id="countries" class="w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <h1 for="language" class="text-2xl text-gray-900 dark:text-white">Programming language:</h1>
+                <select [(ngModel)]="model.language" id="language" name="language" class="w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="CPP">C++</option>
                     <option value="PY" disabled>Python</option>
                     <option value="CS" disabled>C#</option>

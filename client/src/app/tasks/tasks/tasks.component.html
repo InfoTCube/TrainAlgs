@@ -1,7 +1,7 @@
 <div class="content-center flex items-center justify-center pb-4">
   <div class="full relative overflow-x-auto shadow-md rounded-lg">
     <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
-        <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300">
+        <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300 text-center">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Tag
@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr (click)="taskPage(task.nameTag)" *ngFor="let task of tasks" class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer">
+            <tr (click)="taskPage(task.nameTag)" *ngFor="let task of tasks" class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer text-center">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                     {{task.nameTag}}
                 </th>

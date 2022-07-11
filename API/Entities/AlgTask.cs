@@ -10,7 +10,6 @@ public class AlgTask
     public string? Content { get; set; }
     public AppUser? Author { get; set; }
     public int AuthorId { get; set; }
-    public int MemoryLimit { get; set; }
     public ICollection<TestGroup>? TestGroups { get; set; }
     public ICollection<Solution>? Solutions { get; set; }
 }

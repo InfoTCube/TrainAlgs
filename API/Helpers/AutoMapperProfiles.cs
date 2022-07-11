@@ -24,6 +24,9 @@ public class AutoMapperProfiles : Profile
         CreateMap<NewTaskDto, AlgTask>();
         CreateMap<TestGroupSolution, TestGroupSolutionDto>();
         CreateMap<TestSolution, TestSolutionDto>();
+        CreateMap<AlgTask, AlgTaskToTestDto>();
+        CreateMap<TestGroup, TestGroupToTestDto>();
+        CreateMap<Test, TestToTestDto>();
         CreateMap<Solution, SolutionDto>()
             .ForMember(user => user.AuthorUsername, opt => opt.MapFrom(src => 
                 src.Author.UserName))
@@ -33,6 +36,6 @@ public class AutoMapperProfiles : Profile
             .ForMember(user => user.AuthorUsername, opt => opt.MapFrom(src => 
                 src.Author.UserName))
             .ForMember(solution => solution.AlgTaskTag, opt => opt.MapFrom(src => 
-                src.Task.NameTag));   
+                src.Task.NameTag));
     }
 }

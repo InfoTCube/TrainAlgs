@@ -34,7 +34,7 @@ public class CppService : ICppService
         catch(Exception e) // compiling error
         {
             File.Delete($"{path}.cpp");
-            solution.Status = "Compiling Error";
+            solution.Status = "Compilation Error";
             foreach (Match match in Regex.Matches(e.Message, @"(?<=cpp:)(.*)(?=\n)", RegexOptions.None))
                 if(int.TryParse(match.Value.First().ToString(), out _)) // check if first char of match.Value is digit
                     solution.ErrorMessage += match.Value + '\n';

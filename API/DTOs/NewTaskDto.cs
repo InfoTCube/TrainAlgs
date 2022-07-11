@@ -9,7 +9,5 @@ public class NewTaskDto
     public string? NameTag { get; set; }
     [Required]
     public string? Content { get; set; }
-    [Required]
-    public int MemoryLimit { get; set; }
     public ICollection<NewTestGroupDto>? TestGroups { get; set; }
 }

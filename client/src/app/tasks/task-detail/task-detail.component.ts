@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'src/app/Models/task';
+import { SolutionsService } from 'src/app/services/solutions.service';
 import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
@@ -12,8 +14,11 @@ export class TaskDetailComponent implements OnInit {
   task: Task;
   markdown = '';
   tab='problemStatement';
+  addSolutionForm: FormGroup;
+  model: any = {}
 
-  constructor(private route: ActivatedRoute, private tasksService: TasksService) { }
+  constructor(private route: ActivatedRoute, private tasksService: TasksService, 
+    private solutionsService: SolutionsService, private router: Router) { }
 
   ngOnInit(): void {
     this.getTask();
@@ -25,6 +30,14 @@ export class TaskDetailComponent implements OnInit {
       this.markdown = this.replaceInlineCode(response.content);
       console.log(response.exampleTestGroup.tests)
     })
+  }
+
+  submitSolution() {
+    this.model.algTaskTag = this.task.nameTag;
+    console.log(this.model);
+    this.solutionsService.addSolution(this.model).subscribe(response => {
+      this.router.navigateByUrl(`/solutions`);
+    });
   }
 
   replaceInlineCode(md: string) : string {

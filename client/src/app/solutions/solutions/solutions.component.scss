@@ -1,0 +1,33 @@
+.full {
+    width: 98%;
+}
+
+.ok {
+    background: linear-gradient(90deg, #E9D758 0%, transparent 5%);
+}
+
+.wrong {
+    background: linear-gradient(90deg, #FF5964 0%, transparent 5%);
+}
+
+.good {
+    background: linear-gradient(90deg, #2CDA9D  0%, transparent 5%);
+}
+
+.okPoints {
+    background: #E9D758;
+    color: #1e293b;
+    font-weight: bold;
+}
+
+.wrongPoints {
+    background: #FF5964;
+    color: #1e293b;
+    font-weight: bold;
+}
+
+.goodPoints {
+    background: #2CDA9D;
+    color: #1e293b;
+    font-weight: bold;
+}

@@ -8,13 +8,17 @@ import { HomeComponent } from './home/home.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { SolutionDetailComponent } from './solutions/solution-detail/solution-detail.component';
+import { SolutionsComponent } from './solutions/solutions/solutions.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TasksComponent } from './tasks/tasks/tasks.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'tasks', component: TasksComponent},
+  {path: 'solutions', component: SolutionsComponent},
   {path: 'tasks/:nameTag', component: TaskDetailComponent},
+  {path: 'solutions/:id', component: SolutionDetailComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: 'server-error', component: ServerErrorComponent},
   {path: 'members/:username', component: MemberDetailComponent},

@@ -21,6 +21,8 @@ import { TasksComponent } from './tasks/tasks/tasks.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { FooterComponent } from './footer/footer.component';
+import { SolutionsComponent } from './solutions/solutions/solutions.component';
+import { SolutionDetailComponent } from './solutions/solution-detail/solution-detail.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { FooterComponent } from './footer/footer.component';
     MemberDetailComponent,
     TasksComponent,
     TaskDetailComponent,
-    FooterComponent
+    FooterComponent,
+    SolutionsComponent,
+    SolutionDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-export class TaskParams {
+export class ListingParams {
     pageNumber = 1;
     pageSize = 25;   
 }

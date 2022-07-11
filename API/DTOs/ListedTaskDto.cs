@@ -5,5 +5,4 @@ public class ListedTaskDto
     public string? NameTag { get; set; }
     public string? Content { get; set; }
     public string? AuthorUsername { get; set; }
-    public int MemoryLimit { get; set; }
 }

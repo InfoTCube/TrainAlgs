@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { delay, Observable } from 'rxjs';
 import { PaginatedResult, Pagination } from 'src/app/Models/pagination';
 import { ListedTask } from 'src/app/Models/listedTask';
-import { TaskParams } from 'src/app/Models/taskParams';
+import { ListingParams } from 'src/app/Models/listingParams';
 import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { TasksService } from 'src/app/services/tasks.service';
 export class TasksComponent implements OnInit {
   tasks: ListedTask[];
   pagination: Pagination;
-  taskParams: TaskParams = new TaskParams();
+  taskParams: ListingParams = new ListingParams();
 
   constructor(private tasksService: TasksService, private router: Router, private route: ActivatedRoute) { }
 
