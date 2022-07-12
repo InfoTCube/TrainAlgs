@@ -17,7 +17,7 @@ export class TaskDetailComponent implements OnInit {
   addSolutionForm: FormGroup;
   submitSolutionForm: FormGroup;
   validationErrors: string[] = [];
-  fileContent: string;
+  fileContent: string = "";
 
   constructor(private route: ActivatedRoute, private tasksService: TasksService, 
     private solutionsService: SolutionsService, private router: Router) { }
@@ -70,16 +70,16 @@ export class TaskDetailComponent implements OnInit {
       code: new FormControl('', Validators.required),
       language: new FormControl(''),
     });
-    this.submitSolutionForm.get("language").setValue("CPP");
+    this.submitSolutionForm.get("language").setValue("C++");
     this.submitSolutionForm.get("file").valueChanges.subscribe(filename => {
       if(filename != "") {
         console.log(filename);
         this.submitSolutionForm.get("code").disable();
         let ext = filename.split('.').pop();
         if(ext == "py")
-          this.submitSolutionForm.get("language").setValue("PY");
+          this.submitSolutionForm.get("language").setValue("PYTHON");
         else if(ext == "cpp" || ext == "cxx" || ext == "cc")
-          this.submitSolutionForm.get("language").setValue("CPP");
+          this.submitSolutionForm.get("language").setValue("C++");
 
         this.submitSolutionForm.get("language").disable();
       } else {

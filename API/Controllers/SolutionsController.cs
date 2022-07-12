@@ -99,7 +99,7 @@ public class SolutionsController : BaseApiController
         return _mapper.Map<SolutionDto>(solution);
     }
 
-    [HttpPost, DisableRequestSizeLimit]
+    [HttpPost]
     public async Task<ActionResult<NewSolutionDto>> AddSolution(NewSolutionDto solutionDto)
     {
         string username = User.GetUsername();
@@ -121,14 +121,12 @@ public class SolutionsController : BaseApiController
         HttpClient client = new HttpClient(clientHandler);
         HttpResponseMessage response = new HttpResponseMessage();
 
-        BadRequest();
-
         var taskToTest = _mapper.Map<AlgTaskToTestDto>(task);
         taskToTest.Code = solutionDto.Code;
 
-        if(solution.Language == "CPP")
+        if(solution.Language == "C++")
             response = await client.PostAsJsonAsync("https://localhost:7279/judge/Cpp/TestTaskCpp", taskToTest);
-        else if(solution.Language == "PY")
+        else if(solution.Language == "PYTHON")
             response = await client.PostAsJsonAsync("https://localhost:7279/judge/Python/TestTaskPython", taskToTest);
         
         if(!response.IsSuccessStatusCode)

@@ -22,18 +22,18 @@ export class SolutionsComponent implements OnInit {
     if(this.taskTag == "")
       this.loadAllSolutions();
     else
-      this.loadSolutionsForTask(this.taskTag);
+      this.loadSolutionsForTask();
   }
 
   async loadAllSolutions() {
     this.solutionsService.getSolutionsForCurrentUser(this.solutionParams).subscribe(response => {
-      this.solutions = response.result;
       this.pagination = response.pagination;
+      this.solutions = response.result;
       console.log(this.pagination)
-    })
+    });
   }
 
-  async loadSolutionsForTask(taskTag: string) {
+  async loadSolutionsForTask() {
     this.solutionsService.getSolutionsForCurrentUserAndTask(this.solutionParams, this.taskTag).subscribe(response => {
       this.solutions = response.result;
       this.pagination = response.pagination;

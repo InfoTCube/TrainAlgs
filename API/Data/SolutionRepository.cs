@@ -1,3 +1,4 @@
+using System.Linq;
 using API.DTOs;
 using API.Entities;
 using API.Helpers;
@@ -31,6 +32,7 @@ public class SolutionRepository : ISolutionRepository
     {
         var query = _context.Solutions
             .Where(s => s.Author.UserName == username)
+            .OrderByDescending(d => d.Date)
             .ProjectTo<ListedSolutionDto>(_mapper.ConfigurationProvider)
             .AsNoTracking();
         return await PagedList<ListedSolutionDto>.CreateAsync(query, elementParams.PageNumber, elementParams.PageSize);
@@ -41,6 +43,7 @@ public class SolutionRepository : ISolutionRepository
         var query = _context.Solutions
             .Where(s => s.Author.UserName == username)
             .Where(s => s.Task.NameTag == taskNameTag)
+            .OrderByDescending(d => d.Date)
             .ProjectTo<ListedSolutionDto>(_mapper.ConfigurationProvider)
             .AsNoTracking();
         return await PagedList<ListedSolutionDto>.CreateAsync(query, elementParams.PageNumber, elementParams.PageSize);

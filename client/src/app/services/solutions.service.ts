@@ -4,6 +4,7 @@ import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ListedSolution } from '../Models/listedSolutions';
 import { ListingParams } from '../Models/listingParams';
+import { PaginatedResult } from '../Models/pagination';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 
 @Injectable({

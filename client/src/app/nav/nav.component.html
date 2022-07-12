@@ -34,14 +34,14 @@
             </div>
             <div class="hidden justify-between items-center md:flex w-full md:w-auto" id="mobile-menu">
                 <ul class="flex flex-col md:flex-row md:space-x-6 md:text-sm md:font-medium" id="mobile-menu">
-                    <li>
-                        <a href="/" class="py-4 px-5 text-gray-900 dark:text-white border-b-4 border-blue-500 font-semibold">Home</a>
+                    <li class="nav-item">
+                        <a routerLink="/" [ngClass]="{'active': page == '/'}" class="py-4 px-5 text-gray-900 dark:text-white border-b-4 border-gray-500 dark:border-gray-200 font-semibold hover:text-blue-500 transition dark:hover:text-blue-500 duration-300">Home</a>
                     </li>
-                    <li>
-                        <a href="/tasks" class="py-4 px-5 text-gray-900 dark:text-white border-b-4 border-gray-500 dark:border-gray-200 font-semibold hover:text-blue-500 dark:hover:text-blue-500 transition duration-300">Tasks</a>
+                    <li class="nav-item">
+                        <a routerLink="/tasks" [ngClass]="{'active': page == '/tasks'}" class="py-4 px-5 text-gray-900 dark:text-white border-b-4 border-gray-500 dark:border-gray-200 font-semibold hover:text-blue-500 dark:hover:text-blue-500 transition duration-300">Tasks</a>
                     </li>
-                    <li>
-                        <a href="/solutions" class="py-4 px-5 text-gray-900 dark:text-white border-b-4 border-gray-500 dark:border-gray-200 font-semibold hover:text-blue-500 dark:hover:text-blue-500 transition duration-300">Solutions</a>
+                    <li class="nav-item">
+                        <a routerLink="/solutions" [ngClass]="{'active': page == '/solutions'}" class="py-4 px-5 text-gray-900 dark:text-white border-b-4 border-gray-500 dark:border-gray-200 font-semibold hover:text-blue-500 dark:hover:text-blue-500 transition duration-300">Solutions</a>
                     </li>
                 </ul>
             </div>

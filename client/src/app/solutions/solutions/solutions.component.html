@@ -23,7 +23,7 @@
           <tbody>
               <tr (click)="solutionPage(solution.id)" *ngFor="let solution of solutions" class="text-center bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer">
                   <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap" [ngClass]="{'good': solution.points == 100, 'wrong': solution.points == 0, 'ok': solution.points > 0 && solution.points < 100}">
-                      {{solution.date | date:'full'}}
+                      {{solution.date | date:'EE, d MMMM y HH:mm:ss':'GMT'}} GMT
                   </th>
                   <td class="px-6 py-4">
                       {{solution.algTaskName}} ({{solution.algTaskTag}})
@@ -48,7 +48,7 @@
       </table>
     </div>
   </div>
-  
+
   <div *ngIf="pagination" class="bg-white dark:bg-gray-900 px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 sm:px-6">
       <div class="flex-1 flex justify-between sm:hidden">
         <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-900 dark:text-white bg-white dark:bg-gray-700 hover:bg-gray-50"> Previous </a>
@@ -58,11 +58,11 @@
         <div>
           <p class="text-sm text-gray-900 dark:text-white">
             Showing
-            <span class="font-medium">{{(pagination.currentPage)*(pagination.itemsPerPage)}}</span>
+            <span class="font-medium">{{(pagination?.currentPage-1)*pagination?.itemsPerPage}}</span>
             to
-            <span class="font-medium">10</span>
+            <span class="font-medium">{{pagination?.currentPage*pagination?.itemsPerPage}}</span>
             of
-            <span class="font-medium">{{pagination.totalItems}}</span>
+            <span class="font-medium">{{pagination?.totalItems}}</span>
             results
           </p>
         </div>

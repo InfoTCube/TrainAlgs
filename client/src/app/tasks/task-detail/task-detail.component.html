@@ -28,9 +28,9 @@
         </ul>
     </div>
 
-    <div *ngIf="tab == 'problemStatement'">
-        <h1 class="text-5xl text-gray-900 dark:text-white mb-7">{{task.name}} ({{task.nameTag}})</h1>
+    <h1 class="text-5xl text-gray-900 dark:text-white mb-7">{{task.name}} ({{task.nameTag}})</h1>
 
+    <div *ngIf="tab == 'problemStatement'">
         <markdown class="prose dark:prose-invert max-w-none text-xl text-gray-900 dark:text-white" [data]="markdown"></markdown>
 
         <div *ngIf="task.exampleTestGroup" class="content-center flex items-center justify-left mt-6 pb-4">
@@ -90,9 +90,9 @@
             <div>
                 <h1 for="language" class="text-2xl text-gray-900 dark:text-white">Programming language:</h1>
                 <select formControlName="language" required id="language" name="language" class="w-96 bg-gray-50 disabled:bg-gray-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:disabled:bg-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="CPP" selected>C++</option>
-                    <option value="PY">Python</option>
-                    <option value="CS" disabled>C#</option>
+                    <option value="C++" selected>C++</option>
+                    <option value="PYTHON">Python</option>
+                    <option value="C#" disabled>C#</option>
                 </select>
             </div>
     

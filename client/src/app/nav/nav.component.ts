@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { createPopper, placements } from '@popperjs/core';
-import { Observable } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { User } from '../Models/user';
 import { AccountService } from '../services/account.service';
 
@@ -14,11 +14,17 @@ export class NavComponent implements OnInit, AfterViewInit {
   dropdownPopoverShow: boolean = false;
   @ViewChild("btnDropdownRef", { static: false }) btnDropdownRef: ElementRef;
   @ViewChild("popoverDropdownRef", { static: false }) popoverDropdownRef: ElementRef;
+  page = "/";
 
-  constructor(public accountService: AccountService, private router: Router) { }
+  constructor(public accountService: AccountService, private router: Router) { 
+    router.events.pipe(
+      filter(event => event instanceof NavigationEnd)  
+    ).subscribe((event: NavigationEnd) => {
+      this.page = event.url.split("/").slice(0, 2).join('/');
+    });
+  }
 
   ngOnInit(): void {
-    
   }
 
   ngAfterViewInit(): void {
