@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'src/app/Models/task';
 import { SolutionsService } from 'src/app/services/solutions.service';
@@ -15,13 +15,16 @@ export class TaskDetailComponent implements OnInit {
   markdown = '';
   tab='problemStatement';
   addSolutionForm: FormGroup;
-  model: any = {}
+  submitSolutionForm: FormGroup;
+  validationErrors: string[] = [];
+  fileContent: string;
 
   constructor(private route: ActivatedRoute, private tasksService: TasksService, 
     private solutionsService: SolutionsService, private router: Router) { }
 
   ngOnInit(): void {
     this.getTask();
+    this.initializeForm();
   }
 
   getTask() {
@@ -33,9 +36,13 @@ export class TaskDetailComponent implements OnInit {
   }
 
   submitSolution() {
-    this.model.algTaskTag = this.task.nameTag;
-    console.log(this.model);
-    this.solutionsService.addSolution(this.model).subscribe(response => {
+    var model = this.submitSolutionForm.value;
+    model.code = this.fileContent == "" ? this.submitSolutionForm.get("code").value : this.fileContent;
+    model.language = this.submitSolutionForm.get("language").value;
+    model.algTaskTag = this.task.nameTag;
+    delete model.file
+    console.log(model);
+    this.solutionsService.addSolution(model).subscribe(response => {
       this.router.navigateByUrl(`/solutions`);
     });
   }
@@ -55,5 +62,41 @@ export class TaskDetailComponent implements OnInit {
 
   changeTab(name: string) {
     this.tab = name;
+  }
+
+  initializeForm() {
+    this.submitSolutionForm = new FormGroup({
+      file: new FormControl(''),
+      code: new FormControl('', Validators.required),
+      language: new FormControl(''),
+    });
+    this.submitSolutionForm.get("language").setValue("CPP");
+    this.submitSolutionForm.get("file").valueChanges.subscribe(filename => {
+      if(filename != "") {
+        console.log(filename);
+        this.submitSolutionForm.get("code").disable();
+        let ext = filename.split('.').pop();
+        if(ext == "py")
+          this.submitSolutionForm.get("language").setValue("PY");
+        else if(ext == "cpp" || ext == "cxx" || ext == "cc")
+          this.submitSolutionForm.get("language").setValue("CPP");
+
+        this.submitSolutionForm.get("language").disable();
+      } else {
+        this.submitSolutionForm.get("code").enable();
+        this.submitSolutionForm.get("language").enable();
+      }
+    });
+  }
+
+  async onFileChange(event) {
+    const file:File = event.target.files[0];
+
+    if(file) {
+      const text = await file.text();
+      this.fileContent = text;
+    } else {
+      this.fileContent = "";
+    }
   }
 }

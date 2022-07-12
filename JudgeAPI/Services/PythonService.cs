@@ -1,47 +1,32 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using CliWrap;
 using CliWrap.Buffered;
 using JudgeAPI.DTOs;
 using JudgeAPI.Interfaces;
 
 namespace JudgeAPI.Services;
-public class CppService : ICppService
+
+public class PythonService : IPythonService
 {
-    public async Task<SolutionDto> RunCpp(AlgTaskDto algTask)
+    public async Task<SolutionDto> RunPython(AlgTaskDto algTask)
     {
         var ticks = DateTime.Now.Ticks;
         var guid = Guid.NewGuid().ToString();
         var uniqueId = ticks.ToString() +'-'+ guid.ToString();
-        string path = $"./Runners/Cpp/{uniqueId}";
+        string path = $"./Runners/Python/{uniqueId}";
 
-        using (StreamWriter sw = File.CreateText($"{path}.cpp"))
+        using (StreamWriter sw = File.CreateText($"{path}.py"))
         {
             await sw.WriteAsync(algTask.Code);
             sw.Close();
         }
 
         SolutionDto solution = new SolutionDto();
-
-        // compiling
-        try
-        {
-            var result = await Cli.Wrap("g++")
-            .WithArguments($"{path}.cpp -o {path}")
-            .ExecuteBufferedAsync();
-            Console.WriteLine($"{uniqueId} - {result.ExitCode} -- {result.ExitTime} -- {result.RunTime}");
-        }
-        catch(Exception e) // compiling error
-        {
-            File.Delete($"{path}.cpp");
-            solution.Status = "Compilation Error";
-            foreach (Match match in Regex.Matches(e.Message, @"(?<=cpp:)(.*)(?=\n)", RegexOptions.None))
-                if(int.TryParse(match.Value.First().ToString(), out _)) // check if first char of match.Value is digit
-                    solution.ErrorMessage += match.Value + '\n';
-
-            solution.Points = 0;
-            return solution;
-        }
 
         // running code goes here
         try
@@ -61,7 +46,9 @@ public class CppService : ICppService
                     cts.CancelAfter(TimeSpan.FromMilliseconds(t.TimeLimit));
                     try
                     {
-                        var result = await (t.Input | Cli.Wrap($"{path}") | outputBuilder)
+                        Console.WriteLine(t.Input);
+                        var result = await (t.Input.Replace(' ', '\n') | Cli.Wrap("python3") | outputBuilder)
+                            .WithArguments($"{path}.py")
                             .ExecuteBufferedAsync(cts.Token);
                         Console.WriteLine($"{uniqueId} - {outputBuilder.ToString()} -- {result.ExitCode} -- {result.ExitTime} -- {result.RunTime}");
                         time = result.RunTime.TotalMilliseconds;
@@ -111,7 +98,7 @@ public class CppService : ICppService
             System.Console.WriteLine(e.Message);
         }
 
-        File.Delete(path); File.Delete($"{path}.cpp"); // clean trash
+        File.Delete($"{path}.py"); // clean trash
 
         solution.Points = solution.TestGroups.Sum(x => x.Points);
         solution.Status = "Preliminary checking: ";

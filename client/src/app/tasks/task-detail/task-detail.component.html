@@ -73,32 +73,44 @@
         <app-solutions [taskTag]="task.nameTag"></app-solutions>
     </div>
     <div *ngIf="tab == 'submit'">
-        <form #submit="ngForm" class="mt-8 space-y-6" (ngSubmit)="submitSolution()">
+        <form [formGroup]="submitSolutionForm" #SubmitSolution="ngForm" class="mt-8 space-y-6" (ngSubmit)="submitSolution()">
             <div>
                 <h1 for="file" class="text-2xl text-gray-900 dark:text-white">File:</h1>
                 <div class="mb-1 w-96">
-                    <input class="form-control
+                    <input formControlName="file" class="form-control
                     block w-full pr-3 py-1.5 text-base font-normal text-gray-900 dark:text-white rounded transition
                     ease-in-out focus:bg-gray-600 focus:border-blue-600 focus:outline-none dark:dark-file-input" 
-                    accept=".cpp,.cc" name="file" [(ngModel)]="model.file" type="file" id="file">
+                    accept=".cpp,.cxx,.cc,.py" name="file" type="file" id="file" (change)="onFileChange($event)">
                 </div>
-                <p class="mb-3 text-sm text-gray-500" id="file_input_help">.cpp or .cc files</p>
             </div>
             <div>
                 <h1 for="code" class="text-2xl text-gray-900 dark:text-white">Code:</h1>
-                <textarea class="form-control rounded-md bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-white" name="code" id="code" cols="70" rows="10" [(ngModel)]="model.code"></textarea>
+                <textarea formControlName="code" required class="form-control rounded-md bg-gray-200 disabled:bg-gray-400 text-gray-900 dark:bg-gray-700 dark:text-white dark:disabled:bg-gray-800" name="code" id="code" cols="70" rows="10"></textarea>
             </div>
             <div>
                 <h1 for="language" class="text-2xl text-gray-900 dark:text-white">Programming language:</h1>
-                <select [(ngModel)]="model.language" id="language" name="language" class="w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="CPP">C++</option>
-                    <option value="PY" disabled>Python</option>
+                <select formControlName="language" required id="language" name="language" class="w-96 bg-gray-50 disabled:bg-gray-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:disabled:bg-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="CPP" selected>C++</option>
+                    <option value="PY">Python</option>
                     <option value="CS" disabled>C#</option>
                 </select>
             </div>
     
+            <div class="m-1 text-red-600 text-sm">
+                <ol class="list-disc">
+                  <li *ngIf="submitSolutionForm.get('code').invalid && (submitSolutionForm.get('code').dirty || submitSolutionForm.get('code').touched)">
+                    Please provide a code.
+                  </li>
+                  <div *ngIf="validationErrors.length > 0">
+                    <li *ngFor="let error of validationErrors">
+                      {{error}}
+                    </li>
+                  </div>
+                </ol>
+              </div>
+
             <div>
-              <button type="submit" class="w-64 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800">
+              <button [disabled]="!submitSolutionForm.valid" type="submit" class="w-64 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800">
                 <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                     <svg class="h-5 w-5 text-blue-300 group-hover:text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" fill="currentColor" aria-hidden="true">  <line x1="22" y1="2" x2="11" y2="13" />  <polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
                 </span>

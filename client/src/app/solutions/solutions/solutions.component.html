@@ -29,7 +29,9 @@
                       {{solution.algTaskName}} ({{solution.algTaskTag}})
                   </td>
                   <td class="px-6 py-4">
-                      {{solution.language}}
+                      <span class="badge lang p-2 rounded-lg">
+                        {{solution.language}}
+                      </span>
                   </td>
                   <td class="px-6 py-4">
                       <span class="text-white badge rounded-lg p-2" [ngClass]="{'goodPoints': solution.points == 100, 'wrongPoints': solution.points == 0, 'okPoints': solution.points > 0 && solution.points < 100}">
