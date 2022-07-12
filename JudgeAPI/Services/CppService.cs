@@ -26,8 +26,14 @@ public class CppService : ICppService
         // compiling
         try
         {
+            // create jail
+            await Cli.Wrap("sh")
+                .WithArguments("createJail.sh n")
+                .ExecuteAsync();
+            
+            // compile code
             var result = await Cli.Wrap("g++")
-            .WithArguments($"{path}.cpp -o {path}")
+            .WithArguments($"{path}.cpp -o jail-submission-n/{path}")
             .ExecuteBufferedAsync();
             Console.WriteLine($"{uniqueId} - {result.ExitCode} -- {result.ExitTime} -- {result.RunTime}");
         }
@@ -61,10 +67,15 @@ public class CppService : ICppService
                     cts.CancelAfter(TimeSpan.FromMilliseconds(t.TimeLimit));
                     try
                     {
-                        var result = await (t.Input | Cli.Wrap($"{path}") | outputBuilder)
+                        var result = await (t.Input | Cli.Wrap($"unshare").WithArguments($"-m -n {path}").WithWorkingDirectory("jail-submission-n") | outputBuilder)
                             .ExecuteBufferedAsync(cts.Token);
                         Console.WriteLine($"{uniqueId} - {outputBuilder.ToString()} -- {result.ExitCode} -- {result.ExitTime} -- {result.RunTime}");
                         time = result.RunTime.TotalMilliseconds;
+                        
+                        // clean up a bit after jail
+                        await Cli.Wrap("sh")
+                            .WithArguments("exitJail.sh n")
+                            .ExecuteAsync();
                     }
                     catch(Exception e)
                     {
