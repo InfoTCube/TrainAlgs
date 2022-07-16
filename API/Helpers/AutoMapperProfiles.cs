@@ -22,16 +22,24 @@ public class AutoMapperProfiles : Profile
             .ForMember(user => user.AuthorUsername, opt => opt.MapFrom(src => 
                 src.Author.UserName));
         CreateMap<NewTaskDto, AlgTask>();
+        CreateMap<TestSolution, TestSolutionDto>()
+            .ForMember(test => test.MemoryLimit, opt => opt.MapFrom(src => 
+                src.TestGroup.Solution.Task.TestGroups.FirstOrDefault(x => x.Number == src.TestGroup.Number)
+                .Tests.FirstOrDefault(x => x.Number == src.Number).MemoryLimit))
+            .ForMember(test => test.TimeLimit, opt => opt.MapFrom(src => 
+                src.TestGroup.Solution.Task.TestGroups.FirstOrDefault(x => x.Number == src.TestGroup.Number)
+                .Tests.FirstOrDefault(x => x.Number == src.Number).TimeLimit));
         CreateMap<TestGroupSolution, TestGroupSolutionDto>();
-        CreateMap<TestSolution, TestSolutionDto>();
+        CreateMap<Solution, SolutionDto>()
+            .ForMember(solution => solution.AuthorUsername, opt => opt.MapFrom(src => 
+                src.Author.UserName))
+            .ForMember(solution => solution.AlgTaskTag, opt => opt.MapFrom(src => 
+                src.Task.NameTag))
+            .ForMember(solution => solution.AlgTaskName, opt => opt.MapFrom(src => 
+                src.Task.Name));
         CreateMap<AlgTask, AlgTaskToTestDto>();
         CreateMap<TestGroup, TestGroupToTestDto>();
         CreateMap<Test, TestToTestDto>();
-        CreateMap<Solution, SolutionDto>()
-            .ForMember(user => user.AuthorUsername, opt => opt.MapFrom(src => 
-                src.Author.UserName))
-            .ForMember(solution => solution.AlgTaskTag, opt => opt.MapFrom(src => 
-                src.Task.NameTag));
         CreateMap<Solution, ListedSolutionDto>()
             .ForMember(user => user.AuthorUsername, opt => opt.MapFrom(src => 
                 src.Author.UserName))

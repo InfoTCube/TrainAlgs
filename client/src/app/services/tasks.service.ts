@@ -7,6 +7,9 @@ import { ListedTask } from '../Models/listedTask';
 import { Task } from '../Models/task';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 import { ListingParams } from '../Models/listingParams';
+import { AccountService } from './account.service';
+import { take } from 'rxjs/operators';
+import { User } from '../Models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +17,24 @@ import { ListingParams } from '../Models/listingParams';
 export class TasksService {
   baseUrl = environment.apiUrl;
   tasks: ListedTask[] = [];
-  
+  taskParams: ListingParams;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+      this.taskParams = new ListingParams();
+  }
+
+  getTaskParams() {
+    return this.taskParams;
+  }
+
+  setTaskParams(params: ListingParams) {
+    this.taskParams = params;
+  }
+
+  resetTaskParams() {
+    this.taskParams = new ListingParams();
+    return this.taskParams;
+  }
 
   getTasks(taskParams: ListingParams) {
     let params = getPaginationHeaders(taskParams.pageNumber, taskParams.pageSize)

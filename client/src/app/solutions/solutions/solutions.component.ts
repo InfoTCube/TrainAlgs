@@ -13,10 +13,12 @@ import { SolutionsService } from 'src/app/services/solutions.service';
 export class SolutionsComponent implements OnInit {
   solutions: ListedSolution[];
   pagination: Pagination;
-  solutionParams: ListingParams = new ListingParams();
+  solutionParams: ListingParams;
   @Input() taskTag: string = "";
 
-  constructor(private solutionsService: SolutionsService, private router: Router) { }
+  constructor(private solutionsService: SolutionsService, private router: Router) { 
+    this.solutionParams = this.solutionsService.getSolutionParams();
+  }
 
   ngOnInit(): void {
     if(this.taskTag == "")
@@ -43,6 +45,16 @@ export class SolutionsComponent implements OnInit {
 
   solutionPage(id: number) {
     this.router.navigateByUrl('/solutions/' + id);
+  }
+
+  pageChanged(event: any) {
+    this.solutionParams.pageNumber = event;
+    console.log(event)
+    this.solutionsService.setSolutionParams(this.solutionParams);
+    if(this.taskTag == "")
+      this.loadAllSolutions();
+    else
+      this.loadSolutionsForTask();
   }
 
 }

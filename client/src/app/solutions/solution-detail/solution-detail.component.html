@@ -1,1 +1,49 @@
-<p>solution-detail works!</p>
+<div class="content-center flex items-center justify-center pb-4">
+    <div class="full relative overflow-x-auto shadow-md rounded-lg">
+      <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
+          <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300 text-center">
+              <tr>
+                  <th scope="col" class="px-6 py-3">
+                      Test
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Status
+                  </th>
+                  <th scope="col" class="px-4 py-3">
+                      Time
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Memory
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+              <div *ngFor="let testGroup in solution.testGroups">
+                <tr *ngFor="let test in testGroup.tests" class="text-center bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap" [ngClass]="{'good': solution.points == 100, 'wrong': solution.points == 0, 'ok': solution.points > 0 && solution.points < 100}">
+                        {{test.number}}
+                    </th>
+                    <td class="px-6 py-4">
+                        {{solution.algTaskName}} ({{solution.algTaskTag}})
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="badge lang p-2 rounded-lg">
+                          {{solution.language}}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="text-white badge rounded-lg p-2" [ngClass]="{'goodPoints': solution.points == 100, 'wrongPoints': solution.points == 0, 'okPoints': solution.points > 0 && solution.points < 100}">
+                          {{solution.status}}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="text-white badge rounded-lg p-2" [ngClass]="{'goodPoints': solution.points == 100, 'wrongPoints': solution.points == 0, 'okPoints': solution.points > 0 && solution.points < 100}">
+                          {{solution.points}}
+                        </span>
+                    </td>
+                </tr>
+              </div>
+          </tbody>
+      </table>
+    </div>
+</div>

@@ -8,3 +8,48 @@
         @apply text-white;
     }
 }
+
+.dark {
+    .dark\:dark-file-input {
+        @apply bg-gray-700;
+        @apply text-white;
+    }
+}
+
+.dark {
+    .dark\:styled-pagination .ngx-pagination {
+        .disabled {
+            @apply text-gray-600;
+        }
+        .current {
+            @apply bg-gray-800;
+        }
+        a {
+            @apply text-white;
+        }
+        a:hover {
+            @apply bg-gray-800;
+        }
+        li {
+            @apply text-white;
+        }
+    }
+}
+
+.styled-pagination .ngx-pagination {
+    .disabled {
+        @apply text-gray-400;
+    }
+    .current {
+        @apply bg-gray-200;
+    }
+    a {
+        @apply text-gray-900;
+    }
+    a:hover {
+        @apply bg-gray-200;
+    }
+    li {
+        @apply text-gray-900;
+    }
+}

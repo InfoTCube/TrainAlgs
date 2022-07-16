@@ -23,6 +23,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { FooterComponent } from './footer/footer.component';
 import { SolutionsComponent } from './solutions/solutions/solutions.component';
 import { SolutionDetailComponent } from './solutions/solution-detail/solution-detail.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { SolutionDetailComponent } from './solutions/solution-detail/solution-de
     ReactiveFormsModule,
     HttpClientModule,
     NgxSpinnerModule,
+    NgxPaginationModule,
     BrowserAnimationsModule,
     MarkdownModule.forRoot()
   ],

@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { ListedSolution } from '../Models/listedSolutions';
 import { ListingParams } from '../Models/listingParams';
 import { PaginatedResult } from '../Models/pagination';
+import { Solution } from '../Models/solution';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 
 @Injectable({
@@ -13,8 +14,24 @@ import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 export class SolutionsService {
   baseUrl = environment.apiUrl;
   solutions: ListedSolution[] = [];
+  solutionParams: ListingParams;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+      this.solutionParams = new ListingParams();
+  }
+
+  getSolutionParams() {
+    return this.solutionParams;
+  }
+
+  setSolutionParams(params: ListingParams) {
+    this.solutionParams = params;
+  }
+
+  resetSolutionParams() {
+    this.solutionParams = new ListingParams();
+    return this.solutionParams;
+  }
 
   addSolution(model: any) {
     return this.http.post(this.baseUrl + 'solutions', model);
@@ -38,5 +55,9 @@ export class SolutionsService {
         return response;
       })
     );
+  }
+
+  getSolution(id: number) {
+    return this.http.get<Solution>(this.baseUrl + 'solutions/' + id);
   }
 }

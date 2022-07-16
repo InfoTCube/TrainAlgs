@@ -94,7 +94,6 @@ public class SolutionsController : BaseApiController
     public async Task<ActionResult<SolutionDto>> GetSolution(int id)
     {
         var solution = await _unitOfWork.SolutionRepository.GetSolutionByIdAsync(id);
-
         if(solution is null) return NotFound();
         return _mapper.Map<SolutionDto>(solution);
     }

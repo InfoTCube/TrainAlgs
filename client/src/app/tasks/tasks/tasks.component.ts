@@ -14,9 +14,11 @@ import { TasksService } from 'src/app/services/tasks.service';
 export class TasksComponent implements OnInit {
   tasks: ListedTask[];
   pagination: Pagination;
-  taskParams: ListingParams = new ListingParams();
+  taskParams: ListingParams;
 
-  constructor(private tasksService: TasksService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private tasksService: TasksService, private router: Router, private route: ActivatedRoute) { 
+    this.taskParams = this.tasksService.getTaskParams();
+  }
 
   ngOnInit(): void {
     this.loadTasks();
@@ -32,5 +34,11 @@ export class TasksComponent implements OnInit {
 
   taskPage(nameTag: string) {
     this.router.navigateByUrl('/tasks/' + nameTag);
+  }
+
+  pageChanged(event: any) {
+    this.taskParams.pageNumber = event;
+    this.tasksService.setTaskParams(this.taskParams);
+    this.loadTasks();
   }
 }

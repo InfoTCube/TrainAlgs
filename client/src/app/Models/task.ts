@@ -5,6 +5,5 @@ export interface Task {
     nameTag: string;
     content: string;
     authorUsername: string;
-    memoryLimit: number;
     exampleTestGroup: TestGroup;
 }
