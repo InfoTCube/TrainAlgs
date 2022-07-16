@@ -29,7 +29,9 @@ public class AutoMapperProfiles : Profile
             .ForMember(test => test.TimeLimit, opt => opt.MapFrom(src => 
                 src.TestGroup.Solution.Task.TestGroups.FirstOrDefault(x => x.Number == src.TestGroup.Number)
                 .Tests.FirstOrDefault(x => x.Number == src.Number).TimeLimit));
-        CreateMap<TestGroupSolution, TestGroupSolutionDto>();
+        CreateMap<TestGroupSolution, TestGroupSolutionDto>()
+            .ForMember(testGroup => testGroup.MaxPoints, opt => opt.MapFrom(src => 
+                src.Solution.Task.TestGroups.FirstOrDefault(x => x.Number == src.Number).Points));
         CreateMap<Solution, SolutionDto>()
             .ForMember(solution => solution.AuthorUsername, opt => opt.MapFrom(src => 
                 src.Author.UserName))

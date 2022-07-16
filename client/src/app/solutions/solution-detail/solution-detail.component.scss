@@ -1,3 +1,52 @@
 .full {
     width: 98%;
 }
+
+.full {
+    width: 98%;
+}
+
+.ok {
+    background: linear-gradient(90deg, #E9D758 0%, transparent 5%);
+}
+
+.wrong {
+    background: linear-gradient(90deg, #FF5964 0%, transparent 5%);
+}
+
+.good {
+    background: linear-gradient(90deg, #2CDA9D  0%, transparent 5%);
+}
+
+.okStatus {
+    background: #E9D758;
+}
+
+.wrongStatus {
+    background: #FF5964;
+}
+
+.goodStatus {
+    background: #2CDA9D;
+}
+
+.okPoints {
+    background: #E9D758;
+}
+
+.wrongPoints {
+    background: #FF5964;
+}
+
+.goodPoints {
+    background: #2CDA9D;
+}
+
+.badge {
+    color: #1e293b;
+    font-weight: bold;
+}
+
+.lang {
+    background-color: #009FB7;
+}

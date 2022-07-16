@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Solution } from 'src/app/Models/solution';
+import { TestSolutionResults } from 'src/app/Models/testSolutionResults';
 import { SolutionsService } from 'src/app/services/solutions.service';
 
 @Component({
@@ -10,6 +11,10 @@ import { SolutionsService } from 'src/app/services/solutions.service';
 })
 export class SolutionDetailComponent implements OnInit {
   solution: Solution;
+  tests: TestSolutionResults[] = [];
+  testsErrors: string[] = [];
+  exampleTests: TestSolutionResults[] = [];
+  exampleTestsErrors: string[] = [];
 
   constructor(private solutionsService: SolutionsService, private route: ActivatedRoute) { }
 
@@ -20,8 +25,31 @@ export class SolutionDetailComponent implements OnInit {
   getSolution() {
     this.solutionsService.getSolution(parseInt(this.route.snapshot.paramMap.get('id'))).subscribe(response => {
       this.solution = response;
-      console.log(this.solution);
-    })
+      this.solution.testGroups.forEach(tg => {
+        tg.tests.forEach(t => {
+          var test: TestSolutionResults = {number: `${tg.number}.${t.number}`, time: t.time, memory: t.memory, timeLimit: t.timeLimit,
+            memoryLimit: t.memoryLimit, status: t.status, error: t.error, points: null, maxPoints: null, showPoints: false, pointsLength: null};
+
+          if(t.number == 1) {
+            test.points = tg.points;
+            test.maxPoints = tg.maxPoints;
+            test.showPoints = true;
+            test.pointsLength = tg.tests.length;
+          }
+
+          if(tg.number == 0)
+            this.exampleTests.push(test);
+          else
+            this.tests.push(test);
+
+          if(t.error && tg.number == 0) 
+            this.exampleTestsErrors.push(t.error);
+          else if(t.error)
+            this.testsErrors.push(t.error);
+        });
+      });
+      console.log(response)
+    });
   }
 
 }

@@ -34,7 +34,7 @@ public class CppService : ICppService
         catch(Exception e) // compiling error
         {
             File.Delete($"{path}.cpp");
-            solution.Status = "Compilation Error";
+            solution.Status = "Compilation error";
             foreach (Match match in Regex.Matches(e.Message, @"(?<=cpp:)(.*)(?=\n)", RegexOptions.None))
                 if(int.TryParse(match.Value.First().ToString(), out _)) // check if first char of match.Value is digit
                     solution.ErrorMessage += match.Value + '\n';
@@ -94,8 +94,8 @@ public class CppService : ICppService
                     }
                     else
                     {
-                        test.Status = "Wrong Answer";
-                        test.Error = $"{tg.Number}:{t.Number}: received: {output}, expected: '{t.Output}'";
+                        test.Status = "Wrong answer";
+                        test.Error = $"{tg.Number}.{t.Number}: received: '{output}', expected: '{t.Output}'";
                     }
                     testGroup.Tests?.Add(test);
                 }

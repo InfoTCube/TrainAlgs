@@ -25,7 +25,17 @@ public class SolutionRepository : ISolutionRepository
 
     public async Task<Solution> GetSolutionByIdAsync(int id)
     {
-        return await _context.Solutions.FindAsync(id);
+        var solution =  await _context.Solutions
+            .Include(solution => solution.TestGroups)
+            .Include("TestGroups.Tests")
+            .Include(solution => solution.Task)
+            .Include(solution => solution.Task.TestGroups)
+            .Include("Task.TestGroups.Tests")
+            .Include(solution => solution.Author)
+            .Where(solution => solution.Id == id)
+            .SingleOrDefaultAsync();
+
+        return solution;
     }
 
     public async Task<PagedList<ListedSolutionDto>> GetSolutionsForUserAsync(string username, ElementParams elementParams)

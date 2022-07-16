@@ -81,8 +81,8 @@ public class PythonService : IPythonService
                     }
                     else
                     {
-                        test.Status = "Wrong Answer";
-                        test.Error = $"{tg.Number}:{t.Number}: received: {output}, expected: '{t.Output}'";
+                        test.Status = "Wrong answer";
+                        test.Error = $"{tg.Number}.{t.Number}: received: '{output}', expected: '{t.Output}'";
                     }
                     testGroup.Tests?.Add(test);
                 }
