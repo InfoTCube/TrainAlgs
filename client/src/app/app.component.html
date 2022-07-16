@@ -1,12 +1,15 @@
-<ngx-spinner type="timer">
-  <h3 class="text-white text-xl">Loading...</h3>
-</ngx-spinner>
+<div class="max-height" [ngClass]="{'dark': theme == 'dark'}">
+  <div class="max-height bg-white dark:bg-gray-900">
+    <ngx-spinner type="timer">
+      <h3 class="text-white text-xl">Loading...</h3>
+    </ngx-spinner>
 
-<app-nav></app-nav>
+    <app-nav (themeChangedEvent)="changeTheme($event)"></app-nav>
 
-<div class="mt-5">
-  <router-outlet></router-outlet>
+    <div class="mt-5">
+      <router-outlet></router-outlet>
+    </div>
+
+    <app-footer class="ft"></app-footer>
+  </div>
 </div>
-
-<app-footer></app-footer>
-

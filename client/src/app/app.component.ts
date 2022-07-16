@@ -10,6 +10,7 @@ import { AccountService } from './services/account.service';
 })
 export class AppComponent implements OnInit {
   title = 'client';
+  theme = localStorage.theme;
 
   ngOnInit(): void {
     this.setCurrentUser();
@@ -20,5 +21,9 @@ export class AppComponent implements OnInit {
   setCurrentUser() {
     const user: User = JSON.parse(localStorage.getItem('user'));
     this.accountService.setCurrentUser(user);
+  }
+
+  changeTheme(theme: string) {
+    this.theme = theme;
   }
 }
