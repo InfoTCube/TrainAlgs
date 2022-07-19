@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ListedSolution } from '../Models/listedSolutions';
-import { ListingParams } from '../Models/listingParams';
-import { PaginatedResult } from '../Models/pagination';
-import { Solution } from '../Models/solution';
+import { ListedSolution } from '../models/listedSolutions';
+import { ListingParams } from '../models/listingParams';
+import { PaginatedResult } from '../models/pagination';
+import { Solution } from '../models/solution';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class SolutionsService {
   solutions: ListedSolution[] = [];
   solutionParams: ListingParams;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
       this.solutionParams = new ListingParams();
   }
 

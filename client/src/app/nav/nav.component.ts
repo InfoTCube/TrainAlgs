@@ -1,8 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { createPopper, placements } from '@popperjs/core';
-import { filter, Observable } from 'rxjs';
-import { User } from '../Models/user';
+import { createPopper } from '@popperjs/core';
+import { filter } from 'rxjs';
 import { AccountService } from '../services/account.service';
 
 @Component({
@@ -41,17 +40,22 @@ export class NavComponent implements OnInit, AfterViewInit {
 
   logout() {
     this.accountService.logout();
-    this.toggleDropdown(event);
     this.router.navigateByUrl('/sign_in');
   }
 
-  toggleDropdown(event) {
-    event.preventDefault();
-    if(this.dropdownPopoverShow) {
-      this.dropdownPopoverShow = false;
-    } else {
-      this.dropdownPopoverShow = true;
-    }
+  goToProfile() {
+    let username;
+    this.accountService.currentUser$.subscribe(
+      user => {
+        username = user.username;
+      }
+    )
+    this.router.navigateByUrl(`/members/${username}`);
+  }
+
+  takeAction($event) {
+    if($event == "Profile") this.goToProfile();
+    else if($event == "Sign out") this.logout();
   }
 
   themeChanged() {

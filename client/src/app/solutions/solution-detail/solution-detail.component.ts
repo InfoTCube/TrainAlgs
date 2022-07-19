@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Solution } from 'src/app/Models/solution';
-import { TestSolutionResults } from 'src/app/Models/testSolutionResults';
+import { Solution } from 'src/app/models/solution';
+import { TestSolutionResults } from 'src/app/models/testSolutionResults';
 import { SolutionsService } from 'src/app/services/solutions.service';
 
 @Component({
@@ -15,11 +15,14 @@ export class SolutionDetailComponent implements OnInit {
   testsErrors: string[] = [];
   exampleTests: TestSolutionResults[] = [];
   exampleTestsErrors: string[] = [];
+  showCode = false;
+  language = "cpp";
 
   constructor(private solutionsService: SolutionsService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getSolution();
+    this.getLanguage();
   }
 
   getSolution() {
@@ -42,7 +45,7 @@ export class SolutionDetailComponent implements OnInit {
           else
             this.tests.push(test);
 
-          if(t.error && tg.number == 0) 
+          if(t.error && tg.number == 0)
             this.exampleTestsErrors.push(t.error);
           else if(t.error)
             this.testsErrors.push(t.error);
@@ -50,6 +53,24 @@ export class SolutionDetailComponent implements OnInit {
       });
       console.log(response)
     });
+  }
+
+  getLanguage() {
+    switch(this.solution.language) {
+      case "C++":
+        this.language = "cpp";
+        break;
+      case "Python":
+        this.language = "python";
+        break;
+      default:
+        this.language = "cpp";
+        break;
+    }
+  }
+
+  toggleCode() {
+    this.showCode = !this.showCode;
   }
 
 }

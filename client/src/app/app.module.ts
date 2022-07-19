@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -24,6 +23,9 @@ import { FooterComponent } from './footer/footer.component';
 import { SolutionsComponent } from './solutions/solutions/solutions.component';
 import { SolutionDetailComponent } from './solutions/solution-detail/solution-detail.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { DropdownComponent } from './modules/dropdown/dropdown.component';
+import { CodeViewerComponent } from './modules/code-viewer/code-viewer.component';
+import { SharedModule } from './modules/shared.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     TaskDetailComponent,
     FooterComponent,
     SolutionsComponent,
-    SolutionDetailComponent
+    SolutionDetailComponent,
+    DropdownComponent,
+    CodeViewerComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +54,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgxSpinnerModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
+    SharedModule,
     MarkdownModule.forRoot()
   ],
   providers: [

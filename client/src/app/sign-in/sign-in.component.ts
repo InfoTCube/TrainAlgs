@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { User } from '../Models/user';
+import { User } from '../models/user';
 import { AccountService } from '../services/account.service';
 
 @Component({

@@ -2,14 +2,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { PaginatedResult } from '../Models/pagination';
-import { ListedTask } from '../Models/listedTask';
-import { Task } from '../Models/task';
+import { PaginatedResult } from '../models/pagination';
+import { ListedTask } from '../models/listedTask';
+import { Task } from '../models/task';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
-import { ListingParams } from '../Models/listingParams';
+import { ListingParams } from '../models/listingParams';
 import { AccountService } from './account.service';
 import { take } from 'rxjs/operators';
-import { User } from '../Models/user';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class TasksService {
   tasks: ListedTask[] = [];
   taskParams: ListingParams;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
       this.taskParams = new ListingParams();
   }
 

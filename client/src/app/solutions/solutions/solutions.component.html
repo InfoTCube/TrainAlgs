@@ -21,7 +21,7 @@
               </tr>
           </thead>
           <tbody *ngIf="pagination">
-              <tr (click)="solutionPage(solution.id)" *ngFor="let solution of solutions | paginate: {id: 'solutions', itemsPerPage: pagination.itemsPerPage, currentPage: pagination.currentPage, totalItems: pagination.totalItems}" 
+              <tr (click)="solutionPage(solution.id)" *ngFor="let solution of solutions | paginate: {id: 'solutions', itemsPerPage: pagination.itemsPerPage, currentPage: pagination.currentPage, totalItems: pagination.totalItems}"
                 class="text-center bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer">
                   <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap" [ngClass]="{'good': solution.points == 100, 'wrong': solution.points == 0, 'ok': solution.points > 0 && solution.points < 100}">
                       {{solution.date | date:'EE, d MMMM y HH:mm:ss':'GMT'}} GMT

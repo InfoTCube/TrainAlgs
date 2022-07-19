@@ -5,6 +5,7 @@ public class SolutionDto
     public string? Code { get; set; }
     public string? Language { get; set; }
     public string? Status { get; set; }
+    public string? ErrorMessage { get; set; }
     public int Points { get; set; }
     public string? AlgTaskTag { get; set; }
     public string? AlgTaskName { get; set; }

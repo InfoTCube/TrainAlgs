@@ -82,6 +82,8 @@ public class PythonService : IPythonService
                     else
                     {
                         test.Status = "Wrong answer";
+                        output = output.Length > 20 ? output.Substring(0, 20) + ".." : output;
+                        t.Output = t.Output.Length > 20 ? t.Output.Substring(0, 20) + ".." : t.Output;
                         test.Error = $"{tg.Number}.{t.Number}: received: '{output}', expected: '{t.Output}'";
                     }
                     testGroup.Tests?.Add(test);

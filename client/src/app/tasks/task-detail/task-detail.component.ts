@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Task } from 'src/app/Models/task';
+import { Task } from 'src/app/models/task';
+import { AccountService } from 'src/app/services/account.service';
 import { SolutionsService } from 'src/app/services/solutions.service';
 import { TasksService } from 'src/app/services/tasks.service';
 
@@ -13,18 +14,19 @@ import { TasksService } from 'src/app/services/tasks.service';
 export class TaskDetailComponent implements OnInit {
   task: Task;
   markdown = '';
-  tab='problemStatement';
+  tab='statement';
   addSolutionForm: FormGroup;
   submitSolutionForm: FormGroup;
   validationErrors: string[] = [];
   fileContent: string = "";
 
-  constructor(private route: ActivatedRoute, private tasksService: TasksService, 
-    private solutionsService: SolutionsService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private tasksService: TasksService,
+    private solutionsService: SolutionsService, private router: Router, public accountService: AccountService) { }
 
   ngOnInit(): void {
     this.getTask();
     this.initializeForm();
+    this.tab = this.router.url.split('/').pop();
   }
 
   getTask() {
@@ -61,7 +63,7 @@ export class TaskDetailComponent implements OnInit {
   }
 
   changeTab(name: string) {
-    this.tab = name;
+    this.router.navigateByUrl('/tasks/' + this.task.nameTag + '/' + name);
   }
 
   initializeForm() {

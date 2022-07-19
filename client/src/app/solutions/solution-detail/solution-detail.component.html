@@ -1,176 +1,231 @@
-<div class="content-center flex items-center justify-center pb-4">
-    <div class="full relative overflow-x-auto shadow-md rounded-lg">
-      <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
-          <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300 text-center">
-              <tr>
-                  <th scope="col" class="px-6 py-3">
-                      Date
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                      Task
-                  </th>
-                  <th scope="col" class="px-4 py-3">
-                      Language
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                      Status
-                  </th>
-                  <th scope="col" class="px-4 py-3">
-                      Points
-                  </th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr class="text-center bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700">
-                  <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap" [ngClass]="{'good': solution.points == 100, 'wrong': solution.points == 0, 'ok': solution.points > 0 && solution.points < 100}">
-                      {{solution.date | date:'EE, d MMMM y HH:mm:ss':'GMT'}} GMT
-                  </th>
-                  <td class="px-6 py-4">
-                      {{solution.algTaskName}} ({{solution.algTaskTag}})
-                  </td>
-                  <td class="px-6 py-4">
-                      <span class="badge lang p-2 rounded-lg">
-                        {{solution.language}}
-                      </span>
-                  </td>
-                  <td class="px-6 py-4">
-                      <span class="text-white badge rounded-lg p-2" [ngClass]="{'goodPoints': solution.points == 100, 'wrongPoints': solution.points == 0, 'okPoints': solution.points > 0 && solution.points < 100}">
-                        {{solution.status}}
-                      </span>
-                  </td>
-                  <td class="px-6 py-4">
-                      <span class="text-white badge rounded-lg p-2" [ngClass]="{'goodPoints': solution.points == 100, 'wrongPoints': solution.points == 0, 'okPoints': solution.points > 0 && solution.points < 100}">
-                        {{solution.points}}
-                      </span>
-                  </td>
-              </tr>
-          </tbody>
-      </table>
-    </div>
-</div>
-
-<div *ngIf="solution.status != 'Compilation error'">
-    <h1 class="text-4xl text-gray-900 dark:text-white text-center my-7">Final testing report</h1>
-
-    <div class="content-center flex items-center justify-center pb-4">
-        <div class="full relative overflow-x-auto shadow-md rounded-lg">
+<div *ngIf="solution">
+  <div class="content-center flex items-center justify-center pb-4">
+      <div class="full relative overflow-x-auto shadow-md rounded-lg">
         <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
             <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300 text-center">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Test
+                        Date
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Task
+                    </th>
+                    <th scope="col" class="px-4 py-3">
+                        Language
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Status
                     </th>
                     <th scope="col" class="px-4 py-3">
-                        Time
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Memory
-                    </th>
-                    <th scope="col" class="px-6 py-3">
                         Points
                     </th>
                 </tr>
             </thead>
-            <tbody *ngIf="tests">
-                <tr *ngFor="let test of tests" class="text-center bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap" [ngClass]="{'good': test.status == 'Ok', 'wrong': test.status == 'Wrong Answer' || test.status == 'Runtime error', 'ok': test.status == 'Time limit exceeded'}">
-                        {{test.number}}
+            <tbody>
+                <tr class="text-center bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap" [ngClass]="{'good': solution.points == 100, 'wrong': solution.points == 0, 'ok': solution.points > 0 && solution.points < 100}">
+                        {{solution.date | date:'EE, d MMMM y HH:mm:ss':'GMT'}} GMT
                     </th>
                     <td class="px-6 py-4">
-                        <span class="text-white badge rounded-lg p-2" [ngClass]="{'goodStatus': test.status == 'Ok', 'wrongStatus': test.status == 'Wrong Answer' || test.status == 'Runtime error', 'okStatus': test.status == 'Time limit exceeded'}">
-                            {{test.status}}
+                        {{solution.algTaskName}} ({{solution.algTaskTag}})
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="badge lang p-2 rounded-lg">
+                          {{solution.language}}
                         </span>
                     </td>
                     <td class="px-6 py-4">
-                        <span *ngIf="test.status != 'Time limit exceeded'" class="p-2 rounded-lg">
-                            {{test.time/1000}}s/{{test.timeLimit/1000}}s
-                        </span>
-                        <span *ngIf="test.status == 'Time limit exceeded'" class="p-2 rounded-lg">
-                            -.---s/{{test.timeLimit/1000}}s
+                        <span class="text-white badge rounded-lg p-2" [ngClass]="{'goodPoints': solution.points == 100, 'wrongPoints': solution.points == 0, 'okPoints': solution.points > 0 && solution.points < 100}">
+                          {{solution.status}}
                         </span>
                     </td>
-                    <td class="px-6 py-3">
-                        <span class="text-white p-2">
-                            {{test.memory}}/{{test.memoryLimit}}b
-                        </span>
-                    </td>
-                    <td *ngIf="test.showPoints" class="px-6 py-3" [attr.rowspan]="test.pointsLength">
-                        <span class="text-white badge rounded-lg p-2" [ngClass]="{'goodPoints': test.points == test.maxPoints, 'wrongPoints': test.points == 0, 'okPoints': test.points > 0 && test.points < test.maxPoints}">
-                            {{test.points}}/{{test.maxPoints}}
+                    <td class="px-6 py-4">
+                        <span class="text-white badge rounded-lg p-2" [ngClass]="{'goodPoints': solution.points == 100, 'wrongPoints': solution.points == 0, 'okPoints': solution.points > 0 && solution.points < 100}">
+                          {{solution.points}}
                         </span>
                     </td>
                 </tr>
             </tbody>
         </table>
-        </div>
-    </div>
+      </div>
+  </div>
 
-    <ol class="s text-gray-900 dark:text-white ml-5">
-        <li *ngFor="let error of testsErrors">• {{error}}</li>
-    </ol>
+  <div *ngIf="solution.status == 'Compilation error'" class="ml-5">
+    <span class="text-gray-900 dark:text-white">
+      <p>• {{solution.errorMessage}}</p>
+    </span>
+  </div>
 
-    <h1 class="text-4xl text-gray-900 dark:text-white text-center my-7">Initial testing report</h1>
+  <div class="ml-5 my-3 flex">
+    <button class="m-2 w-40 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900" type="button" (click)="toggleCode()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+      </svg>
+      Show code
+    </button>
+    <button class="m-2 w-44 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+      </svg>
+      Download code
+    </button>
+  </div>
 
-    <div class="content-center flex items-center justify-center pb-4">
-        <div class="full relative overflow-x-auto shadow-md rounded-lg">
-        <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
-            <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300 text-center">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Test
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Status
-                    </th>
-                    <th scope="col" class="px-4 py-3">
-                        Time
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Memory
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Points
-                    </th>
-                </tr>
-            </thead>
-            <tbody *ngIf="exampleTests">
-                <tr *ngFor="let test of exampleTests" class="text-center bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap" [ngClass]="{'good': test.status == 'Ok', 'wrong': test.status == 'Wrong Answer' || test.status == 'Runtime error', 'ok': test.status == 'Time limit exceeded'}">
-                        {{test.number}}
-                    </th>
-                    <td class="px-6 py-4">
-                        <span class="text-white badge rounded-lg p-2" [ngClass]="{'goodStatus': test.status == 'Ok', 'wrongStatus': test.status == 'Wrong Answer' || test.status == 'Runtime error', 'okStatus': test.status == 'Time limit exceeded'}">
-                            {{test.status}}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4">
-                        <span *ngIf="test.status != 'Time limit exceeded'" class="p-2 rounded-lg">
-                            {{test.time/1000}}s/{{test.timeLimit/1000}}s
-                        </span>
-                        <span *ngIf="test.status == 'Time limit exceeded'" class="p-2 rounded-lg">
-                            -.---s/{{test.timeLimit/1000}}s
-                        </span>
-                    </td>
-                    <td class="px-6 py-3">
-                        <span class="text-white p-2">
-                            {{test.memory}}/{{test.memoryLimit}}b
-                        </span>
-                    </td>
-                    <td *ngIf="test.showPoints" class="px-6 py-3" [attr.rowspan]="test.pointsLength">
-                        <span class="text-white p-2 badge rounded-lg okPoints">
-                            ---
-                        </span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        </div>
-    </div>
+  <div *ngIf="solution.status != 'Compilation error'">
+      <h1 class="text-4xl text-gray-900 dark:text-white text-center my-7">Final testing report</h1>
+
+      <div class="content-center flex items-center justify-center pb-4">
+          <div class="full relative overflow-x-auto shadow-md rounded-lg">
+          <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
+              <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300 text-center">
+                  <tr>
+                      <th scope="col" class="px-6 py-3">
+                          Test
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                          Status
+                      </th>
+                      <th scope="col" class="px-4 py-3">
+                          Time
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                          Memory
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                          Points
+                      </th>
+                  </tr>
+              </thead>
+              <tbody *ngIf="tests">
+                  <tr *ngFor="let test of tests" class="text-center bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700">
+                      <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap" [ngClass]="{'good': test.status == 'Ok', 'wrong': test.status == 'Wrong Answer' || test.status == 'Runtime error', 'ok': test.status == 'Time limit exceeded'}">
+                          {{test.number}}
+                      </th>
+                      <td class="px-6 py-4">
+                          <span class="text-white badge rounded-lg p-2" [ngClass]="{'goodStatus': test.status == 'Ok', 'wrongStatus': test.status == 'Wrong answer' || test.status == 'Runtime error', 'okStatus': test.status == 'Time limit exceeded'}">
+                              {{test.status}}
+                          </span>
+                      </td>
+                      <td class="px-6 py-4">
+                          <span *ngIf="test.status != 'Time limit exceeded'" class="p-2 rounded-lg">
+                              {{test.time/1000}}s/{{test.timeLimit/1000}}s
+                          </span>
+                          <span *ngIf="test.status == 'Time limit exceeded'" class="p-2 rounded-lg">
+                              -.---s/{{test.timeLimit/1000}}s
+                          </span>
+                      </td>
+                      <td class="px-6 py-3">
+                          <span class="text-white p-2">
+                              {{test.memory}}/{{test.memoryLimit}}b
+                          </span>
+                      </td>
+                      <td *ngIf="test.showPoints" class="px-6 py-3" [attr.rowspan]="test.pointsLength">
+                          <span class="text-white badge rounded-lg p-2" [ngClass]="{'goodPoints': test.points == test.maxPoints, 'wrongPoints': test.points == 0, 'okPoints': test.points > 0 && test.points < test.maxPoints}">
+                              {{test.points}}/{{test.maxPoints}}
+                          </span>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+          </div>
+      </div>
+
+      <ol class="s text-gray-900 dark:text-white ml-5">
+          <li *ngFor="let error of testsErrors">• {{error}}</li>
+      </ol>
+
+      <h1 class="text-4xl text-gray-900 dark:text-white text-center my-7">Initial testing report</h1>
+
+      <div class="content-center flex items-center justify-center pb-4">
+          <div class="full relative overflow-x-auto shadow-md rounded-lg">
+          <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
+              <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300 text-center">
+                  <tr>
+                      <th scope="col" class="px-6 py-3">
+                          Test
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                          Status
+                      </th>
+                      <th scope="col" class="px-4 py-3">
+                          Time
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                          Memory
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                          Points
+                      </th>
+                  </tr>
+              </thead>
+              <tbody *ngIf="exampleTests">
+                  <tr *ngFor="let test of exampleTests" class="text-center bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700">
+                      <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap" [ngClass]="{'good': test.status == 'Ok', 'wrong': test.status == 'Wrong Answer' || test.status == 'Runtime error', 'ok': test.status == 'Time limit exceeded'}">
+                          {{test.number}}
+                      </th>
+                      <td class="px-6 py-4">
+                          <span class="text-white badge rounded-lg p-2" [ngClass]="{'goodStatus': test.status == 'Ok', 'wrongStatus': test.status == 'Wrong answer' || test.status == 'Runtime error', 'okStatus': test.status == 'Time limit exceeded'}">
+                              {{test.status}}
+                          </span>
+                      </td>
+                      <td class="px-6 py-4">
+                          <span *ngIf="test.status != 'Time limit exceeded'" class="p-2 rounded-lg">
+                              {{test.time/1000}}s/{{test.timeLimit/1000}}s
+                          </span>
+                          <span *ngIf="test.status == 'Time limit exceeded'" class="p-2 rounded-lg">
+                              -.---s/{{test.timeLimit/1000}}s
+                          </span>
+                      </td>
+                      <td class="px-6 py-3">
+                          <span class="text-white p-2">
+                              {{test.memory}}/{{test.memoryLimit}}b
+                          </span>
+                      </td>
+                      <td *ngIf="test.showPoints" class="px-6 py-3" [attr.rowspan]="test.pointsLength">
+                          <span class="text-white p-2 badge rounded-lg okPoints">
+                              ---
+                          </span>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+          </div>
+      </div>
+  </div>
+
+  <ol class="s text-gray-900 dark:text-white ml-5">
+      <li *ngFor="let error of exampleTestsErrors">• {{error}}</li>
+  </ol>
 </div>
 
-<ol class="s text-gray-900 dark:text-white ml-5">
-    <li *ngFor="let error of exampleTestsErrors">• {{error}}</li>
-</ol>
+<div *ngIf="showCode" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+  <div class="relative w-auto my-6 mx-auto max-w-6xl width-90p">
+    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none bg-gray-200 dark:bg-gray-700">
+      <!--header-->
+      <div class="flex items-start justify-between p-5 border-b border-solid border-slate-200 dark:border-slate-500 rounded-t">
+        <h3 class="text-3xl font-semibold text-gray-900 dark:text-white">
+          Code
+        </h3>
+        <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" (click)="toggleCode()">
+          <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+            x
+          </span>
+        </button>
+      </div>
+      <!--body-->
+      <div class="relative p-6 flex-auto">
+        <p class="my-4 text-gray-900 dark:text-white text-lg leading-relaxed">
+
+        </p>
+        <app-code-viewer [code]="solution.code" [language]="language"></app-code-viewer>
+      </div>
+      <!--footer-->
+      <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 dark:border-slate-500 rounded-b">
+        <button class="text-red-500 hover:text-white background-transparent font-bold uppercase px-6 py-2 text-sm outline hover:bg-red-500 rounded-md focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="toggleCode()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="showCode" class="opacity-25 fixed inset-0 z-40 bg-black"></div>

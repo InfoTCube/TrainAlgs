@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ListedSolution } from 'src/app/Models/listedSolutions';
-import { ListingParams } from 'src/app/Models/listingParams';
-import { Pagination } from 'src/app/Models/pagination';
+import { ListedSolution } from 'src/app/models/listedSolutions';
+import { ListingParams } from 'src/app/models/listingParams';
+import { Pagination } from 'src/app/models/pagination';
+import { AccountService } from 'src/app/services/account.service';
 import { SolutionsService } from 'src/app/services/solutions.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class SolutionsComponent implements OnInit {
   solutionParams: ListingParams;
   @Input() taskTag: string = "";
 
-  constructor(private solutionsService: SolutionsService, private router: Router) { 
+  constructor(private solutionsService: SolutionsService, private router: Router) {
     this.solutionParams = this.solutionsService.getSolutionParams();
   }
 

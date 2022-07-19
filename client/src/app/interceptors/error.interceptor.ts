@@ -24,7 +24,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 for(const key in error.error.errors) {
                   if(error.error.errors[key]) {
                     modalStateError.push(error.error.errors[key])
-                  } 
+                  }
                 }
                 throw modalStateError.flat();
               } else {
@@ -32,6 +32,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               }
               break;
             case 401:
+              this.router.navigateByUrl('/');
               throw(error.statusText, error.status);
               break;
             case 404:

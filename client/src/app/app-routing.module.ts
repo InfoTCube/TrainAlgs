@@ -16,9 +16,7 @@ import { TasksComponent } from './tasks/tasks/tasks.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'tasks', component: TasksComponent},
-  {path: 'solutions', component: SolutionsComponent},
-  {path: 'tasks/:nameTag', component: TaskDetailComponent},
-  {path: 'solutions/:id', component: SolutionDetailComponent},
+  {path: 'tasks/:nameTag/statement', component: TaskDetailComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: 'server-error', component: ServerErrorComponent},
   {path: 'members/:username', component: MemberDetailComponent},
@@ -26,7 +24,12 @@ const routes: Routes = [
     path: '',
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
-    children: []
+    children: [
+      {path: 'solutions', component: SolutionsComponent},
+      {path: 'solutions/:id', component: SolutionDetailComponent},
+      {path: 'tasks/:nameTag/solutions', component: TaskDetailComponent},
+      {path: 'tasks/:nameTag/submit', component: TaskDetailComponent},
+    ]
   },
   {
     path: '',

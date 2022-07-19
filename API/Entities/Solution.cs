@@ -8,6 +8,7 @@ public class Solution
     public string? Code { get; set; }
     public string? Language { get; set; }
     public string? Status { get; set; }
+    public string? ErrorMessage { get; set; }
     public int Points { get; set; }
     public AlgTask? Task { get; set; }
     public int TaskId { get; set; }

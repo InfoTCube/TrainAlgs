@@ -9,6 +9,7 @@ export interface Solution {
     language: string;
     status: string;
     points: number;
+    errorMessage: string;
     date: Date;
     memoryLimit: number;
     testGroups: TestGroupSolution[];

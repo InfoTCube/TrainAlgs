@@ -93,8 +93,10 @@ public class SolutionsController : BaseApiController
     [HttpGet("{id}")]
     public async Task<ActionResult<SolutionDto>> GetSolution(int id)
     {
+        string username = User.GetUsername();
         var solution = await _unitOfWork.SolutionRepository.GetSolutionByIdAsync(id);
         if(solution is null) return NotFound();
+        if(solution.Author.UserName != username) return Unauthorized();
         return _mapper.Map<SolutionDto>(solution);
     }
 
@@ -135,6 +137,7 @@ public class SolutionsController : BaseApiController
 
         solution.Points = result.Points;
         solution.Status = result.Status;
+        solution.ErrorMessage = result.ErrorMessage;
         solution.TestGroups = result.TestGroups;
 
         await _unitOfWork.SolutionRepository.AddSolutionAsync(solution);

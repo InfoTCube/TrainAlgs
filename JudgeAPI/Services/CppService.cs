@@ -12,7 +12,7 @@ public class CppService : ICppService
     {
         var ticks = DateTime.Now.Ticks;
         var guid = Guid.NewGuid().ToString();
-        var uniqueId = ticks.ToString() +'-'+ guid.ToString();
+        var uniqueId = ticks.ToString() + '-' + guid.ToString();
         string path = $"./Runners/Cpp/{uniqueId}";
 
         using (StreamWriter sw = File.CreateText($"{path}.cpp"))
@@ -31,12 +31,12 @@ public class CppService : ICppService
             .ExecuteBufferedAsync();
             Console.WriteLine($"{uniqueId} - {result.ExitCode} -- {result.ExitTime} -- {result.RunTime}");
         }
-        catch(Exception e) // compiling error
+        catch (Exception e) // compiling error
         {
             File.Delete($"{path}.cpp");
             solution.Status = "Compilation error";
             foreach (Match match in Regex.Matches(e.Message, @"(?<=cpp:)(.*)(?=\n)", RegexOptions.None))
-                if(int.TryParse(match.Value.First().ToString(), out _)) // check if first char of match.Value is digit
+                if (int.TryParse(match.Value.First().ToString(), out _)) // check if first char of match.Value is digit
                     solution.ErrorMessage += match.Value + '\n';
 
             solution.Points = 0;
@@ -47,12 +47,12 @@ public class CppService : ICppService
         try
         {
             solution.TestGroups = new List<TestGroupSolutionDto>();
-            foreach(var tg in algTask.TestGroups) 
+            foreach (var tg in algTask.TestGroups)
             {
-                var testGroup = new TestGroupSolutionDto{ Number = tg.Number };
+                var testGroup = new TestGroupSolutionDto { Number = tg.Number };
                 testGroup.Tests = new List<TestSolutionDto>();
 
-                foreach(var t in tg.Tests) 
+                foreach (var t in tg.Tests)
                 {
                     string error = string.Empty;
                     double time = 0;
@@ -66,47 +66,49 @@ public class CppService : ICppService
                         Console.WriteLine($"{uniqueId} - {outputBuilder.ToString()} -- {result.ExitCode} -- {result.ExitTime} -- {result.RunTime}");
                         time = result.RunTime.TotalMilliseconds;
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
-                        if(e.Message.Substring(Math.Max(0, e.Message.Length - 27)) == "was killed by user request.") // check for TLE
+                        if (e.Message.Substring(Math.Max(0, e.Message.Length - 27)) == "was killed by user request.") // check for TLE
                             error = "TLE";
                         else
                             error = "RE";
-                        
+
                         System.Console.WriteLine(e.Message);
                     }
-                    
+
                     string output = outputBuilder.ToString().Trim();
 
                     var test = new TestSolutionDto { Number = t.Number };
                     test.Time = (int)time;
-                    if(output == t.Output) 
+                    if (output == t.Output)
                     {
                         test.Status = "Ok";
                     }
-                    else if(error == "TLE")
+                    else if (error == "TLE")
                     {
                         test.Status = "Time limit exceeded";
                     }
-                    else if(error == "RE")
+                    else if (error == "RE")
                     {
                         test.Status = "Runtime error";
                     }
                     else
                     {
                         test.Status = "Wrong answer";
+                        output = output.Length > 20 ? output.Substring(0, 20) + ".." : output;
+                        t.Output = t.Output.Length > 20 ? t.Output.Substring(0, 20) + ".." : t.Output;
                         test.Error = $"{tg.Number}.{t.Number}: received: '{output}', expected: '{t.Output}'";
                     }
                     testGroup.Tests?.Add(test);
                 }
 
-                if(testGroup.Tests.Where(s => s.Status == "Ok").Count() == tg.Tests.Count()) // give points if all tests from group succeed
+                if (testGroup.Tests.Where(s => s.Status == "Ok").Count() == tg.Tests.Count()) // give points if all tests from group succeed
                     testGroup.Points = tg.Points;
 
                 solution.TestGroups.Add(testGroup);
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             System.Console.WriteLine(e.Message);
         }
@@ -115,7 +117,7 @@ public class CppService : ICppService
 
         solution.Points = solution.TestGroups.Sum(x => x.Points);
         solution.Status = "Preliminary checking: ";
-        if(solution.TestGroups.Where(n => n.Number == 0)
+        if (solution.TestGroups.Where(n => n.Number == 0)
             .FirstOrDefault().Tests
             .Where(s => s.Status == "Ok").Count() == solution.TestGroups.Where(n => n.Number == 0).FirstOrDefault().Tests.Count())
         {
