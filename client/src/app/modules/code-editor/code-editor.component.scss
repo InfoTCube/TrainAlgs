@@ -1,0 +1,19 @@
+.textarea {
+  height: 20em;
+  overflow: scroll;
+  overflow-x: hidden;
+  width: 40em;
+  position: relative;
+	display: block;
+}
+
+.textarea:focus {
+  outline: 0px solid transparent;
+}
+
+.line-numbers {
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+  height: 20em;
+}

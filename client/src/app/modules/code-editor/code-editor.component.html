@@ -1,0 +1,6 @@
+<div class="container flex">
+  <div #numbers class="line-numbers text-gray-400 py-1 pl-1 pr-1.5 saturate-200 dark:saturate-100 bg-gray-500 dark:bg-gray-700 rounded-l-md text-right border-r border-solid border-gray-400">
+    <div *ngFor="let num of lineNums">{{num}}</div>
+  </div>
+  <div id="editor"><div (scroll)="scroll($event)" (keydown)="checkForTab($event)" (input)="highlight($event)" #codeEle class="language-{{lang}} textarea saturate-200 dark:saturate-100 bg-gray-500 dark:bg-gray-700 text-white active:border-none p-1 form-control" contenteditable="plaintext-only" spellcheck="false"></div></div>
+</div>

@@ -4,6 +4,11 @@
 
 @import "prismjs/themes/prism-okaidia.css";
 
+.token.operator,
+.token.punctuation {
+  color: #93CAED;
+}
+
 .dark {
     .dark\:dark-file-input::file-selector-button {
         @apply bg-gray-700;
@@ -13,7 +18,6 @@
 
 .dark {
     .dark\:dark-file-input {
-        @apply bg-gray-700;
         @apply text-white;
     }
 }

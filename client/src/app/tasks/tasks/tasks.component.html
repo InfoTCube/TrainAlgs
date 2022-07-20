@@ -14,8 +14,8 @@
                 </th>
             </tr>
         </thead>
-        <tbody>
-            <tr (click)="taskPage(task.nameTag)" *ngFor="let task of tasks | paginate: {id: 'tasks', itemsPerPage: pagination.itemsPerPage, currentPage: pagination.currentPage, totalItems: pagination.totalItems}" 
+        <tbody *ngIf="pagination">
+            <tr (click)="taskPage(task.nameTag)" *ngFor="let task of tasks | paginate: {id: 'tasks', itemsPerPage: pagination.itemsPerPage, currentPage: pagination.currentPage, totalItems: pagination.totalItems}"
               class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer text-center">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                     {{task.nameTag}}

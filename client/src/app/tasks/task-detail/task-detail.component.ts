@@ -19,6 +19,7 @@ export class TaskDetailComponent implements OnInit {
   submitSolutionForm: FormGroup;
   validationErrors: string[] = [];
   fileContent: string = "";
+  lang: string = 'cpp';
 
   constructor(private route: ActivatedRoute, private tasksService: TasksService,
     private solutionsService: SolutionsService, private router: Router, public accountService: AccountService) { }
@@ -100,5 +101,20 @@ export class TaskDetailComponent implements OnInit {
     } else {
       this.fileContent = "";
     }
+  }
+
+  selected($event) {
+    switch(this.submitSolutionForm.get("language").value) {
+      case 'C++':
+        this.lang = 'cpp';
+        break;
+      case 'PYTHON':
+        this.lang = 'python';
+        break;
+    }
+  }
+
+  getCode(code: string) {
+    this.submitSolutionForm.get("code").setValue(code);
   }
 }

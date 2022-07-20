@@ -26,6 +26,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DropdownComponent } from './modules/dropdown/dropdown.component';
 import { CodeViewerComponent } from './modules/code-viewer/code-viewer.component';
 import { SharedModule } from './modules/shared.module';
+import { CodeEditorComponent } from './modules/code-editor/code-editor.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { SharedModule } from './modules/shared.module';
     SolutionDetailComponent,
     DropdownComponent,
     CodeViewerComponent,
+    CodeEditorComponent
   ],
   imports: [
     BrowserModule,

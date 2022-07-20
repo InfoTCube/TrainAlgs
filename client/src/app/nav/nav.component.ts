@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { createPopper } from '@popperjs/core';
 import { filter } from 'rxjs';
 import { AccountService } from '../services/account.service';
 
@@ -9,11 +8,8 @@ import { AccountService } from '../services/account.service';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
-export class NavComponent implements OnInit, AfterViewInit {
+export class NavComponent implements OnInit {
   @Output() themeChangedEvent = new EventEmitter<string>();
-  dropdownPopoverShow: boolean = false;
-  @ViewChild("btnDropdownRef", { static: false }) btnDropdownRef: ElementRef;
-  @ViewChild("popoverDropdownRef", { static: false }) popoverDropdownRef: ElementRef;
   page = "/";
   theme = localStorage.theme;
 
@@ -26,16 +22,6 @@ export class NavComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
-    createPopper(
-      this.btnDropdownRef.nativeElement,
-      this.popoverDropdownRef.nativeElement,
-      {
-        placement: "bottom-end",
-      }
-    );
   }
 
   logout() {
