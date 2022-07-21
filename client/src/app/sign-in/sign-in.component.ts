@@ -25,9 +25,6 @@ export class SignInComponent implements OnInit {
       username: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]),
       password: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(32), this.containsAllTypes()])
     });
-    this.signInForm.controls.password.valueChanges.subscribe(() => {
-      this.signInForm.controls.confirmPassword.updateValueAndValidity();
-    });
   }
 
   containsAllTypes(): ValidatorFn {

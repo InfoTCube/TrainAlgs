@@ -1,20 +1,16 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { PaginatedResult } from '../models/pagination';
 import { ListedTask } from '../models/listedTask';
+import { ListingParams } from '../models/listingParams';
 import { AlgTask } from '../models/task';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
-import { ListingParams } from '../models/listingParams';
-import { AccountService } from './account.service';
-import { take } from 'rxjs/operators';
-import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TasksService {
+export class ModeratorService {
   baseUrl = environment.apiUrl;
   tasks: ListedTask[] = [];
   taskParams: ListingParams;
@@ -36,17 +32,21 @@ export class TasksService {
     return this.taskParams;
   }
 
-  getTasks(taskParams: ListingParams) {
+  getTasksToVerify(taskParams: ListingParams) {
     let params = getPaginationHeaders(taskParams.pageNumber, taskParams.pageSize)
 
-    return getPaginatedResult<ListedTask[]>(this.baseUrl + 'tasks', params, this.http).pipe(
+    return getPaginatedResult<ListedTask[]>(this.baseUrl + 'moderator/verify-tasks', params, this.http).pipe(
       map(response => {
         return response;
       })
     );
   }
 
-  getTask(nameTag: string) {
-    return this.http.get<AlgTask>(this.baseUrl + 'tasks/' + nameTag);
+  getTaskToVerify(nameTag: string) {
+    return this.http.get<AlgTask>(this.baseUrl + 'moderator/verify-tasks/' + nameTag);
+  }
+
+  verifyTask(nameTag: string) {
+    return this.http.put(this.baseUrl + 'moderator/verify-tasks/' + nameTag, {});
   }
 }

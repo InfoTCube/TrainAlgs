@@ -3,9 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ModeratorGuard } from './guards/moderator.guard';
 import { UnauthGuard } from './guards/unauth.guard';
 import { HomeComponent } from './home/home.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { VerifyTaskDetailComponent } from './moderator/verify-task-detail/verify-task-detail.component';
+import { VerifyTasksComponent } from './moderator/verify-tasks/verify-tasks.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SolutionDetailComponent } from './solutions/solution-detail/solution-detail.component';
@@ -29,6 +32,8 @@ const routes: Routes = [
       {path: 'solutions/:id', component: SolutionDetailComponent},
       {path: 'tasks/:nameTag/solutions', component: TaskDetailComponent},
       {path: 'tasks/:nameTag/submit', component: TaskDetailComponent},
+      {path: 'moderator/verify-tasks', component: VerifyTasksComponent, canActivate: [ModeratorGuard]},
+      {path: 'moderator/verify-tasks/:nameTag', component: VerifyTaskDetailComponent, canActivate: [ModeratorGuard]},
     ]
   },
   {
@@ -37,7 +42,7 @@ const routes: Routes = [
     canActivate: [UnauthGuard],
     children: [
       {path: 'sign_up', component: SignUpComponent},
-      {path: 'sign_in', component: SignInComponent}
+      {path: 'sign_in', component: SignInComponent},
     ]
   },
   {path: '**', component: NotFoundComponent, pathMatch: 'full'}

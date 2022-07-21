@@ -56,7 +56,7 @@ export class SolutionDetailComponent implements OnInit {
   }
 
   getLanguage() {
-    switch(this.solution.language) {
+    switch(this.solution?.language) {
       case "C++":
         this.language = "cpp";
         break;

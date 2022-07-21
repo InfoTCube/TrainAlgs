@@ -1,6 +1,6 @@
 import { TestGroup } from "./testGroup";
 
-export interface Task {
+export interface AlgTask {
     name: string;
     nameTag: string;
     content: string;

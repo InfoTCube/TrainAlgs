@@ -28,6 +28,9 @@ import { CodeViewerComponent } from './modules/code-viewer/code-viewer.component
 import { SharedModule } from './modules/shared.module';
 import { CodeEditorComponent } from './modules/code-editor/code-editor.component';
 import { TimeagoModule } from 'ngx-timeago';
+import { HasRoleDirective } from './directives/has-role.directive';
+import { VerifyTasksComponent } from './moderator/verify-tasks/verify-tasks.component';
+import { VerifyTaskDetailComponent } from './moderator/verify-task-detail/verify-task-detail.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { TimeagoModule } from 'ngx-timeago';
     SolutionDetailComponent,
     DropdownComponent,
     CodeViewerComponent,
-    CodeEditorComponent
+    CodeEditorComponent,
+    HasRoleDirective,
+    VerifyTasksComponent,
+    VerifyTaskDetailComponent
   ],
   imports: [
     BrowserModule,

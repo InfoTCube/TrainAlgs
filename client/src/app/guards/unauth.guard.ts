@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { CanActivate } from '@angular/router';
 import { AccountService } from '../services/account.service';
 
 @Injectable({
@@ -9,13 +8,14 @@ import { AccountService } from '../services/account.service';
 export class UnauthGuard implements CanActivate {
   constructor(private accountService: AccountService) {}
 
-  canActivate(): Observable<boolean> {
-    return this.accountService.currentUser$.pipe(
-      map(user => {
-        if(user) return false;
-        return true;
-      })
+  canActivate(): boolean {
+    var user;
+    this.accountService.currentUser$.subscribe(u => {
+        user = u;
+      }
     );
+
+    if(user) return false;
+    return true;
   }
-  
 }

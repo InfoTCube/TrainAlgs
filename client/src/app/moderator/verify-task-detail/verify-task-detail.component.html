@@ -1,0 +1,40 @@
+<div *ngIf="task" class="px-8 pb-4">
+  <h1 class="text-5xl text-gray-900 dark:text-white mb-7">{{task.name}} ({{task.nameTag}})</h1>
+  <markdown class="prose dark:prose-invert max-w-none text-xl text-gray-900 dark:text-white" [data]="markdown"></markdown>
+
+  <div *ngIf="task.exampleTestGroup" class="content-center flex items-center justify-left mt-6 pb-4">
+      <div>
+          <h1 class="text-gray-900 dark:text-white text-center">Example tests</h1>
+          <div class="full relative overflow-x-auto shadow-md rounded-lg">
+              <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
+                  <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300">
+                      <tr>
+                          <th scope="col" class="px-6 py-3">
+                              #
+                          </th>
+                          <th scope="col" class="px-6 py-3">
+                              Input
+                          </th>
+                          <th scope="col" class="px-6 py-3">
+                              Output
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let test of task.exampleTestGroup.tests" class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700">
+                          <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                              {{test.number}}
+                          </th>
+                          <td class="px-6 py-4">
+                              <span style="white-space: pre-line">{{test.input}}</span>
+                          </td>
+                          <td class="px-6 py-4">
+                              <span style="white-space: pre-line">{{test.output}}</span>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>

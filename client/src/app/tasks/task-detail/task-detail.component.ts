@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Task } from 'src/app/models/task';
+import { AlgTask } from 'src/app/models/task';
 import { AccountService } from 'src/app/services/account.service';
 import { SolutionsService } from 'src/app/services/solutions.service';
 import { TasksService } from 'src/app/services/tasks.service';
@@ -12,7 +12,7 @@ import { TasksService } from 'src/app/services/tasks.service';
   styleUrls: ['./task-detail.component.scss']
 })
 export class TaskDetailComponent implements OnInit {
-  task: Task;
+  task: AlgTask;
   markdown = '';
   tab='statement';
   addSolutionForm: FormGroup;
@@ -34,7 +34,6 @@ export class TaskDetailComponent implements OnInit {
     this.tasksService.getTask(this.route.snapshot.paramMap.get('nameTag')).subscribe(response => {
       this.task = response;
       this.markdown = this.replaceInlineCode(response.content);
-      console.log(response.exampleTestGroup.tests)
     })
   }
 

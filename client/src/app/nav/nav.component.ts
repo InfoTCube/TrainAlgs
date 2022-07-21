@@ -30,13 +30,10 @@ export class NavComponent implements OnInit {
   }
 
   goToProfile() {
-    let username;
-    this.accountService.currentUser$.subscribe(
-      user => {
-        username = user.username;
-      }
-    )
-    this.router.navigateByUrl(`/members/${username}`);
+    this.accountService.currentUser$.subscribe(user => {
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+      this.router.navigateByUrl(`/members/${user.username}`));
+    });
   }
 
   takeAction($event) {

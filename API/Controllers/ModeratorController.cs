@@ -35,6 +35,14 @@ public class ModeratorController : BaseApiController
     }
 
     [Authorize(Policy = "RequireModeratorRole")]
+    [HttpGet("verify-tasks/{nameTag}")]
+    public async Task<ActionResult<TaskDto>> GetTaskToVerify(string nameTag)
+    {
+        var task = await _unitOfWork.TaskRepository.GetTaskToVerifyByNameTagAsync(nameTag);
+        return _mapper.Map<TaskDto>(task);
+    }
+
+    [Authorize(Policy = "RequireModeratorRole")]
     [HttpPut("verify-tasks/{nameTag}")]
     public async Task<ActionResult> VerifyTask(string nameTag)
     {

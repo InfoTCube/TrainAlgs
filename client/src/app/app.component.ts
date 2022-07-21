@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { delay } from 'rxjs';
 import { User } from './models/user';
 import { AccountService } from './services/account.service';
 
@@ -9,18 +8,19 @@ import { AccountService } from './services/account.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'client';
   theme = localStorage.theme;
+
+  constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {
     this.setCurrentUser();
   }
 
-  constructor(private accountService: AccountService) {}
-
   setCurrentUser() {
     const user: User = JSON.parse(localStorage.getItem('user'));
-    this.accountService.setCurrentUser(user);
+    if(user) {
+      this.accountService.setCurrentUser(user);
+    }
   }
 
   changeTheme(theme: string) {
