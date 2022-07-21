@@ -4,32 +4,48 @@
         <img class="mx-auto h-12 w-auto" src="https://jf-staeulalia.pt/img/other/44/collection-simple-train-cliparts-11.png" alt="Workflow">
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">Sign in to your account</h2>
       </div>
-      <form #signIn="ngForm" class="mt-8 space-y-6" (ngSubmit)="login()">
+      <form [formGroup]="signInForm" #SignIn="ngForm" class="mt-8 space-y-6" (ngSubmit)="login()">
         <input type="hidden" name="remember" value="true">
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
             <label for="username" class="sr-only">Email address</label>
-            <input id="username" name="username" [(ngModel)]="model.username" type="text" autocomplete="username" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="Username">
+            <input id="username" formControlName="username" type="text" autocomplete="username" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="Username">
           </div>
           <div>
             <label for="password" class="sr-only">Password</label>
-            <input id="password" name="password" [(ngModel)]="model.password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="Password">
+            <input id="password" formControlName="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="Password">
           </div>
         </div>
-  
+
+        <div class="m-1 text-red-600 text-sm">
+          <ol class="list-disc">
+            <li *ngIf="signInForm.get('username').invalid && (signInForm.get('username').dirty || signInForm.get('username').touched)">
+              Please provide a username.
+            </li>
+            <li *ngIf="signInForm.get('password').invalid && (signInForm.get('password').dirty || signInForm.get('password').touched)">
+              Please provide a password.
+            </li>
+            <div *ngIf="validationErrors.length > 0">
+              <li *ngFor="let error of validationErrors">
+                {{error}}
+              </li>
+            </div>
+          </ol>
+        </div>
+
         <div class="flex items-center justify-between">
           <div class="flex items-center">
             <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
             <label for="remember-me" class="ml-2 block text-sm text-gray-900 dark:text-white"> Remember me </label>
           </div>
-  
+
           <div class="text-sm">
             <a href="#" class="font-medium text-blue-500 hover:text-blue-700"> Forgot your password? </a>
           </div>
         </div>
-  
+
         <div>
-          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800">
+          <button [disabled]="!signInForm.valid" type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800">
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
               <svg class="h-5 w-5 text-blue-300 group-hover:text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />

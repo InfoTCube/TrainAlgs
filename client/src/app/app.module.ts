@@ -27,6 +27,7 @@ import { DropdownComponent } from './modules/dropdown/dropdown.component';
 import { CodeViewerComponent } from './modules/code-viewer/code-viewer.component';
 import { SharedModule } from './modules/shared.module';
 import { CodeEditorComponent } from './modules/code-editor/code-editor.component';
+import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { CodeEditorComponent } from './modules/code-editor/code-editor.component
     NgxPaginationModule,
     BrowserAnimationsModule,
     SharedModule,
-    MarkdownModule.forRoot()
+    MarkdownModule.forRoot(),
+    TimeagoModule.forRoot()
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

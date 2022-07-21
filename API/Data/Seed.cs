@@ -13,6 +13,7 @@ public class Seed
         var roles = new List<AppRole> 
         {
             new AppRole{Name = "Member"},
+            new AppRole{Name = "Moderator"},
             new AppRole{Name = "Admin"}
         };
             

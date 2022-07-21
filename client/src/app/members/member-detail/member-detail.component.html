@@ -4,8 +4,8 @@
         <div class="text-gray-900 dark:text-white font-bold text-5xl mb-2">{{member.username}}</div>
         <p class="text base text-gray-900 dark:text-white">Describtion: {{member.description}}</p>
         <p class="text-gray-900 dark:text-white text-base">Country: {{member.country}}</p>
-        <p class="text-gray-900 dark:text-white text-base">Member since: {{member.created}}</p>
-        <p class="text-gray-900 dark:text-white text-base">Last active: {{member.lastActive}}</p>
+        <p class="text-gray-900 dark:text-white text-base">Member since: {{member.created | timeago}}</p>
+        <p class="text-gray-900 dark:text-white text-base">Last active: {{member.lastActive | timeago}}</p>
       </div>
     </div>
 </div>

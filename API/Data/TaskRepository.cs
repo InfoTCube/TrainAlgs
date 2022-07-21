@@ -24,7 +24,7 @@ public class TaskRepository : ITaskRepository
 
     public async Task<AlgTask> GetTaskByIdAsync(int id)
     {
-        return await _context.Tasks.FindAsync(id);
+        return await _context.Tasks.Where(task => task.Verified == true).Where(task => task.Id == id).FirstOrDefaultAsync();
     }
 
     public async Task<AlgTask> GetTaskByNameTagAsync(string nameTag)
@@ -33,6 +33,19 @@ public class TaskRepository : ITaskRepository
             .Include(task => task.TestGroups)
             .Include("TestGroups.Tests")
             .Where(task => task.NameTag == nameTag)
+            .Where(task => task.Verified == true)
+            .SingleOrDefaultAsync();
+
+        return task;
+    }
+
+    public async Task<AlgTask> GetTaskToVerifyByNameTagAsync(string nameTag)
+    {
+        var task =  await _context.Tasks
+            .Include(task => task.TestGroups)
+            .Include("TestGroups.Tests")
+            .Where(task => task.NameTag == nameTag)
+            .Where(task => task.Verified == false)
             .SingleOrDefaultAsync();
 
         return task;
@@ -41,6 +54,17 @@ public class TaskRepository : ITaskRepository
     public async Task<PagedList<ListedTaskDto>> GetTasksAsync(ElementParams elementParams)
     {
         var query = _context.Tasks
+            .Where(task => task.Verified == true)
+            .ProjectTo<ListedTaskDto>(_mapper.ConfigurationProvider)
+            .AsNoTracking();
+
+        return await PagedList<ListedTaskDto>.CreateAsync(query, elementParams.PageNumber, elementParams.PageSize);
+    }
+
+    public async Task<PagedList<ListedTaskDto>> GetTasksToVerifyAsync(ElementParams elementParams)
+    {
+        var query = _context.Tasks
+            .Where(task => task.Verified == false)
             .ProjectTo<ListedTaskDto>(_mapper.ConfigurationProvider)
             .AsNoTracking();
 
