@@ -1,4 +1,4 @@
-<div class="content-center flex items-center justify-center pb-4">
+<div *ngIf="solutions && solutions.length > 0" class="content-center flex items-center justify-center pb-4">
     <div class="full relative overflow-x-auto shadow-md rounded-lg">
       <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
           <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300 text-center">
@@ -48,6 +48,10 @@
           </tbody>
       </table>
     </div>
+</div>
+
+<div *ngIf="solutions && solutions.length == 0" class="text-center text-gray-900 dark:text-white">
+  There are no solutions to display...
 </div>
 
 <pagination-controls class="text-center styled-pagination dark:styled-pagination" id="solutions" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="10"

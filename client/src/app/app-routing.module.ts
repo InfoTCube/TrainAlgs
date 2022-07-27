@@ -13,6 +13,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SolutionDetailComponent } from './solutions/solution-detail/solution-detail.component';
 import { SolutionsComponent } from './solutions/solutions/solutions.component';
+import { TaskAddingComponent } from './tasks/task-adding/task-adding.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TasksComponent } from './tasks/tasks/tasks.component';
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'tasks', component: TasksComponent},
   {path: 'tasks/:nameTag/statement', component: TaskDetailComponent},
+  {path: 'tasks/add-task', component: TaskAddingComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: 'server-error', component: ServerErrorComponent},
   {path: 'members/:username', component: MemberDetailComponent},

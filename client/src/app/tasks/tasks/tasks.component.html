@@ -1,4 +1,13 @@
-<div class="content-center flex items-center justify-center pb-4">
+<button routerLink="/tasks/add-task" class="group w-48 flex justify-center m-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800">
+  <span class="left-0 inset-y-0 flex items-center pr-2">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+    </svg>
+  </span>
+  Add your own task!
+</button>
+
+<div *ngIf="tasks && tasks.length > 0" class="content-center flex items-center justify-center pb-4">
   <div class="full relative overflow-x-auto shadow-md rounded-lg">
     <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
         <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300 text-center">
@@ -30,6 +39,10 @@
         </tbody>
     </table>
   </div>
+</div>
+
+<div *ngIf="tasks && tasks.length == 0" class="text-center text-gray-900 dark:text-white">
+  There are no tasks to display...
 </div>
 
 <pagination-controls class="text-center styled-pagination dark:styled-pagination-dark" id="tasks" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="10"

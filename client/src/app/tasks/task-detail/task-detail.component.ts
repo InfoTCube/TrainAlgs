@@ -52,7 +52,7 @@ export class TaskDetailComponent implements OnInit {
   replaceInlineCode(md: string) : string {
     let matchString = '.';
     while(matchString != null) {
-      let match = md.match(/(?=`)`(?!`)[^`]*(?=`)`(?!`)/);
+      let match = md.match(/(?<!``)(?=`)`(?!`)[^`]*(?=`)`(?!`)/);
       if(match == null) {
         matchString = null;
         continue;

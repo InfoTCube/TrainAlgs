@@ -31,6 +31,7 @@ import { TimeagoModule } from 'ngx-timeago';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { VerifyTasksComponent } from './moderator/verify-tasks/verify-tasks.component';
 import { VerifyTaskDetailComponent } from './moderator/verify-task-detail/verify-task-detail.component';
+import { TaskAddingComponent } from './tasks/task-adding/task-adding.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { VerifyTaskDetailComponent } from './moderator/verify-task-detail/verify
     CodeEditorComponent,
     HasRoleDirective,
     VerifyTasksComponent,
-    VerifyTaskDetailComponent
+    VerifyTaskDetailComponent,
+    TaskAddingComponent
   ],
   imports: [
     BrowserModule,

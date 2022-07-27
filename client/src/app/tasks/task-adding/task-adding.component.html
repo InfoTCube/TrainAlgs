@@ -1,0 +1,44 @@
+<div class="flex justify-center">
+  <app-code-editor (getCodeEvent)="getCode($event)" [lang]="'markdown'"></app-code-editor>
+</div>
+<div class="flex justify-center mt-6">
+  <div class="bg-gray-300 dark:bg-gray-700 rounded-md md p-3">
+    <h1 class="text-5xl text-gray-900 dark:text-white mb-7">Task name</h1>
+    <markdown class="prose dark:prose-invert max-w-none text-xl text-gray-900 dark:text-white" [data]="markdown"></markdown>
+    <div class="content-center flex items-center justify-left mt-6 pb-4">
+      <div>
+          <h1 class="text-gray-900 dark:text-white text-center mb-2">Example tests</h1>
+          <div class="border-white border-2 border-dotted full relative overflow-x-auto shadow-md rounded-lg">
+              <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
+                  <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300">
+                      <tr>
+                          <th scope="col" class="px-6 py-3">
+                              #
+                          </th>
+                          <th scope="col" class="px-6 py-3">
+                              Input
+                          </th>
+                          <th scope="col" class="px-6 py-3">
+                              Output
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700">
+                          <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                              aaa
+                          </th>
+                          <td class="px-6 py-4">
+                              <span style="white-space: pre-line">aaa</span>
+                          </td>
+                          <td class="px-6 py-4">
+                              <span style="white-space: pre-line">aaa</span>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+  </div>
+</div>

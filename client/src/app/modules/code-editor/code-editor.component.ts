@@ -119,6 +119,6 @@ export class CodeEditorComponent implements AfterViewInit, OnChanges{
   }
 
   getCode() {
-    this.getCodeEvent.emit(this.codeEle.nativeElement.innerText);
+      this.getCodeEvent.emit(this.codeEle.nativeElement.innerText);
   }
 }
