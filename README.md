@@ -26,3 +26,4 @@ If you are interested in collaboration please contact me via discord or email:
 Discord: <a href="https://discord.com/users/671790729676324867">Info Cube#6039</a>
 </br>
 Mail: <a href="mailto:tymoteusz.marzec.dev@gmail.com">tymoteusz.marzec.dev@gmail.com</a>
+</br>
