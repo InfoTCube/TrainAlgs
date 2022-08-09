@@ -49,4 +49,8 @@ export class TasksService {
   getTask(nameTag: string) {
     return this.http.get<AlgTask>(this.baseUrl + 'tasks/' + nameTag);
   }
+
+  addTask(model: any) {
+    return this.http.post(this.baseUrl + 'tasks', model);
+  }
 }

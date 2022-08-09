@@ -43,7 +43,6 @@ export class TaskDetailComponent implements OnInit {
     model.language = this.submitSolutionForm.get("language").value;
     model.algTaskTag = this.task.nameTag;
     delete model.file
-    console.log(model);
     this.solutionsService.addSolution(model).subscribe(response => {
       this.router.navigateByUrl(`/solutions`);
     });
