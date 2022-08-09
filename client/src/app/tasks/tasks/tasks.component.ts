@@ -28,7 +28,7 @@ export class TasksComponent implements OnInit {
     this.tasksService.getTasks(this.taskParams).subscribe(response => {
       this.tasks = response.result;
       this.pagination = response.pagination;
-      console.log(this.pagination)
+      console.log(this.tasks)
     })
   }
 

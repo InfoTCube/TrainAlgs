@@ -19,6 +19,15 @@
                     Name
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Submissions
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    % Of Correct
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Average
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Author Username
                 </th>
             </tr>
@@ -31,6 +40,15 @@
                 </th>
                 <td class="px-6 py-4">
                     {{task.name}}
+                </td>
+                <td class="px-6 py-4">
+                    {{task.submissions}}
+                </td>
+                <td class="px-6 py-4">
+                    {{task.correctPercent}}%
+                </td>
+                <td class="px-6 py-4">
+                    {{task.averageResult}}
                 </td>
                 <td class="px-6 py-4">
                     {{task.authorUsername}}
