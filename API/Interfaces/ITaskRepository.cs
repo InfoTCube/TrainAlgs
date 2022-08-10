@@ -10,6 +10,6 @@ public interface ITaskRepository
     Task<AlgTask> GetTaskByIdAsync(int id);
     Task<AlgTask> GetTaskByNameTagAsync(string nameTag);
     Task<AlgTask> GetTaskToVerifyByNameTagAsync(string nameTag);
-    Task<PagedList<ListedTaskDto>> GetTasksAsync(ElementParams elementParams);
+    Task<PagedList<ListedTaskDto>> GetTasksAsync(string username, ElementParams elementParams);
     Task<PagedList<ListedTaskDto>> GetTasksToVerifyAsync(ElementParams elementParams);
 }

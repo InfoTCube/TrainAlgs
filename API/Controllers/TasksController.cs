@@ -21,7 +21,7 @@ public class TasksController : BaseApiController
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ListedTaskDto>>> GetTasks([FromQuery] ElementParams elementParams)
     {
-        var tasks = await _unitOfWork.TaskRepository.GetTasksAsync(elementParams);
+        var tasks = await _unitOfWork.TaskRepository.GetTasksAsync(User.GetUsername(), elementParams);
 
         Response.AddPaginationHeader(tasks.CurrentPage, tasks.PageSize,
             tasks.TotalCount, tasks.TotalPages);

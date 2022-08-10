@@ -5,6 +5,7 @@ using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using static API.Helpers.TaskParams;
 
 namespace API.Data;
 public class TaskRepository : ITaskRepository
@@ -51,13 +52,14 @@ public class TaskRepository : ITaskRepository
         return task;
     }
 
-    public async Task<PagedList<ListedTaskDto>> GetTasksAsync(ElementParams elementParams)
+    public async Task<PagedList<ListedTaskDto>> GetTasksAsync(string username, ElementParams elementParams)
     {
         var query = _context.Tasks
             .Where(task => task.Verified == true)
+            .Include("Solutions.Author")
             .ProjectTo<ListedTaskDto>(_mapper.ConfigurationProvider)
             .AsNoTracking();
-
+    
         return await PagedList<ListedTaskDto>.CreateAsync(query, elementParams.PageNumber, elementParams.PageSize);
     }
 

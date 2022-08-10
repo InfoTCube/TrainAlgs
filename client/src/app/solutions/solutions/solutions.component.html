@@ -54,7 +54,7 @@
   There are no solutions to display...
 </div>
 
-<pagination-controls class="text-center styled-pagination dark:styled-pagination" id="solutions" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="10"
+<pagination-controls *ngIf="solutions && solutions.length != 0" class="text-center styled-pagination dark:styled-pagination" id="solutions" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="10"
   directionLinks="true" autoHide="true" responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
   screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
 </pagination-controls>
