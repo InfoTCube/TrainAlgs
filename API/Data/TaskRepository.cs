@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using API.DTOs;
 using API.Entities;
 using API.Helpers;
@@ -36,7 +37,7 @@ public class TaskRepository : ITaskRepository
             .Where(task => task.NameTag == nameTag)
             .Where(task => task.Verified == true)
             .SingleOrDefaultAsync();
-
+        
         return task;
     }
 
@@ -52,14 +53,13 @@ public class TaskRepository : ITaskRepository
         return task;
     }
 
-    public async Task<PagedList<ListedTaskDto>> GetTasksAsync(string username, ElementParams elementParams)
+    public async Task<PagedList<ListedTaskDto>> GetTasksAsync(ElementParams elementParams)
     {
         var query = _context.Tasks
             .Where(task => task.Verified == true)
             .Include("Solutions.Author")
-            .ProjectTo<ListedTaskDto>(_mapper.ConfigurationProvider)
-            .AsNoTracking();
-    
+            .ProjectTo<ListedTaskDto>(_mapper.ConfigurationProvider);
+            
         return await PagedList<ListedTaskDto>.CreateAsync(query, elementParams.PageNumber, elementParams.PageSize);
     }
 
@@ -76,5 +76,20 @@ public class TaskRepository : ITaskRepository
     public void Update(AlgTask task)
     {
         _context.Entry(task).State = EntityState.Modified;
+    }
+
+    public async Task<PagedList<ListedTaskDto>> GetTasksWithUserResultsAsync(PagedList<ListedTaskDto> tasks, string username)
+    {
+        foreach(var task in tasks)
+        {
+            var userSolutions = _context.Solutions
+                .Include(s => s.Author)
+                .Include(s => s.Task)
+                .Where(s => s.Author.UserName == username)
+                .Where(s => s.Task.NameTag == task.NameTag);
+            task.UserScore = userSolutions.Count() != 0 ? userSolutions.Max(s => s.Points) : -1;
+        }
+
+        return tasks;
     }
 }

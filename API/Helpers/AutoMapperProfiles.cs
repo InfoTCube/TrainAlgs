@@ -1,6 +1,8 @@
 using API.DTOs;
 using API.Entities;
+using API.Interfaces;
 using AutoMapper;
+using System.Security.Claims;
 using static API.Helpers.TaskParams;
 
 namespace API.Helpers;
@@ -24,8 +26,7 @@ public class AutoMapperProfiles : Profile
                 src.Author.UserName))
             .ForMember(task => task.Submissions, opt => opt.MapFrom(src => src.Solutions.Count))
             .ForMember(task => task.AverageResult, opt => opt.MapFrom(src => CalculateAverageResult(src.Solutions)))
-            .ForMember(task => task.CorrectPercent, opt => opt.MapFrom(src => CalculatePercentOfCorrect(src.Solutions)))
-            .ForMember(task => task.UserScore, opt => opt.MapFrom(src => GetUserScore(src.Solutions)));
+            .ForMember(task => task.CorrectPercent, opt => opt.MapFrom(src => CalculatePercentOfCorrect(src.Solutions)));
         CreateMap<NewTaskDto, AlgTask>();
         CreateMap<TestSolution, TestSolutionDto>()
             .ForMember(test => test.MemoryLimit, opt => opt.MapFrom(src => 
@@ -66,13 +67,5 @@ public class AutoMapperProfiles : Profile
         int correct = solutions.Where(s => s.Points == 100).Count();
         if(correct == 0) return 0;
         return (short)((correct*100 / solutions.Count()));
-    }
-    private static int GetUserScore(IEnumerable<Solution> solutions)
-    {
-        var solutionsForUser = solutions.Where(s => s.Author?.UserName == "olix3001");
-        if(solutionsForUser == null || solutionsForUser.Count() == 0) return -1;
-        int maxPoints = solutionsForUser.Max(s => s.Points);
-
-        return maxPoints;
     }
 }
