@@ -11,7 +11,8 @@ public class AutoMapperProfiles : Profile
     public AutoMapperProfiles()
     {
         CreateMap<RegisterDto, AppUser>();
-        CreateMap<AppUser, MemberDto>();
+        CreateMap<AppUser, MemberDto>()
+            .ForMember(user => user.Solutions, opt => opt.MapFrom(src => GetSolutions(src.Solutions, src.UserName)));
         CreateMap<NewTestDto, Test>();
         CreateMap<Test, TestDto>();
         CreateMap<NewTestGroupDto, TestGroup>();
@@ -67,5 +68,26 @@ public class AutoMapperProfiles : Profile
         int correct = solutions.Where(s => s.Points == 100).Count();
         if(correct == 0) return 0;
         return (short)((correct*100 / solutions.Count()));
+    }
+
+    private static IEnumerable<Tuple<string, int>> GetSolutions(IEnumerable<Solution> solutions, string username)
+    {
+        List<Tuple<string, int>>? solutionsCount = new List<Tuple<string, int>>();
+        solutions = solutions.Where(s => s.Author?.UserName == username);
+        int sum = 0;
+        DateTime day = DateTime.Today;
+        while(solutions.Count() != sum)
+        {
+            int count = solutions
+                .Where(s => s.Date.ToString("dd/MM/yyyy") == day.ToString("dd/MM/yyyy"))
+                .Count();
+
+            if(count > 0) solutionsCount.Add(new Tuple<string, int>(day.ToString("dd/MM/yyyy"), count));
+
+            sum += count;
+            day = day.AddDays(-1);
+        }
+
+        return solutionsCount;
     }
 }

@@ -20,6 +20,7 @@ public class UserRepository : IUserRepository
     {
         return await _context.Users
             .Where(user => user.UserName == username)
+            .Include("Solutions.Author")
             .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
             .SingleOrDefaultAsync();
     }

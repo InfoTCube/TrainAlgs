@@ -4,4 +4,5 @@ export interface Member {
     lastActive: Date;
     country: string;
     description: string;
+    solutions: object[];
 }

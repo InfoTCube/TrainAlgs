@@ -32,6 +32,7 @@ import { HasRoleDirective } from './directives/has-role.directive';
 import { VerifyTasksComponent } from './moderator/verify-tasks/verify-tasks.component';
 import { VerifyTaskDetailComponent } from './moderator/verify-task-detail/verify-task-detail.component';
 import { TaskAddingComponent } from './tasks/task-adding/task-adding.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -66,8 +67,9 @@ import { TaskAddingComponent } from './tasks/task-adding/task-adding.component';
     NgxPaginationModule,
     BrowserAnimationsModule,
     SharedModule,
+    NgxChartsModule,
     MarkdownModule.forRoot(),
-    TimeagoModule.forRoot()
+    TimeagoModule.forRoot(),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

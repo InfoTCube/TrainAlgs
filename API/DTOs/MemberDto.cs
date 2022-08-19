@@ -6,4 +6,5 @@ public class MemberDto
     public DateTime LastActive { get; set; }
     public string? Country { get; set; }
     public string? Description { get; set; }
+    public IEnumerable<Tuple<string, int>>? Solutions { get; set; }
 }

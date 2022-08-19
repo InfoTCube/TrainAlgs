@@ -10,3 +10,9 @@
   top: .125em;
   position: relative;
 }
+
+::ng-deep.dark .ngx-charts {
+  text { fill: #fff !important; }
+}
+
+
