@@ -14,27 +14,66 @@
         <p class="text-gray-900 dark:text-white text-base">Member since: {{member.created | timeago}}</p>
         <p class="text-gray-900 dark:text-white text-base">Last active: {{member.lastActive | timeago}}</p>
 
-        <ngx-charts-heat-map
-          [min]="heatmapMin"
-          [max]="heatmapMax"
-          [view]="[1000, 180]"
-          [scheme]="colorScheme"
-          [results]="calendarData"
-          [animations]="true"
-          [legend]="false"
-          [gradient]="false"
-          [xAxis]="true"
-          [yAxis]="true"
-          [xAxisTickFormatting]="calendarAxisTickFormatting"
-          [tooltipText]="calendarTooltipText"
-          [innerPadding]="2"
-          [trimXAxisTicks]="true"
-          [trimYAxisTicks]="true"
-          [rotateXAxisTicks]="true"
-          [maxXAxisTickLength]="16"
-          [maxYAxisTickLength]="16"
-        >
-        </ngx-charts-heat-map>
+        <div class="mt-2">
+          <div>
+          <select *ngIf="years" (change)="getCalendarData($event.target.value)" class="float-right mr-8 text-xs w-20 h-10 bg-gray-50 disabled:bg-gray-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1 dark:disabled:bg-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="Last year" selected>Last year</option>
+            <option *ngFor="let year of years" value="{{year}}">{{year}}</option>
+          </select>
+
+          <ngx-charts-heat-map
+            [min]="heatmapMin"
+            [max]="heatmapMax"
+            [view]="[1000, 180]"
+            [scheme]="colorScheme"
+            [results]="calendarData"
+            [animations]="true"
+            [legend]="false"
+            [gradient]="false"
+            [xAxis]="true"
+            [yAxis]="true"
+            [xAxisTickFormatting]="calendarAxisTickFormatting"
+            [tooltipText]="calendarTooltipText"
+            [innerPadding]="2"
+            [trimXAxisTicks]="true"
+            [trimYAxisTicks]="true"
+            [rotateXAxisTicks]="true"
+            [maxXAxisTickLength]="16"
+            [maxYAxisTickLength]="16"
+          >
+          </ngx-charts-heat-map>
+        </div>
+
+          <div class="table text-gray-900 dark:text-white ml-2">
+            <div class="flex flexwrap justify-center">
+                <div class="p-3 w-40">
+                  <p class="text-2xl">{{member.graphChart.solvedAllTime}} tasks</p>
+                  <p class="text-sm text-gray-500">solved for all time</p>
+                </div>
+                <div class="p-3 w-40">
+                  <p class="text-2xl">{{member.graphChart.solvedLastYear}} tasks</p>
+                  <p class="text-sm text-gray-500">solved for the last year</p>
+                </div>
+                <div class="p-3 w-40">
+                  <p class="text-2xl">{{member.graphChart.solvedLastMonth}} tasks</p>
+                  <p class="text-sm text-gray-500">solved for the last month</p>
+                </div>
+                <div class="p-3 w-40">
+                  <p class="text-2xl">{{member.graphChart.solvedInRowAllTime}} days</p>
+                  <p class="text-sm text-gray-500">in a row max</p>
+                </div>
+                <div class="p-3 w-40">
+                  <p class="text-2xl">{{member.graphChart.solvedInRowLastYear}} days</p>
+                  <p class="text-sm text-gray-500">in a row max for the last year</p>
+                </div>
+                <div class="p-3 w-40">
+                  <p class="text-2xl">{{member.graphChart.solvedInRowLastMonth}} days</p>
+                  <p class="text-sm text-gray-500">in a row max for the last month</p>
+                </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
 </div>

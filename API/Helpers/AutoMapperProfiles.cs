@@ -12,7 +12,7 @@ public class AutoMapperProfiles : Profile
     {
         CreateMap<RegisterDto, AppUser>();
         CreateMap<AppUser, MemberDto>()
-            .ForMember(user => user.Solutions, opt => opt.MapFrom(src => GetSolutions(src.Solutions, src.UserName)));
+            .ForMember(user => user.GraphChart, opt => opt.MapFrom(src => GetSolutions(src.Solutions, src.UserName)));
         CreateMap<NewTestDto, Test>();
         CreateMap<Test, TestDto>();
         CreateMap<NewTestGroupDto, TestGroup>();
@@ -70,13 +70,21 @@ public class AutoMapperProfiles : Profile
         return (short)((correct*100 / solutions.Count()));
     }
 
-    private static IEnumerable<Tuple<string, int>> GetSolutions(IEnumerable<Solution> solutions, string username)
+    private static GraphChartDto? GetSolutions(IEnumerable<Solution> solutions, string username)
     {
+        GraphChartDto graphChart = new GraphChartDto();
         List<Tuple<string, int>>? solutionsCount = new List<Tuple<string, int>>();
+        int solvedAllTime = 0;
+        int solvedLastYear = 0;
+        int solvedLastMonth = 0;
+        int solvedInRowAllTime = 0;
+        int solvedInRowLastYear = 0;
+        int solvedInRowLastMonth = 0;
+
         solutions = solutions.Where(s => s.Author?.UserName == username);
-        int sum = 0;
         DateTime day = DateTime.Today;
-        while(solutions.Count() != sum)
+        int currentRow = 0;
+        while(solutions.Count() != solvedAllTime)
         {
             int count = solutions
                 .Where(s => s.Date.ToString("dd/MM/yyyy") == day.ToString("dd/MM/yyyy"))
@@ -84,10 +92,36 @@ public class AutoMapperProfiles : Profile
 
             if(count > 0) solutionsCount.Add(new Tuple<string, int>(day.ToString("dd/MM/yyyy"), count));
 
-            sum += count;
+            if(DateTime.Today.AddDays(-30) < day) solvedLastMonth += count;
+            if(DateTime.Today.AddDays(-365) < day) solvedLastYear += count;
+
+            if(DateTime.Today.AddDays(-30).ToString("dd/MM/yyyy") == day.ToString("dd/MM/yyyy")) solvedInRowLastMonth = currentRow > solvedInRowLastMonth ? currentRow : solvedInRowLastMonth;
+            if(DateTime.Today.AddDays(-365).ToString("dd/MM/yyyy") == day.ToString("dd/MM/yyyy")) solvedInRowLastYear = currentRow > solvedInRowLastYear ? currentRow : solvedInRowLastYear;
+
+            if(count > 0) ++currentRow;
+            else
+            {
+                if(DateTime.Today.AddDays(-30) < day) solvedInRowLastMonth = currentRow > solvedInRowLastMonth ? currentRow : solvedInRowLastMonth;
+                if(DateTime.Today.AddDays(-365) < day) solvedInRowLastYear = currentRow > solvedInRowLastYear ? currentRow : solvedInRowLastYear;
+                solvedInRowAllTime = currentRow > solvedInRowAllTime ? currentRow : solvedInRowAllTime;
+                currentRow = 0;
+            }
+
+            solvedAllTime += count;
             day = day.AddDays(-1);
         }
 
-        return solutionsCount;
+        graphChart = new GraphChartDto
+        {
+            Solutions = solutionsCount,
+            SolvedAllTime = solvedAllTime,
+            SolvedLastYear = solvedLastYear,
+            SolvedLastMonth = solvedLastMonth,
+            SolvedInRowAllTime = solvedInRowAllTime,
+            SolvedInRowLastYear = solvedInRowLastYear,
+            SolvedInRowLastMonth = solvedInRowLastMonth
+        };
+
+        return graphChart;
     }
 }

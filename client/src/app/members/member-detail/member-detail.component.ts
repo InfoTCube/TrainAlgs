@@ -22,6 +22,7 @@ export class MemberDetailComponent implements OnInit {
   colorScheme: any;
   heatmapMin: number = 0;
   heatmapMax: number = 10;
+  years: string[] = [];
 
   constructor(private membersService: MembersService, private route: ActivatedRoute, private accoutService: AccountService) { }
 
@@ -37,7 +38,8 @@ export class MemberDetailComponent implements OnInit {
 
     this.membersService.getMember(this.route.snapshot.paramMap.get('username')).subscribe(member => {
       this.member = member;
-      this.calendarData = this.getCalendarData();
+      this.getCalendarData(null);
+      this.getYears();
     })
   }
 
@@ -58,41 +60,87 @@ export class MemberDetailComponent implements OnInit {
     `;
   }
 
-  getCalendarData(): any[] {
+  getCalendarData(year) {
     var maxValue = 0;
-    // today
-    const now = new Date();
-    const todaysDay = now.getDate();
-    const thisDay = new Date(now.getFullYear(), now.getMonth(), todaysDay);
+    const calendarData = [];
+
+    if(year == null || year == "Last year") {
+      // today
+      const now = new Date();
+      const todaysDay = now.getDate();
+      const thisDay = new Date(now.getFullYear(), now.getMonth(), todaysDay);
+
+      // Monday
+      const thisMonday = new Date(thisDay.getFullYear(), thisDay.getMonth(), todaysDay - thisDay.getDay() + 1);
+      const thisMondayDay = thisMonday.getDate();
+      const thisMondayYear = thisMonday.getFullYear();
+      const thisMondayMonth = thisMonday.getMonth();
+
+      // 52 weeks before monday
+      const getDate = d => new Date(thisMondayYear, thisMondayMonth, d);
+      for (let week = -52; week <= 0; week++) {
+        const mondayDay = thisMondayDay + week * 7;
+        const monday = getDate(mondayDay);
+
+        // one week
+        const series = [];
+        for (let dayOfWeek = 7; dayOfWeek > 0; dayOfWeek--) {
+          const date = getDate(mondayDay - 1 + dayOfWeek);
+
+          // skip future dates
+          if (date > now) {
+            continue;
+          }
+
+          // value
+          const solutions = this.member.graphChart.solutions.find(s => Object.values(s)[0] === moment(date).format('DD/MM/yyyy'));
+
+          const value = solutions != undefined ? Object.values(solutions)[1] : 0;
+
+          maxValue = value > maxValue ? value : maxValue;
+
+          series.push({
+            date,
+            name: weekdayName.format(date),
+            value: value
+          });
+        }
+
+        calendarData.push({
+          name: monday.toString(),
+          series
+        });
+      }
+
+      this.heatmapMax = maxValue == 0 ? 1 : maxValue;
+      this.calendarData = calendarData;
+      return;
+    }
+
+    const firstDay = new Date(parseInt(year), 0, 1);
 
     // Monday
-    const thisMonday = new Date(thisDay.getFullYear(), thisDay.getMonth(), todaysDay - thisDay.getDay() + 1);
-    const thisMondayDay = thisMonday.getDate();
-    const thisMondayYear = thisMonday.getFullYear();
-    const thisMondayMonth = thisMonday.getMonth();
+    const previousMonday =  firstDay;
+    previousMonday.setDate(firstDay.getDate() - (firstDay.getDay() + 6) % 7);//new Date(parseInt(year), 12, lastDay.getDate() - lastDay.getDay() + 1);
+    const previousMondayDay = previousMonday.getDate();
+    const previousMondayYear = previousMonday.getFullYear();
+    const previousMondayMonth = previousMonday.getMonth();
 
-    // 52 weeks before monday
-    const calendarData = [];
-    const getDate = d => new Date(thisMondayYear, thisMondayMonth, d);
-    for (let week = -52; week <= 0; week++) {
-      const mondayDay = thisMondayDay + week * 7;
+    const getDate = d => new Date(previousMondayYear, previousMondayMonth, d);
+    for (let week = 0; week <= 52; week++) {
+      const mondayDay = previousMondayDay + week * 7;
       const monday = getDate(mondayDay);
 
-      // one week
       const series = [];
       for (let dayOfWeek = 7; dayOfWeek > 0; dayOfWeek--) {
         const date = getDate(mondayDay - 1 + dayOfWeek);
 
-        // skip future dates
-        if (date > now) {
+        if (date > new Date(parseInt(year), 11, 31) || date < new Date(parseInt(year), 0, 1)) {
           continue;
         }
 
-        // value
-        const solutions = this.member.solutions.find(s => Object.values(s)[0] === moment(date).format('DD/MM/yyyy'));
-
+        const solutions = this.member.graphChart.solutions.find(s => Object.values(s)[0] === moment(date).format('DD/MM/yyyy'));
         const value = solutions != undefined ? Object.values(solutions)[1] : 0;
-
         maxValue = value > maxValue ? value : maxValue;
 
         series.push({
@@ -108,8 +156,14 @@ export class MemberDetailComponent implements OnInit {
       });
     }
 
-    this.heatmapMax = maxValue;
-    return calendarData;
+    this.heatmapMax = maxValue == 0 ? 1 : maxValue;
+    this.calendarData = calendarData;
+  }
+
+  getYears() {
+    this.years = this.member.graphChart.solutions
+      .map(s => Object.values(s)[0] = Object.values(s)[0].split("/").pop())
+      .filter((v, i, a) => a.indexOf(v) === i)
   }
 
 }
