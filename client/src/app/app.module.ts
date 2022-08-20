@@ -78,7 +78,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       },
-      defaultLanguage: 'pl'
+      defaultLanguage: 'en'
     }),
   ],
   providers: [
