@@ -4,21 +4,21 @@
         <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
             <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300 text-center">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Date
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Task
-                    </th>
-                    <th scope="col" class="px-4 py-3">
-                        Language
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Status
-                    </th>
-                    <th scope="col" class="px-4 py-3">
-                        Points
-                    </th>
+                  <th scope="col" class="px-6 py-3">
+                      {{'Solutions.Solutions.Date' | translate}}
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      {{'Solutions.Solutions.Task' | translate}}
+                  </th>
+                  <th scope="col" class="px-4 py-3">
+                      {{'Solutions.Solutions.Language' | translate}}
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      {{'Solutions.Solutions.Status' | translate}}
+                  </th>
+                  <th scope="col" class="px-4 py-3">
+                      {{'Solutions.Solutions.Points' | translate}}
+                  </th>
                 </tr>
             </thead>
             <tbody>
@@ -61,18 +61,18 @@
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
       </svg>
-      Show code
+      {{'Solutions.SolutionDetail.ShowCode' | translate}}
     </button>
     <button class="m-2 w-44 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
       </svg>
-      Download code
+      {{'Solutions.SolutionDetail.DownloadCode' | translate}}
     </button>
   </div>
 
   <div *ngIf="solution.status != 'Compilation error'">
-      <h1 class="text-4xl text-gray-900 dark:text-white text-center my-7">Final testing report</h1>
+      <h1 class="text-4xl text-gray-900 dark:text-white text-center my-7">{{'Solutions.SolutionDetail.FinalTestingReport' | translate}}</h1>
 
       <div class="content-center flex items-center justify-center pb-4">
           <div class="full relative overflow-x-auto shadow-md rounded-lg">
@@ -80,19 +80,19 @@
               <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300 text-center">
                   <tr>
                       <th scope="col" class="px-6 py-3">
-                          Test
+                          {{'Solutions.SolutionDetail.Test' | translate}}
                       </th>
                       <th scope="col" class="px-6 py-3">
-                          Status
+                          {{'Solutions.SolutionDetail.Status' | translate}}
                       </th>
                       <th scope="col" class="px-4 py-3">
-                          Time
+                          {{'Solutions.SolutionDetail.Time' | translate}}
                       </th>
                       <th scope="col" class="px-6 py-3">
-                          Memory
+                          {{'Solutions.SolutionDetail.Memory' | translate}}
                       </th>
                       <th scope="col" class="px-6 py-3">
-                          Points
+                          {{'Solutions.SolutionDetail.Points' | translate}}
                       </th>
                   </tr>
               </thead>
@@ -134,28 +134,28 @@
           <li *ngFor="let error of testsErrors">• {{error}}</li>
       </ol>
 
-      <h1 class="text-4xl text-gray-900 dark:text-white text-center my-7">Initial testing report</h1>
+      <h1 class="text-4xl text-gray-900 dark:text-white text-center my-7">{{'Solutions.SolutionDetail.InitialTestingReport' | translate}}</h1>
 
       <div class="content-center flex items-center justify-center pb-4">
           <div class="full relative overflow-x-auto shadow-md rounded-lg">
           <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
               <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300 text-center">
                   <tr>
-                      <th scope="col" class="px-6 py-3">
-                          Test
-                      </th>
-                      <th scope="col" class="px-6 py-3">
-                          Status
-                      </th>
-                      <th scope="col" class="px-4 py-3">
-                          Time
-                      </th>
-                      <th scope="col" class="px-6 py-3">
-                          Memory
-                      </th>
-                      <th scope="col" class="px-6 py-3">
-                          Points
-                      </th>
+                    <th scope="col" class="px-6 py-3">
+                      {{'Solutions.SolutionDetail.Test' | translate}}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        {{'Solutions.SolutionDetail.Status' | translate}}
+                    </th>
+                    <th scope="col" class="px-4 py-3">
+                        {{'Solutions.SolutionDetail.Time' | translate}}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        {{'Solutions.SolutionDetail.Memory' | translate}}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        {{'Solutions.SolutionDetail.Points' | translate}}
+                    </th>
                   </tr>
               </thead>
               <tbody *ngIf="exampleTests">

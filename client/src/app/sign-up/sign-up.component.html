@@ -2,74 +2,74 @@
     <div class="max-w-md w-full space-y-8">
       <div>
         <img class="mx-auto h-12 w-auto" src="https://jf-staeulalia.pt/img/other/44/collection-simple-train-cliparts-11.png" alt="Workflow">
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">Create a new account</h2>
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">{{'SignUp.CreateNewAccount' | translate}}</h2>
       </div>
       <form [formGroup]="signUpForm" #SignUp="ngForm" class="mt-8 space-y-6" (ngSubmit)="register()">
         <input type="hidden" name="remember" value="true">
         <div class="rounded-md shadow-sm -space-y-px">
             <div>
                 <label for="firstName" class="sr-only">First name</label>
-                <input id="firstName" formControlName="firstName" type="text" autocomplete="firstName" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="First name">
+                <input id="firstName" formControlName="firstName" type="text" autocomplete="firstName" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="{{'SignUp.FirstName' | translate}}">
             </div>
             <div>
                 <label for="lastName" class="sr-only">Last name</label>
-                <input id="lastName" formControlName="lastName" type="text" autocomplete="lastName" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="Last name">
+                <input id="lastName" formControlName="lastName" type="text" autocomplete="lastName" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="{{'SignUp.LastName' | translate}}">
             </div>
             <div>
                 <label for="email" class="sr-only">Email</label>
-                <input id="email" formControlName="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="Email">
+                <input id="email" formControlName="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="{{'SignUp.Email' | translate}}">
             </div>
             <div>
                 <label for="username" class="sr-only">Username</label>
-                <input id="username" formControlName="username" type="text" autocomplete="username" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="Username">
+                <input id="username" formControlName="username" type="text" autocomplete="username" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="{{'SignUp.Username' | translate}}">
             </div>
             <div>
                 <label for="password" class="sr-only">Password</label>
-                <input id="password" formControlName="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="Password">
+                <input id="password" formControlName="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="{{'SignUp.Password' | translate}}">
             </div>
             <div>
                 <label for="confirmPassword" class="sr-only">Confirm password</label>
-                <input id="confirmPassword" formControlName="confirmPassword" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="Confirm password">
+                <input id="confirmPassword" formControlName="confirmPassword" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="{{'SignUp.ConfirmPassword' | translate}}">
             </div>
         </div>
 
         <div class="m-1 text-red-600 text-sm">
           <ol class="list-disc">
             <li *ngIf="signUpForm.get('firstName').invalid && (signUpForm.get('firstName').dirty || signUpForm.get('firstName').touched)">
-              Please provide a first name.
+              {{'SignUp.ProvideFirstName' | translate}}
             </li>
             <li *ngIf="signUpForm.get('lastName').invalid && (signUpForm.get('lastName').dirty || signUpForm.get('lastName').touched)">
-              Please provide a last name.
+              {{'SignUp.ProvideLastName' | translate}}
             </li>
             <li *ngIf="signUpForm.get('email').invalid && (signUpForm.get('email').dirty || signUpForm.get('email').touched)">
-              Please provide an correct email.
+              {{'SignUp.ProvideCorrectEmail' | translate}}
             </li>
             <li *ngIf="signUpForm.get('username').invalid && (signUpForm.get('username').dirty || signUpForm.get('username').touched)">
-              Please provide a username.
+              {{'SignUp.ProvideUsername' | translate}}
             </li>
             <li *ngIf="signUpForm.get('username').invalid && (signUpForm.get('username').dirty || signUpForm.get('username').touched) && signUpForm.get('username').hasError('minlength')">
-              Username has to have at least 3 characters.
+              {{'SignUp.UsernameMustHaveAtLeast' | translate}}
             </li>
             <li *ngIf="signUpForm.get('username').invalid && (signUpForm.get('username').dirty || signUpForm.get('username').touched) && signUpForm.get('username').hasError('maxlength')">
-              Username has to have at most 32 characters.
+              {{'SignUp.UsernameMustHaveAtMost' | translate}}
             </li>
             <li *ngIf="signUpForm.get('password').invalid && (signUpForm.get('password').dirty || signUpForm.get('password').touched)">
-              Please provide a password.
+              {{'SignUp.ProvidePassword' | translate}}
             </li>
             <li *ngIf="signUpForm.get('password').invalid && (signUpForm.get('password').dirty || signUpForm.get('password').touched) && signUpForm.get('password').hasError('minlength')">
-              Password has to have at least 7 characters.
+              {{'SignUp.PasswordMustHaveAtLeast' | translate}}
             </li>
             <li *ngIf="signUpForm.get('password').invalid && (signUpForm.get('password').dirty || signUpForm.get('password').touched) && signUpForm.get('password').hasError('maxlength')">
-              Password has to have at most 32 characters.
+              {{'SignUp.PasswordMustHaveAtMost' | translate}}
             </li>
             <li *ngIf="signUpForm.get('password').invalid && (signUpForm.get('password').dirty || signUpForm.get('password').touched) && signUpForm.get('password').hasError('containsAllTypes')">
-              Password must contain at least one lowercase letter, uppercase letter, digit and special character.
+              {{'SignUp.PasswordMustContain' | translate}}
             </li>
             <li *ngIf="signUpForm.get('confirmPassword').invalid && (signUpForm.get('confirmPassword').dirty || signUpForm.get('confirmPassword').touched)">
-              Please provide a confirm password.
+              {{'SignUp.ProvideConfirmPassword' | translate}}
             </li>
             <li *ngIf="signUpForm.get('confirmPassword').invalid && (signUpForm.get('confirmPassword').dirty || signUpForm.get('confirmPassword').touched) && signUpForm.get('confirmPassword').hasError('isMatching')">
-              Confirm password must be the same as password.
+              {{'SignUp.PasswordsMustBeSame' | translate}}
             </li>
             <div *ngIf="validationErrors.length > 0">
               <li *ngFor="let error of validationErrors">
@@ -78,7 +78,7 @@
             </div>
           </ol>
         </div>
-  
+
         <div>
           <button [disabled]="!signUpForm.valid" type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800">
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -86,10 +86,10 @@
                 <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
               </svg>
             </span>
-            Sign up
+            {{'SignUp.SignUp' | translate}}
           </button>
         </div>
       </form>
-      <p class="text-center font-medium text-gray-900 dark:text-white">Already have an account? <a class="font-medium text-blue-500 hover:text-blue-700" href="sign_in">Sign in now!</a></p>
+      <p class="text-center font-medium text-gray-900 dark:text-white">{{'SignUp.AlreadyHaveAccount' | translate}} <a class="font-medium text-blue-500 hover:text-blue-700" href="sign_in">{{'SignUp.SignInNow' | translate}}</a></p>
     </div>
   </div>

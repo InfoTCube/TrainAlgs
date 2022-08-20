@@ -1,10 +1,10 @@
-<button routerLink="/tasks/add-task" class="group w-48 flex justify-center m-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800">
+<button *ngIf="(accountService.currentUser$ | async) !== null" routerLink="/tasks/add-task" class="group flex justify-center m-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800">
   <span class="left-0 inset-y-0 flex items-center pr-2">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
     </svg>
   </span>
-  Add your own task!
+  {{ "Tasks.Tasks.AddYourOwnTask" | translate }}!
 </button>
 
 <div *ngIf="tasks && tasks.length > 0" class="content-center flex items-center justify-center pb-4">
@@ -13,22 +13,22 @@
         <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300 text-center">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Tag
+                    {{ "Tasks.Tasks.Tag" | translate }}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Name
+                    {{ "Tasks.Tasks.Name" | translate }}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Submissions
+                    {{ "Tasks.Tasks.Submissions" | translate }}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    % Of Correct
+                    % {{ "Tasks.Tasks.Correct" | translate }}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Average
+                    {{ "Tasks.Tasks.Average" | translate }}
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    Your Score
+                <th *ngIf="(accountService.currentUser$ | async) !== null" scope="col" class="px-6 py-3">
+                    {{ "Tasks.Tasks.YourScore" | translate }}
                 </th>
             </tr>
         </thead>
@@ -50,7 +50,7 @@
                 <td class="px-6 py-4">
                     {{task.averageResult}}
                 </td>
-                <td class="px-6 py-4">
+                <td *ngIf="(accountService.currentUser$ | async) !== null" class="px-6 py-4">
                     <span *ngIf="task.userScore != -1" class="text-white badge rounded-lg p-2" [ngClass]="{'goodPoints': task.userScore == 100, 'wrongPoints': task.userScore == 0, 'okPoints': task.userScore > 0 && task.userScore < 100}">
                       {{task.userScore}}
                     </span>
@@ -62,10 +62,10 @@
 </div>
 
 <div *ngIf="tasks && tasks.length == 0" class="text-center text-gray-900 dark:text-white">
-  There are no tasks to display...
+  {{ "Tasks.Tasks.NoTasksToDisplay" | translate }}...
 </div>
 
 <pagination-controls class="text-center styled-pagination dark:styled-pagination-dark" id="tasks" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="10"
-  directionLinks="true" autoHide="true" responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+  directionLinks="true" autoHide="true" responsive="true" previousLabel="{{'Pagination.Previous' | translate}}" nextLabel="{{'Pagination.Next' | translate}}" screenReaderPaginationLabel="Pagination"
   screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
 </pagination-controls>

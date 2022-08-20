@@ -1,0 +1,112 @@
+{
+  "Members": {
+    "MemberDetail": {
+      "Description": "Opis",
+      "Country": "Narodowość",
+      "MemberSince": "Członek od",
+      "LastActive": "Ostatnio aktywny",
+      "Tasks": "zadania",
+      "Days": "dni",
+      "LastYear": "Zeszły rok",
+      "SolvedAllTime": "rozwiązane łącznie",
+      "SolvedLastYear": "rozwiązane łącznie w ostatnim roku",
+      "SolvedLastMonth": "rozwiązane łącznie w ostatnim miesiącu",
+      "InRowAllTime": "najwięcej z rzędu",
+      "InRowLastYear": "najwięcej z rzędu w ostatnim roku",
+      "InRowLastMonth": "najwięcej z rzędu w ostatnim miesiącu"
+    }
+  },
+  "Menu": {
+    "Home": "Strona główna",
+    "Tasks": "Zadania",
+    "Solutions": "Rozwiązania",
+    "Moderate": "Zarządzaj",
+    "Account": "Konto",
+    "Profile": "Profil",
+    "SignOut": "Wyloguj",
+    "SignIn": "Zaloguj"
+  },
+  "Pagination": {
+    "Next": "Następna",
+    "Previous": "Poprzednia"
+  },
+  "Tasks": {
+    "Tasks": {
+      "AddYourOwnTask": "Dodaj swoje własne zadanie",
+      "Tag": "Etykieta",
+      "Name": "Nazwa",
+      "Submissions": "Zgłoszenia",
+      "Correct": "Poprawnych",
+      "Average": "Średnio",
+      "YourScore": "Twój wynik",
+      "NoTasksToDisplay": "Nie ma żadnych zadań do wyświetlenia"
+    },
+    "TaskDetail": {
+      "ProblemStatement": "Treść zadania",
+      "Solutions": "Rozwiązania",
+      "Submit": "Zgłoś",
+      "ExampleTests": "Testy przykładowe",
+      "Input": "Wejście",
+      "Output": "Wyjście",
+      "File": "Plik",
+      "Code": "Kod",
+      "ProgrammingLanguage": "Język programowania",
+      "SignInToSubmit": "Zaloguj się aby wysłać rozwiązanie"
+    }
+  },
+  "Solutions": {
+    "Solutions": {
+      "Date": "Data",
+      "Task": "Zadanie",
+      "Language": "Język",
+      "Status": "Status",
+      "Points": "Punkty"
+    },
+    "SolutionDetail": {
+      "Test": "Test",
+      "Status": "Status",
+      "Time": "Czas",
+      "Memory": "Pamięć",
+      "Points": "Punkty",
+      "DownloadCode": "Pobierz kod",
+      "ShowCode": "Pokaż kod",
+      "InitialTestingReport": "Wstępne sprawozdanie z testowania",
+      "FinalTestingReport": "Końcowe sprawozdanie z testowania",
+      "PleaseProvideCode": "Proszę napisać kod"
+    }
+  },
+  "SignIn": {
+    "SignInToYourAccount": "Zaloguj się do swojego konta",
+    "RememberMe": "Pamiętaj mnie",
+    "ForgotYourPassword": "Zapomniałeś hasła?",
+    "SignIn": "Zaloguj",
+    "Username": "Nazwa użytkownika",
+    "Password": "Hasło",
+    "DontHaveAccount": "Nie masz jeszcze konta?",
+    "SignUpNow": "Zarejestruj się już teraz"
+  },
+  "SignUp": {
+    "CreateNewAccount": "Utwórz nowe konto",
+    "FirstName": "Imię",
+    "LastName": "Nazwisko",
+    "Email": "Email",
+    "Username": "Nazwa użytkownika",
+    "Password": "Hasło",
+    "ConfirmPassword": "Powtórz hasło",
+    "AlreadyHaveAccount": "Masz już konto?",
+    "SignInNow": "Zaloguj się już teraz",
+    "SignUp": "Zarejestruj",
+    "ProvideFirstName": "Podaj imię.",
+    "ProvideLastName": "Podaj nazwisko.",
+    "ProvideCorrectEmail": "Podaj prawidłowy email.",
+    "ProvideUsername": "Podaj nazwę użytkownika.",
+    "UsernameMustHaveAtLeast": "Nazwa użytkownika musi mieć przynajmniej 3 znaki.",
+    "UsernameMustHaveAtMost": "Nazwa użytkownika może mieć co najwyżej 32 znaki.",
+    "ProvidePassword": "Podaj hasło.",
+    "PasswordMustHaveAtLeast": "Hasło musi mieć przynajmniej 7 znaki.",
+    "PasswordMustHaveAtMost": "Hasło może mieć co najwyżej 32 znaki.",
+    "PasswordMustContain": "Hasło musi zawierać przynajmniej: jedną małą literę, jedną dużą literę, cyfrę i znak specjalny.",
+    "ProvideConfirmPassword": "Powtórz hasło.",
+    "PasswordsMustBeSame": "\"Hasło\" i \"Powtórz hasło\" muszą być takie same."
+  }
+}

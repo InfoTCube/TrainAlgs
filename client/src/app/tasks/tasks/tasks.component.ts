@@ -5,6 +5,7 @@ import { PaginatedResult, Pagination } from 'src/app/models/pagination';
 import { ListedTask } from 'src/app/models/listedTask';
 import { ListingParams } from 'src/app/models/listingParams';
 import { TasksService } from 'src/app/services/tasks.service';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-tasks',
@@ -16,7 +17,7 @@ export class TasksComponent implements OnInit {
   pagination: Pagination;
   taskParams: ListingParams;
 
-  constructor(private tasksService: TasksService, private router: Router, private route: ActivatedRoute) {
+  constructor(private tasksService: TasksService, private router: Router, private route: ActivatedRoute, public accountService: AccountService) {
     this.taskParams = this.tasksService.getTaskParams();
   }
 

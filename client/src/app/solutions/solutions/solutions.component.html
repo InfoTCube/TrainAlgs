@@ -4,19 +4,19 @@
           <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300 text-center">
               <tr>
                   <th scope="col" class="px-6 py-3">
-                      Date
+                      {{'Solutions.Solutions.Date' | translate}}
                   </th>
                   <th scope="col" class="px-6 py-3">
-                      Task
+                      {{'Solutions.Solutions.Task' | translate}}
                   </th>
                   <th scope="col" class="px-4 py-3">
-                      Language
+                      {{'Solutions.Solutions.Language' | translate}}
                   </th>
                   <th scope="col" class="px-6 py-3">
-                      Status
+                      {{'Solutions.Solutions.Status' | translate}}
                   </th>
                   <th scope="col" class="px-4 py-3">
-                      Points
+                      {{'Solutions.Solutions.Points' | translate}}
                   </th>
               </tr>
           </thead>
@@ -55,6 +55,6 @@
 </div>
 
 <pagination-controls *ngIf="solutions && solutions.length != 0" class="text-center styled-pagination dark:styled-pagination" id="solutions" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="10"
-  directionLinks="true" autoHide="true" responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+  directionLinks="true" autoHide="true" responsive="true" previousLabel="{{'Pagination.Previous' | translate}}" nextLabel="{{'Pagination.Next' | translate}}" screenReaderPaginationLabel="Pagination"
   screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
 </pagination-controls>

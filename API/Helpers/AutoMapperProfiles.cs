@@ -81,7 +81,7 @@ public class AutoMapperProfiles : Profile
         int solvedInRowLastYear = 0;
         int solvedInRowLastMonth = 0;
 
-        solutions = solutions.Where(s => s.Author?.UserName == username);
+        solutions = solutions.Where(s => s.Author?.UserName == username).Where(s => s.Points == 100);
         DateTime day = DateTime.Today;
         int currentRow = 0;
         while(solutions.Count() != solvedAllTime)

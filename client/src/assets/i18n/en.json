@@ -1,0 +1,112 @@
+{
+  "Members": {
+    "MemberDetail": {
+      "Description": "Description",
+      "Country": "Country",
+      "MemberSince": "Member since",
+      "LastActive": "Last active",
+      "Tasks": "tasks",
+      "Days": "days",
+      "LastYear": "Last year",
+      "SolvedAllTime": "solved for all time",
+      "SolvedLastYear": "solved for the last year",
+      "SolvedLastMonth": "solved for the last month",
+      "InRowAllTime": "in a row max",
+      "InRowLastYear": "in a row max for the last year",
+      "InRowLastMonth": "in a row max for the last month"
+    }
+  },
+  "Menu": {
+    "Home": "Home",
+    "Tasks": "Tasks",
+    "Solutions": "Solutions",
+    "Moderate": "Moderate",
+    "Account": "Account",
+    "Profile": "Profile",
+    "SignOut": "Sign out",
+    "SignIn": "Sign in"
+  },
+  "Pagination": {
+    "Next": "Next",
+    "Previous": "Previous"
+  },
+  "Tasks": {
+    "Tasks": {
+      "AddYourOwnTask": "Add your own task",
+      "Tag": "Tag",
+      "Name": "Name",
+      "Submissions": "Submissions",
+      "Correct": "Of correct",
+      "Average": "Average",
+      "YourScore": "Your score",
+      "NoTasksToDisplay": "There are no tasks to display"
+    },
+    "TaskDetail": {
+      "ProblemStatement": "Problem statement",
+      "Solutions": "Solutions",
+      "Submit": "Submit",
+      "ExampleTests": "Example tests",
+      "Input": "Input",
+      "Output": "Output",
+      "File": "File",
+      "Code": "Code",
+      "ProgrammingLanguage": "Programming language",
+      "PleaseProvideCode": "Please provide a code",
+      "SignInToSubmit": "Sign in to submit"
+    }
+  },
+  "Solutions": {
+    "Solutions": {
+      "Date": "Date",
+      "Task": "Task",
+      "Language": "Language",
+      "Status": "Status",
+      "Points": "Points"
+    },
+    "SolutionDetail": {
+      "Test": "Test",
+      "Status": "Status",
+      "Time": "Time",
+      "Memory": "Memory",
+      "Points": "Points",
+      "DownloadCode": "Download code",
+      "ShowCode": "Show code",
+      "InitialTestingReport": "Initial testing report",
+      "FinalTestingReport": "Final testing report"
+    }
+  },
+  "SignIn": {
+    "SignInToYourAccount": "Sign in to your account",
+    "RememberMe": "Remember me",
+    "ForgotYourPassword": "Forgot your password?",
+    "SignIn": "Sign in",
+    "Username": "Username",
+    "Password": "Password",
+    "DontHaveAccount": "Don't have an account yet?",
+    "SignUpNow": "Sign up now"
+  },
+  "SignUp": {
+    "CreateNewAccount": "Create a new account",
+    "FirstName": "First name",
+    "LastName": "Last name",
+    "Email": "Email",
+    "Username": "Username",
+    "Password": "Password",
+    "ConfirmPassword": "Confirm password",
+    "AlreadyHaveAccount": "Already have an account?",
+    "SignInNow": "Sign in now",
+    "SignUp": "Sign up",
+    "ProvideFirstName": "Please provide a first name.",
+    "ProvideLastName": "Please provide a last name.",
+    "ProvideCorrectEmail": "Please provide an correct email.",
+    "ProvideUsername": "Please provide a username.",
+    "UsernameMustHaveAtLeast": "Username has to have at least 3 characters.",
+    "UsernameMustHaveAtMost": "Username has to have at most 32 characters.",
+    "ProvidePassword": "Please provide a password.",
+    "PasswordMustHaveAtLeast": "Password has to have at least 7 characters.",
+    "PasswordMustHaveAtMost": "Password has to have at most 32 characters.",
+    "PasswordMustContain": "Password must contain at least one lowercase letter, uppercase letter, digit and special character.",
+    "ProvideConfirmPassword": "Please provide a confirm password.",
+    "PasswordsMustBeSame": "Confirm password must be the same as password."
+  }
+}

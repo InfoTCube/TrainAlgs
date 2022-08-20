@@ -2,18 +2,18 @@
     <div class="max-w-md w-full space-y-8">
       <div>
         <img class="mx-auto h-12 w-auto" src="https://jf-staeulalia.pt/img/other/44/collection-simple-train-cliparts-11.png" alt="Workflow">
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">Sign in to your account</h2>
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">{{'SignIn.SignInToYourAccount' | translate}}</h2>
       </div>
       <form [formGroup]="signInForm" #SignIn="ngForm" class="mt-8 space-y-6" (ngSubmit)="login()">
         <input type="hidden" name="remember" value="true">
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
-            <label for="username" class="sr-only">Email address</label>
-            <input id="username" formControlName="username" type="text" autocomplete="username" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="Username">
+            <label for="username" class="sr-only">Username</label>
+            <input id="username" formControlName="username" type="text" autocomplete="username" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="{{'SignIn.Username' | translate}}">
           </div>
           <div>
             <label for="password" class="sr-only">Password</label>
-            <input id="password" formControlName="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="Password">
+            <input id="password" formControlName="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="{{'SignIn.Password' | translate}}">
           </div>
         </div>
 
@@ -36,11 +36,11 @@
         <div class="flex items-center justify-between">
           <div class="flex items-center">
             <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-            <label for="remember-me" class="ml-2 block text-sm text-gray-900 dark:text-white"> Remember me </label>
+            <label for="remember-me" class="ml-2 block text-sm text-gray-900 dark:text-white"> {{'SignIn.RememberMe' | translate}} </label>
           </div>
 
           <div class="text-sm">
-            <a href="#" class="font-medium text-blue-500 hover:text-blue-700"> Forgot your password? </a>
+            <a href="#" class="font-medium text-blue-500 hover:text-blue-700"> {{'SignIn.ForgotYourPassword' | translate}} </a>
           </div>
         </div>
 
@@ -51,10 +51,10 @@
                 <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
               </svg>
             </span>
-            Sign in
+            {{'SignIn.SignIn' | translate}}
           </button>
         </div>
       </form>
-      <p class="text-center font-medium text-gray-900 dark:text-white">Don't have an account yet? <a class="font-medium text-blue-500 hover:text-blue-700" href="sign_up">Sign up now!</a></p>
+      <p class="text-center font-medium text-gray-900 dark:text-white">{{'SignIn.DontHaveAccount' | translate}} <a class="font-medium text-blue-500 hover:text-blue-700" href="sign_up">{{'SignIn.SignUpNow' | translate}}!</a></p>
     </div>
   </div>

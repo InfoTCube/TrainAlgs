@@ -7,7 +7,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
@@ -33,6 +33,8 @@ import { VerifyTasksComponent } from './moderator/verify-tasks/verify-tasks.comp
 import { VerifyTaskDetailComponent } from './moderator/verify-task-detail/verify-task-detail.component';
 import { TaskAddingComponent } from './tasks/task-adding/task-adding.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,14 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NgxChartsModule,
     MarkdownModule.forRoot(),
     TimeagoModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      defaultLanguage: 'pl'
+    }),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
@@ -79,3 +89,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}

@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { filter } from 'rxjs';
 import { AccountService } from '../services/account.service';
 
@@ -13,7 +14,7 @@ export class NavComponent implements OnInit {
   page = "/";
   theme = localStorage.theme;
 
-  constructor(public accountService: AccountService, private router: Router) {
+  constructor(public accountService: AccountService, private router: Router, private translate: TranslateService) {
     router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
@@ -37,8 +38,9 @@ export class NavComponent implements OnInit {
   }
 
   takeAction($event) {
-    if($event == "Profile") this.goToProfile();
-    else if($event == "Sign out") this.logout();
+
+    if($event == this.translate.instant("Menu.Profile")) this.goToProfile();
+    else if($event == this.translate.instant("Menu.SignOut")) this.logout();
   }
 
   themeChanged() {
