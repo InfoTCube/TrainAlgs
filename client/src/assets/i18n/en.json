@@ -53,6 +53,16 @@
       "ProgrammingLanguage": "Programming language",
       "PleaseProvideCode": "Please provide a code",
       "SignInToSubmit": "Sign in to submit"
+    },
+    "TaskAdding": {
+      "TaskName": "Task name",
+      "Content": "Content",
+      "Submit": "Submit",
+      "Edit": "Edit",
+      "Preview": "Preview",
+      "ProvideCode": "Please provide a code.",
+      "UniqueTagIsGenerated": "A unique tag is generated when the task is created",
+      "Tag": "tag"
     }
   },
   "Solutions": {

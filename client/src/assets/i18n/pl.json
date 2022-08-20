@@ -52,6 +52,16 @@
       "Code": "Kod",
       "ProgrammingLanguage": "Język programowania",
       "SignInToSubmit": "Zaloguj się aby wysłać rozwiązanie"
+    },
+    "TaskAdding": {
+      "TaskName": "Nazwa zadania",
+      "Content": "Treść",
+      "Submit": "Wyślij",
+      "Edit": "Edytuj",
+      "Preview": "Podgląd",
+      "ProvideCode": "Wprowadź kod.",
+      "UniqueTagIsGenerated": "Unikatowa etykieta jest generowana podczas tworzenia zadania",
+      "Tag": "etykieta"
     }
   },
   "Solutions": {
