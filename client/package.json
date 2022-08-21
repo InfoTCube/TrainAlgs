@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
+    "@microsoft/signalr": "^6.0.8",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "@popperjs/core": "^2.11.4",

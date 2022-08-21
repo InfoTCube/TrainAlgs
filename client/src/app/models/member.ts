@@ -4,6 +4,7 @@ export interface Member {
     lastActive: Date;
     country: string;
     description: string;
+    isModerator: boolean;
     graphChart: GraphChart;
 }
 

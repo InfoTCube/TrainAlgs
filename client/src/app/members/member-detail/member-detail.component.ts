@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { Member } from 'src/app/models/member';
 import { AccountService } from 'src/app/services/account.service';
 import { MembersService } from 'src/app/services/members.service';
+import { PresenceService } from 'src/app/services/presence.service';
 import { theme } from './theme';
 
 const monthName = new Intl.DateTimeFormat("en-us", { month: "short" });
@@ -24,7 +25,8 @@ export class MemberDetailComponent implements OnInit {
   heatmapMax: number = 10;
   years: string[] = [];
 
-  constructor(private membersService: MembersService, private route: ActivatedRoute, private accoutService: AccountService) { }
+  constructor(private membersService: MembersService, private route: ActivatedRoute,
+      private accoutService: AccountService, public presenceService: PresenceService) { }
 
   ngOnInit() {
     this.loadMember();
@@ -40,6 +42,7 @@ export class MemberDetailComponent implements OnInit {
       this.member = member;
       this.getCalendarData(null);
       this.getYears();
+      console.log(member);
     })
   }
 

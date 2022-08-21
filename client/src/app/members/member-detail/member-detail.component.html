@@ -3,16 +3,24 @@
       <div>
         <div class="text-gray-900 dark:text-white font-bold text-5xl mb-2">
           {{member.username}}
-          <span *ngIf="member.username == currentUserUsername">
-            <svg *appHasRole="['Moderator']" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 svg-icon" fill="none" viewBox="0 0 22 22" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-            </svg>
-          </span>
+          <svg *ngIf="member.isModerator == true" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 svg-icon" fill="none" viewBox="0 0 22 22" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+          </svg>
         </div>
         <p class="text base text-gray-900 dark:text-white">{{ "Members.MemberDetail.Description" | translate }}: {{member.description}}</p>
         <p class="text-gray-900 dark:text-white text-base">{{ "Members.MemberDetail.Country" | translate }}: {{member.country}}</p>
         <p class="text-gray-900 dark:text-white text-base">{{ "Members.MemberDetail.MemberSince" | translate }}: {{member.created | timeago}}</p>
-        <p class="text-gray-900 dark:text-white text-base">{{ "Members.MemberDetail.LastActive" | translate }}: {{member.lastActive | timeago}}</p>
+
+        <div>
+          <p class="text-gray-900 dark:text-white text-base">{{ "Members.MemberDetail.LastActive" | translate }}:
+            <span *ngIf="!(presenceService.onlineUsers$ | async).includes(member.username) && member.username !== currentUserUsername">
+              {{member.lastActive | timeago}}
+            </span>
+            <span *ngIf="(presenceService.onlineUsers$ | async).includes(member.username) || member.username === currentUserUsername" class="is-online">
+              Online now
+            </span>
+          </p>
+        </div>
 
         <div class="mt-2">
           <div>
@@ -76,4 +84,8 @@
         </div>
       </div>
     </div>
+</div>
+
+<div *ngIf="!member" class="flex justify-center">
+  <p class="text-gray-900 dark:text-white">This member doesn't exist</p>
 </div>

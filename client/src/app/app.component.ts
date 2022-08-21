@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './models/user';
 import { AccountService } from './services/account.service';
+import { PresenceService } from './services/presence.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { AccountService } from './services/account.service';
 export class AppComponent implements OnInit {
   theme = localStorage.theme;
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService, private presenceService: PresenceService) {}
 
   ngOnInit(): void {
     this.setCurrentUser();
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
     const user: User = JSON.parse(localStorage.getItem('user'));
     if(user) {
       this.accountService.setCurrentUser(user);
+      this.presenceService.createHubConnection(user);
     }
   }
 

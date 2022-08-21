@@ -6,5 +6,6 @@ public class MemberDto
     public DateTime LastActive { get; set; }
     public string? Country { get; set; }
     public string? Description { get; set; }
+    public bool isModerator { get; set; }
     public GraphChartDto? GraphChart { get; set; }
 }

@@ -23,7 +23,7 @@
               Please provide a username.
             </li>
             <li *ngIf="signInForm.get('password').invalid && (signInForm.get('password').dirty || signInForm.get('password').touched)">
-              Please provide a password.
+              Please provide a correct password.
             </li>
             <div *ngIf="validationErrors.length > 0">
               <li *ngFor="let error of validationErrors">
