@@ -61,7 +61,11 @@
       "Preview": "Podgląd",
       "ProvideCode": "Wprowadź kod.",
       "UniqueTagIsGenerated": "Unikatowa etykieta jest generowana podczas tworzenia zadania",
-      "Tag": "etykieta"
+      "Tag": "etykieta",
+      "Input": "Wejście",
+      "Output": "Wyjście",
+      "Group#": "Nr. grupy",
+      "Test#": "Nr. testu"
     }
   },
   "Solutions": {

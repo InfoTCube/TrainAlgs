@@ -113,8 +113,12 @@ public class SolutionsController : BaseApiController
             Language = solutionDto.Language,
             Code = solutionDto.Code,
             Author = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username),
-            Task = task
+            Task = task,
+            Status = "Waiting for the results"
         };
+
+        //await _unitOfWork.SolutionRepository.AddSolutionAsync(solution);
+        //await _unitOfWork.Complete();
 
         //getting results
         HttpClientHandler clientHandler = new HttpClientHandler();
@@ -131,7 +135,13 @@ public class SolutionsController : BaseApiController
             response = await client.PostAsJsonAsync("https://localhost:7279/judge/Python/TestTaskPython", taskToTest);
         
         if(!response.IsSuccessStatusCode)
-            return BadRequest("Something went wrong");
+        {
+            solution.Status = "Judge error";
+            await _unitOfWork.SolutionRepository.AddSolutionAsync(solution);
+            //_unitOfWork.SolutionRepository.Update(solution);
+            await _unitOfWork.Complete();
+            return solutionDto;
+        }
 
         Solution result = await response.Content.ReadFromJsonAsync<Solution>();
 
@@ -140,6 +150,7 @@ public class SolutionsController : BaseApiController
         solution.ErrorMessage = result.ErrorMessage;
         solution.TestGroups = result.TestGroups;
 
+        //_unitOfWork.SolutionRepository.Update(solution);
         await _unitOfWork.SolutionRepository.AddSolutionAsync(solution);
         await _unitOfWork.Complete();
 

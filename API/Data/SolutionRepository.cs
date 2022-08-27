@@ -58,4 +58,9 @@ public class SolutionRepository : ISolutionRepository
             .AsNoTracking();
         return await PagedList<ListedSolutionDto>.CreateAsync(query, elementParams.PageNumber, elementParams.PageSize);
     }
+
+    public void Update(Solution solution)
+    {
+        _context.Entry(solution).State = EntityState.Modified;
+    }
 }

@@ -9,4 +9,5 @@ public interface ISolutionRepository
     Task<Solution> GetSolutionByIdAsync(int id);
     Task<PagedList<ListedSolutionDto>> GetSolutionsForUserAsync(string username, ElementParams elementParams);
     Task<PagedList<ListedSolutionDto>> GetSolutionsForUserForTaskAsync(string username, ElementParams elementParams, string taskNameTag);
+    void Update(Solution solution);
 }

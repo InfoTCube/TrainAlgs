@@ -62,7 +62,11 @@
       "Preview": "Preview",
       "ProvideCode": "Please provide a code.",
       "UniqueTagIsGenerated": "A unique tag is generated when the task is created",
-      "Tag": "tag"
+      "Tag": "tag",
+      "Input": "Input",
+      "Output": "Output",
+      "Group#": "Group #",
+      "Test#": "Test #"
     }
   },
   "Solutions": {
