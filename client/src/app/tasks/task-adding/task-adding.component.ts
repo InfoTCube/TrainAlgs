@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TestGroup } from 'src/app/models/testGroup';
+import { CodeEditorComponent } from 'src/app/modules/code-editor/code-editor.component';
 import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
@@ -9,11 +11,13 @@ import { TasksService } from 'src/app/services/tasks.service';
   styleUrls: ['./task-adding.component.scss']
 })
 export class TaskAddingComponent implements OnInit {
+  @ViewChild('codeEditor') codeEditor: CodeEditorComponent;
   content: string = "";
   markdown: string = "";
   addTaskForm: FormGroup;
   validationErrors: string[] = [];
   tab='editor';
+  testGroups: TestGroup[] = [];
 
   constructor(private router: Router, private tasksService: TasksService) { }
 
@@ -41,7 +45,7 @@ export class TaskAddingComponent implements OnInit {
 
   addTask() {
     var model = this.addTaskForm.value;
-    model.content = this.addTaskForm.get("content").value;
+    model.content = this.content;
     this.tasksService.addTask(model).subscribe(response => {
       this.router.navigateByUrl(`/tasks`);
     });
@@ -49,12 +53,41 @@ export class TaskAddingComponent implements OnInit {
 
   changeTab(name: string) {
     this.tab = name;
+    if(name == "editor")
+      setTimeout(() => {
+        this.codeEditor.setCode(this.content);
+      }, 0);
   }
 
   initializeForm() {
     this.addTaskForm = new FormGroup({
-      taskName: new FormControl('', Validators.required),
-      content: new FormControl('', Validators.required),
+      name: new FormControl('', Validators.required),
+      timeLimit: new FormControl('', Validators.required),
+      memoryLimit: new FormControl('', Validators.required),
+      tests: new FormGroup({})
     });
+
+    this.testGroups.push({number: 0, points: 0, tests: [{number: 1, input: "", output: ""}]});
+    this.testGroups.push({number: 1, points: 0, tests: [{number: 1, input: "", output: ""}]});
+  }
+
+  addTestGroup() {
+    this.testGroups.push({number: this.testGroups.length, points: 0, tests: [{number: 1, input: "", output: ""}]});
+  }
+
+  addTest(groupIndex: number) {
+    this.testGroups[groupIndex].tests.push({number: this.testGroups[groupIndex].tests.length+1, input: "", output: ""});
+  }
+
+  deleteTestGroup(groupIndex: number) {
+    this.testGroups.splice(groupIndex, 1);
+    this.testGroups.forEach((element, index) => { element.number = index});
+  }
+
+  deleteTest(groupIndex: number, testIndex: number) {
+    this.testGroups[groupIndex].tests.splice(testIndex, 1);
+    this.testGroups[groupIndex].tests.forEach((element, index) => { element.number = index+1});
+    this.testGroups.forEach((element, index) => { if(element.tests.length == 0) this.testGroups.splice(index, 1)});
+    this.testGroups.forEach((element, index) => { element.number = index});
   }
 }

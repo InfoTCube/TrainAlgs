@@ -43,7 +43,7 @@ public class PythonService : IPythonService
                     double time = 0;
                     using var cts = new CancellationTokenSource();
                     var outputBuilder = new StringBuilder();
-                    cts.CancelAfter(TimeSpan.FromMilliseconds(t.TimeLimit));
+                    cts.CancelAfter(TimeSpan.FromMilliseconds(algTask.TimeLimit));
                     try
                     {
                         Console.WriteLine(t.Input);

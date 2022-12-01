@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as Prism from 'prismjs';
 
@@ -24,7 +24,9 @@ export class CodeEditorComponent implements AfterViewInit, OnChanges{
 
 
   ngAfterViewInit() {
-    Prism.highlightElement(this.codeEle.nativeElement);
+    setTimeout(() => {
+      Prism.highlightElement(this.codeEle.nativeElement)
+    }, 0);
   }
 
   highlight($event) {
@@ -112,13 +114,16 @@ export class CodeEditorComponent implements AfterViewInit, OnChanges{
   }
 
   scroll($event) {
-    console.log(this.lineNums.length)
     this.numbers.nativeElement.scrollTop = this.codeEle.nativeElement.scrollTop;
     if(this.lineNums.length < 13+Math.ceil(this.numbers.nativeElement.scrollTop/23.28))
       this.lineNums = Array.from({length: 13+Math.ceil(this.numbers.nativeElement.scrollTop/23.28)}, (_, i) => i + 1);
   }
 
   getCode() {
-      this.getCodeEvent.emit(this.codeEle.nativeElement.innerText);
+    this.getCodeEvent.emit(this.codeEle.nativeElement.innerText);
+  }
+
+  setCode(code: string) {
+    this.codeEle.nativeElement.innerText = code;
   }
 }

@@ -3,6 +3,7 @@ export interface ListedTask {
     nameTag: string;
     authorUsername: string;
     memoryLimit: number;
+    timeLimit: number;
     submissions: number;
     averageResult: number;
     correctPercent: number;

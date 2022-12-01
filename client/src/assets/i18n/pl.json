@@ -65,7 +65,12 @@
       "Input": "Wejście",
       "Output": "Wyjście",
       "Group#": "Nr. grupy",
-      "Test#": "Nr. testu"
+      "Test#": "Nr. testu",
+      "TimeLimit": "Limit czasu",
+      "MemoryLimit": "Limit pamięci",
+      "ExampleTestsInformation": "Grupa o numerze 0 to grupa testów przykładowych. Stanowi ona wstępną informację zwrotną dla użytkownika",
+      "AddTestGroup": "Dodaj grupę testów",
+      "AddTest": "Dodaj test"
     }
   },
   "Solutions": {

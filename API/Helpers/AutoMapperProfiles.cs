@@ -32,11 +32,9 @@ public class AutoMapperProfiles : Profile
         CreateMap<NewTaskDto, AlgTask>();
         CreateMap<TestSolution, TestSolutionDto>()
             .ForMember(test => test.MemoryLimit, opt => opt.MapFrom(src => 
-                src.TestGroup.Solution.Task.TestGroups.FirstOrDefault(x => x.Number == src.TestGroup.Number)
-                .Tests.FirstOrDefault(x => x.Number == src.Number).MemoryLimit))
+                src.TestGroup.Solution.Task.MemoryLimit))
             .ForMember(test => test.TimeLimit, opt => opt.MapFrom(src => 
-                src.TestGroup.Solution.Task.TestGroups.FirstOrDefault(x => x.Number == src.TestGroup.Number)
-                .Tests.FirstOrDefault(x => x.Number == src.Number).TimeLimit));
+                src.TestGroup.Solution.Task.TimeLimit));
         CreateMap<TestGroupSolution, TestGroupSolutionDto>()
             .ForMember(testGroup => testGroup.MaxPoints, opt => opt.MapFrom(src => 
                 src.Solution.Task.TestGroups.FirstOrDefault(x => x.Number == src.Number).Points));

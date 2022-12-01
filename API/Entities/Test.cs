@@ -7,8 +7,6 @@ public class Test
 {
     public int Id { get; set; }
     public int Number { get; set; }
-    public int TimeLimit { get; set; }
-    public int MemoryLimit { get; set; }
     public string? Input { get; set; }
     public string? Output { get; set; }
     public TestGroup? TestGroup { get; set; }

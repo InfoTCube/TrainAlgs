@@ -160,7 +160,7 @@
               </thead>
               <tbody *ngIf="exampleTests">
                   <tr *ngFor="let test of exampleTests" class="text-center bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700">
-                      <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap" [ngClass]="{'good': test.status == 'Ok', 'wrong': test.status == 'Wrong Answer' || test.status == 'Runtime error', 'ok': test.status == 'Time limit exceeded'}">
+                      <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap" [ngClass]="{'good': test.status == 'Ok', 'wrong': test.status == 'Wrong answer' || test.status == 'Runtime error', 'ok': test.status == 'Time limit exceeded'}">
                           {{test.number}}
                       </th>
                       <td class="px-6 py-4">

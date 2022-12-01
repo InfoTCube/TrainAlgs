@@ -41,9 +41,10 @@ public class TasksController : BaseApiController
     [HttpPost]
     public async Task<ActionResult<NewTaskDto>> AddTask(NewTaskDto taskDto)
     {
-        if(await TaskExists(taskDto.NameTag)) return BadRequest("Task with the same name tag already exist");
+        if(await TaskExists("generated nametag")) return BadRequest("Task with the same name tag already exist");
 
         AlgTask task = _mapper.Map<AlgTask>(taskDto);
+        task.NameTag = "WBG"; // will be generated
         string username = User.GetUsername();
         task.Author = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
 

@@ -66,7 +66,12 @@
       "Input": "Input",
       "Output": "Output",
       "Group#": "Group #",
-      "Test#": "Test #"
+      "Test#": "Test #",
+      "TimeLimit": "Time limit",
+      "MemoryLimit": "Memory limit",
+      "ExampleTestsInformation": "Group number 0 is group of example tests. It is initial feedback for user",
+      "AddTestGroup": "Add test group",
+      "AddTest": "Add test"
     }
   },
   "Solutions": {
