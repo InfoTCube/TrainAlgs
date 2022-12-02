@@ -52,7 +52,9 @@
       "Code": "Code",
       "ProgrammingLanguage": "Programming language",
       "PleaseProvideCode": "Please provide a code",
-      "SignInToSubmit": "Sign in to submit"
+      "SignInToSubmit": "Sign in to submit",
+      "MemoryLimit": "Memory limit",
+      "TimeLimit": "Time limit"
     },
     "TaskAdding": {
       "TaskName": "Task name",
@@ -71,7 +73,8 @@
       "MemoryLimit": "Memory limit",
       "ExampleTestsInformation": "Group number 0 is group of example tests. It is initial feedback for user",
       "AddTestGroup": "Add test group",
-      "AddTest": "Add test"
+      "AddTest": "Add test",
+      "Points": "Points"
     }
   },
   "Solutions": {

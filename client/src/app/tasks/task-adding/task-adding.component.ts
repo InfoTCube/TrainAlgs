@@ -46,6 +46,9 @@ export class TaskAddingComponent implements OnInit {
   addTask() {
     var model = this.addTaskForm.value;
     model.content = this.content;
+    this.saveInputsAndOutputs();
+    model.testGroups = this.testGroups;
+    console.log(model);
     this.tasksService.addTask(model).subscribe(response => {
       this.router.navigateByUrl(`/tasks`);
     });
@@ -53,10 +56,14 @@ export class TaskAddingComponent implements OnInit {
 
   changeTab(name: string) {
     this.tab = name;
-    if(name == "editor")
+    if(name == "editor") {
       setTimeout(() => {
         this.codeEditor.setCode(this.content);
+        this.loadInputsAndOutputs();
       }, 0);
+    } else if(name == "preview") {
+      this.saveInputsAndOutputs();
+    }
   }
 
   initializeForm() {
@@ -64,7 +71,6 @@ export class TaskAddingComponent implements OnInit {
       name: new FormControl('', Validators.required),
       timeLimit: new FormControl('', Validators.required),
       memoryLimit: new FormControl('', Validators.required),
-      tests: new FormGroup({})
     });
 
     this.testGroups.push({number: 0, points: 0, tests: [{number: 1, input: "", output: ""}]});
@@ -89,5 +95,25 @@ export class TaskAddingComponent implements OnInit {
     this.testGroups[groupIndex].tests.forEach((element, index) => { element.number = index+1});
     this.testGroups.forEach((element, index) => { if(element.tests.length == 0) this.testGroups.splice(index, 1)});
     this.testGroups.forEach((element, index) => { element.number = index});
+  }
+
+  saveInputsAndOutputs() {
+    this.testGroups.forEach((group) => {
+      group.tests.forEach((test) => {
+        test.input = (document.getElementById(`input${group.number}.${test.number}`) as HTMLInputElement).value;
+        test.output = (document.getElementById(`output${group.number}.${test.number}`) as HTMLInputElement).value;
+      });
+      group.points = Number((document.getElementById(`points${group.number}`) as HTMLInputElement).value);
+    });
+  }
+
+  loadInputsAndOutputs() {
+    this.testGroups.forEach((group) => {
+      group.tests.forEach((test) => {
+        (document.getElementById(`input${group.number}.${test.number}`) as HTMLInputElement).value = test.input;
+        (document.getElementById(`output${group.number}.${test.number}`) as HTMLInputElement).value = test.output;
+      });
+      (document.getElementById(`points${group.number}`) as HTMLInputElement).value = String(group.points);
+    });
   }
 }

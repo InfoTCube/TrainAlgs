@@ -51,7 +51,9 @@
       "File": "Plik",
       "Code": "Kod",
       "ProgrammingLanguage": "Język programowania",
-      "SignInToSubmit": "Zaloguj się aby wysłać rozwiązanie"
+      "SignInToSubmit": "Zaloguj się aby wysłać rozwiązanie",
+      "MemoryLimit": "Limit pamięci",
+      "TimeLimit": "Limit czasu"
     },
     "TaskAdding": {
       "TaskName": "Nazwa zadania",
@@ -70,7 +72,8 @@
       "MemoryLimit": "Limit pamięci",
       "ExampleTestsInformation": "Grupa o numerze 0 to grupa testów przykładowych. Stanowi ona wstępną informację zwrotną dla użytkownika",
       "AddTestGroup": "Dodaj grupę testów",
-      "AddTest": "Dodaj test"
+      "AddTest": "Dodaj test",
+      "Points": "Punkty"
     }
   },
   "Solutions": {

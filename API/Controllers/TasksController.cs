@@ -41,10 +41,10 @@ public class TasksController : BaseApiController
     [HttpPost]
     public async Task<ActionResult<NewTaskDto>> AddTask(NewTaskDto taskDto)
     {
-        if(await TaskExists("generated nametag")) return BadRequest("Task with the same name tag already exist");
+        string nametag = await GenerateNametag(taskDto.Name);
 
         AlgTask task = _mapper.Map<AlgTask>(taskDto);
-        task.NameTag = "WBG"; // will be generated
+        task.NameTag = nametag;
         string username = User.GetUsername();
         task.Author = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
 
@@ -57,5 +57,19 @@ public class TasksController : BaseApiController
     private async Task<bool> TaskExists(string nameTag)
     {
         return (await _unitOfWork.TaskRepository.GetTaskByNameTagAsync(nameTag) is not null);
+    }
+
+    private async Task<string> GenerateNametag(string name)
+    {
+        name = name.Substring(0, 3).ToUpper();
+        string nametag = name;
+        int counter = 1;
+        while(await TaskExists(nametag))
+        {
+            nametag = $"{name}{counter}";
+            ++counter;
+        }
+
+        return nametag;
     }
 }

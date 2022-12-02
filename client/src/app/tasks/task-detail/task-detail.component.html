@@ -33,7 +33,12 @@
         </ul>
     </div>
 
-    <h1 class="text-5xl text-gray-900 dark:text-white mb-7">{{task.name}} ({{task.nameTag}})</h1>
+    <h1 class="text-5xl text-gray-900 dark:text-white mb-2">{{task.name}} ({{task.nameTag}})</h1>
+    <div class="text-l text-gray-900 dark:text-white mb-7">
+      <p class="float-left mr-3">{{'Tasks.TaskDetail.TimeLimit' | translate}}: {{task.timeLimit/1000}}s</p>
+      <p class="float-left mr-3">•</p>
+      <p>{{'Tasks.TaskDetail.MemoryLimit' | translate}}: {{task.memoryLimit}}MB</p>
+    </div>
 
     <div *ngIf="tab == 'statement'">
         <markdown class="prose dark:prose-invert max-w-none text-xl text-gray-900 dark:text-white" [data]="markdown"></markdown>
