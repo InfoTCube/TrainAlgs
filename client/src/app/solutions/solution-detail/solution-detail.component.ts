@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Solution } from 'src/app/models/solution';
 import { TestSolutionResults } from 'src/app/models/testSolutionResults';
@@ -17,12 +18,14 @@ export class SolutionDetailComponent implements OnInit {
   exampleTestsErrors: string[] = [];
   showCode = false;
   language = "cpp";
+  fileExtension = "cpp";
+  fileUrl;
 
-  constructor(private solutionsService: SolutionsService, private route: ActivatedRoute) { }
+
+  constructor(private solutionsService: SolutionsService, private route: ActivatedRoute, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.getSolution();
-    this.getLanguage();
   }
 
   getSolution() {
@@ -51,26 +54,30 @@ export class SolutionDetailComponent implements OnInit {
             this.testsErrors.push(t.error);
         });
       });
-      console.log(response)
+      this.getLanguage();
     });
   }
 
   getLanguage() {
     switch(this.solution?.language) {
-      case "C++":
+      case "CPP":
         this.language = "cpp";
+        this.fileExtension = "cpp";
         break;
-      case "Python":
+      case "PYTHON":
         this.language = "python";
+        this.fileExtension = "py";
         break;
       default:
         this.language = "cpp";
+        this.fileExtension = "cpp";
         break;
     }
+    const blob = new Blob([this.solution?.code], { type: 'application/octet-stream' });
+    this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
   }
 
   toggleCode() {
     this.showCode = !this.showCode;
   }
-
 }
