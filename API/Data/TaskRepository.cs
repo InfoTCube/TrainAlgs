@@ -59,8 +59,26 @@ public class TaskRepository : ITaskRepository
             .Where(task => task.Verified == true)
             .Include("Solutions.Author")
             .ProjectTo<ListedTaskDto>(_mapper.ConfigurationProvider);
-            
+
         return await PagedList<ListedTaskDto>.CreateAsync(query, elementParams.PageNumber, elementParams.PageSize);
+    }
+
+    public async Task<PagedList<ListedTaskDto>> GetTasksForUserAsync(TaskParams taskParams, string username)
+    {
+        var query = _context.Tasks
+            .Where(task => task.Verified == true)
+            .Include("Solutions.Author");
+
+        query = taskParams.TaskStatus switch 
+        {
+            Status.Default => query,
+            Status.NotAttempted => query.Where(task => task.Solutions.Where(s => s.Author.UserName == username).Count() == 0),
+            Status.Solved => query.Where(task => task.Solutions.Where(s => s.Author.UserName == username).Max(s => s.Points) == 100),
+            Status.Attempted => query.Where(task => task.Solutions.Where(s => s.Author.UserName == username).Max(s => s.Points) >= 0 
+                && task.Solutions.Where(s => s.Author.UserName == username).Max(s => s.Points) < 100)
+        };
+
+        return await PagedList<ListedTaskDto>.CreateAsync(query.ProjectTo<ListedTaskDto>(_mapper.ConfigurationProvider), taskParams.PageNumber, taskParams.PageSize);
     }
 
     public async Task<PagedList<ListedTaskDto>> GetTasksToVerifyAsync(ElementParams elementParams)

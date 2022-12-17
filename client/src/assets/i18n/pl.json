@@ -39,7 +39,11 @@
       "Correct": "Poprawnych",
       "Average": "Średnio",
       "YourScore": "Twój wynik",
-      "NoTasksToDisplay": "Nie ma żadnych zadań do wyświetlenia"
+      "NoTasksToDisplay": "Nie ma żadnych zadań do wyświetlenia",
+      "All": "Wszystkie",
+      "Solved": "Rozwiązane",
+      "Attempted": "Ruszone",
+      "NotAttempted": "Nietknięte"
     },
     "TaskDetail": {
       "ProblemStatement": "Treść zadania",

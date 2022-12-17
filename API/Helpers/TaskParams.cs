@@ -7,12 +7,13 @@ namespace API.Helpers;
 
 public class TaskParams : ElementParams
 {
-    public Status TaskStatus { get; set; } // 2 - Solved, 1 - Attempted, 0 - NotAttempted 
+    public Status TaskStatus { get; set; }
 
     public enum Status
     {
-        NotAttempted = 0,
-        Attempted = 1,
-        Solved = 2
+        Default = 0,
+        NotAttempted = 1,
+        Attempted = 2,
+        Solved = 3
     }
 }

@@ -56,7 +56,7 @@ public class SolutionsController : BaseApiController
         return Ok(solutions);
     }
 
-    [HttpGet("forCurrentUserandTask/{taskNameTag}")]
+    [HttpGet("forCurrentUserAndTask/{taskNameTag}")]
     public async Task<ActionResult<IEnumerable<ListedSolutionDto>>> GetSolutionsForCurrentUserForTask([FromQuery] ElementParams elementParams, string taskNameTag)
     {
         string username = User.GetUsername();
@@ -74,7 +74,7 @@ public class SolutionsController : BaseApiController
         return Ok(solutions);
     }
 
-    [HttpGet("forUserandTask/{username}/{taskNameTag}")]
+    [HttpGet("forUserAndTask/{username}/{taskNameTag}")]
     public async Task<ActionResult<IEnumerable<ListedSolutionDto>>> GetSolutionsForUserForTask([FromQuery] ElementParams elementParams, string username, string taskNameTag)
     {
         var solutions = await _unitOfWork.SolutionRepository.GetSolutionsForUserForTaskAsync(username, elementParams, taskNameTag);

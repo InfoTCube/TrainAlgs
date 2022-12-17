@@ -23,7 +23,7 @@ public class ModeratorController : BaseApiController
     }
 
     [Authorize(Policy = "RequireModeratorRole")]
-    [HttpGet("verify-tasks")]
+    [HttpGet("verifyTasks")]
     public async Task<ActionResult<IEnumerable<ListedTaskDto>>> GetTasksToVerify([FromQuery] ElementParams elementParams)
     {
         var tasks = await _unitOfWork.TaskRepository.GetTasksToVerifyAsync(elementParams);
@@ -35,7 +35,7 @@ public class ModeratorController : BaseApiController
     }
 
     [Authorize(Policy = "RequireModeratorRole")]
-    [HttpGet("verify-tasks/{nameTag}")]
+    [HttpGet("verifyTasks/{nameTag}")]
     public async Task<ActionResult<TaskDto>> GetTaskToVerify(string nameTag)
     {
         var task = await _unitOfWork.TaskRepository.GetTaskToVerifyByNameTagAsync(nameTag);
@@ -43,7 +43,7 @@ public class ModeratorController : BaseApiController
     }
 
     [Authorize(Policy = "RequireModeratorRole")]
-    [HttpPut("verify-tasks/{nameTag}")]
+    [HttpPut("verifyTasks/{nameTag}")]
     public async Task<ActionResult> VerifyTask(string nameTag)
     {
         AlgTask task = await _unitOfWork.TaskRepository.GetTaskToVerifyByNameTagAsync(nameTag);

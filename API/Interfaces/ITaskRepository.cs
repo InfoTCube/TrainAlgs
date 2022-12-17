@@ -1,6 +1,7 @@
 using API.DTOs;
 using API.Entities;
 using API.Helpers;
+using static API.Helpers.TaskParams;
 
 namespace API.Interfaces;
 public interface ITaskRepository
@@ -11,6 +12,7 @@ public interface ITaskRepository
     Task<AlgTask> GetTaskByNameTagAsync(string nameTag);
     Task<AlgTask> GetTaskToVerifyByNameTagAsync(string nameTag);
     Task<PagedList<ListedTaskDto>> GetTasksAsync(ElementParams elementParams);
+    Task<PagedList<ListedTaskDto>> GetTasksForUserAsync(TaskParams taskParams, string username);
     Task<PagedList<ListedTaskDto>> GetTasksToVerifyAsync(ElementParams elementParams);
     Task<PagedList<ListedTaskDto>> GetTasksWithUserResultsAsync(PagedList<ListedTaskDto> tasks, string username);
 }

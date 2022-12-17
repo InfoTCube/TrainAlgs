@@ -19,7 +19,7 @@ public class TasksController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ListedTaskDto>>> GetTasks([FromQuery] ElementParams elementParams)
+    public async Task<ActionResult<IEnumerable<ListedTaskDto>>> GetTasks([FromQuery] TaskParams elementParams)
     {
         var tasks = await _unitOfWork.TaskRepository.GetTasksAsync(elementParams);
         tasks = await _unitOfWork.TaskRepository.GetTasksWithUserResultsAsync(tasks, User.GetUsername());
@@ -35,6 +35,19 @@ public class TasksController : BaseApiController
     {
         var task = await _unitOfWork.TaskRepository.GetTaskByNameTagAsync(nameTag);
         return _mapper.Map<TaskDto>(task);
+    }
+
+    [Authorize]
+    [HttpGet("ForCurrentUser")]
+    public async Task<ActionResult<IEnumerable<ListedTaskDto>>> GetTasksForUser([FromQuery] TaskParams taskParams)
+    {
+        var tasks = await _unitOfWork.TaskRepository.GetTasksForUserAsync(taskParams, User.GetUsername());
+        tasks = await _unitOfWork.TaskRepository.GetTasksWithUserResultsAsync(tasks, User.GetUsername());
+
+        Response.AddPaginationHeader(tasks.CurrentPage, tasks.PageSize,
+            tasks.TotalCount, tasks.TotalPages);
+
+        return Ok(tasks);
     }
 
     [Authorize]

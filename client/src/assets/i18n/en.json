@@ -39,7 +39,11 @@
       "Correct": "Of correct",
       "Average": "Average",
       "YourScore": "Your score",
-      "NoTasksToDisplay": "There are no tasks to display"
+      "NoTasksToDisplay": "There are no tasks to display",
+      "All": "All",
+      "Solved": "Solved",
+      "Attempted": "Attempted",
+      "NotAttempted": "Not Attempted"
     },
     "TaskDetail": {
       "ProblemStatement": "Problem statement",
