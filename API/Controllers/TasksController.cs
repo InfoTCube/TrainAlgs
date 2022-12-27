@@ -67,9 +67,30 @@ public class TasksController : BaseApiController
         return taskDto;
     }
 
+    [Authorize]
+    [HttpPost("RateTask")]
+    public async Task<ActionResult<int>> RateTask(string nameTag, int rating)
+    {
+        var task = await _unitOfWork.TaskRepository.GetTaskByNameTagAsync(nameTag);
+        string username = User.GetUsername();
+        var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+
+        if(await AlreadyRatedTask(user, task)) return BadRequest("You have already rated this task...");
+
+        await _unitOfWork.TaskRepository.RateTaskAsync(user, task, rating);
+        await _unitOfWork.Complete();
+
+        return rating;
+    }
+
     private async Task<bool> TaskExists(string nameTag)
     {
         return (await _unitOfWork.TaskRepository.GetTaskByNameTagAsync(nameTag) is not null);
+    }
+
+    private async Task<bool> AlreadyRatedTask(AppUser user, AlgTask task)
+    {
+        return (await _unitOfWork.TaskRepository.GetRatingByTaskAndUser(user, task) is not null);
     }
 
     private async Task<string> GenerateNametag(string name)

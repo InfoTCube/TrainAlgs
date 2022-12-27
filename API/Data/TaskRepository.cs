@@ -110,4 +110,24 @@ public class TaskRepository : ITaskRepository
 
         return tasks;
     }
+
+    public async Task RateTaskAsync(AppUser user, AlgTask task, int rating)
+    {
+        var rate = new Rating 
+        {
+            User = user,
+            Task = task,
+            Rate = rating
+        };
+
+        await _context.Ratings.AddAsync(rate);
+    }
+
+    public async Task<Rating> GetRatingByTaskAndUser(AppUser user, AlgTask task)
+    {
+        return await _context.Ratings
+            .Where(r => r.User == user)
+            .Where(r => r.Task == task)
+            .FirstOrDefaultAsync();
+    }
 }

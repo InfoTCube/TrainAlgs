@@ -11,5 +11,6 @@ public class ListedTaskDto
     public int Submissions { get; set; } = 0;
     public short CorrectPercent { get; set; } = 0;
     public short AverageResult { get; set; } = 0;
+    public double Rating { get; set; }
     public int UserScore { get; set; }
 }

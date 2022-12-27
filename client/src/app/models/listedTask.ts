@@ -7,5 +7,6 @@ export interface ListedTask {
     submissions: number;
     averageResult: number;
     correctPercent: number;
+    rating: number;
     userScore: number;
 }

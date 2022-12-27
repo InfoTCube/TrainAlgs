@@ -43,7 +43,9 @@
       "All": "Wszystkie",
       "Solved": "Rozwiązane",
       "Attempted": "Ruszone",
-      "NotAttempted": "Nietknięte"
+      "NotAttempted": "Nietknięte",
+      "Rating": "Trudność",
+      "TooLittleDataToCalculateRating": "Jest zbyt mało danych by obliczyć trudność tego zadania"
     },
     "TaskDetail": {
       "ProblemStatement": "Treść zadania",

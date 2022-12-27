@@ -8,6 +8,8 @@ public interface ITaskRepository
 {
     void Update(AlgTask task);
     Task AddTaskAsync(AlgTask task);
+    Task RateTaskAsync(AppUser user, AlgTask task, int rating);
+    Task <Rating> GetRatingByTaskAndUser(AppUser user, AlgTask task);
     Task<AlgTask> GetTaskByIdAsync(int id);
     Task<AlgTask> GetTaskByNameTagAsync(string nameTag);
     Task<AlgTask> GetTaskToVerifyByNameTagAsync(string nameTag);

@@ -43,7 +43,9 @@
       "All": "All",
       "Solved": "Solved",
       "Attempted": "Attempted",
-      "NotAttempted": "Not Attempted"
+      "NotAttempted": "Not Attempted",
+      "Rating": "Rating",
+      "TooLittleDataToCalculateRating": "There is to little data to calculate rating for this task"
     },
     "TaskDetail": {
       "ProblemStatement": "Problem statement",

@@ -13,6 +13,7 @@ public class AlgTask
     public int MemoryLimit { get; set; }
     public AppUser? Author { get; set; }
     public int AuthorId { get; set; }
+    public ICollection<Rating>? Ratings { get; set; }
     public ICollection<TestGroup>? TestGroups { get; set; }
     public ICollection<Solution>? Solutions { get; set; }
 }

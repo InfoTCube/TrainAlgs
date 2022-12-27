@@ -28,7 +28,8 @@ public class AutoMapperProfiles : Profile
                 src.Author.UserName))
             .ForMember(task => task.Submissions, opt => opt.MapFrom(src => src.Solutions.Count))
             .ForMember(task => task.AverageResult, opt => opt.MapFrom(src => CalculateAverageResult(src.Solutions)))
-            .ForMember(task => task.CorrectPercent, opt => opt.MapFrom(src => CalculatePercentOfCorrect(src.Solutions)));
+            .ForMember(task => task.CorrectPercent, opt => opt.MapFrom(src => CalculatePercentOfCorrect(src.Solutions)))
+            .ForMember(task => task.Rating, opt => opt.MapFrom(src => CalculateAverageRating(src.Ratings)));
         CreateMap<NewTaskDto, AlgTask>();
         CreateMap<TestSolution, TestSolutionDto>()
             .ForMember(test => test.MemoryLimit, opt => opt.MapFrom(src => 
@@ -58,15 +59,19 @@ public class AutoMapperProfiles : Profile
     private static short CalculateAverageResult(IEnumerable<Solution> solutions)
     {
         long sum = solutions.Sum(s => s.Points);
-        if(sum == 0) return 0;
-        return (short)(sum / solutions.Count());
+        return sum == 0 ? (short)0 : (short)(sum / solutions.Count());
+    }
+
+    private static double CalculateAverageRating(IEnumerable<Rating> ratings)
+    {
+        long sum = ratings.Sum(r => r.Rate);
+        return sum == 0 || ratings.Count() < 3 ? 0 : (double)(sum / ratings.Count());
     }
 
     private static short CalculatePercentOfCorrect(IEnumerable<Solution> solutions)
     {
         int correct = solutions.Where(s => s.Points == 100).Count();
-        if(correct == 0) return 0;
-        return (short)((correct*100 / solutions.Count()));
+        return correct == 0 ? (short)0 : (short)((correct*100 / solutions.Count()));
     }
 
     private static GraphChartDto? GetSolutions(IEnumerable<Solution> solutions, string username)
