@@ -83,6 +83,16 @@ public class TasksController : BaseApiController
         return rating;
     }
 
+    [Authorize]
+    [HttpGet("CanRateTask/{nameTag}")]
+    public async Task<ActionResult<bool>> CanRateTask(string nameTag)
+    {
+        string username = User.GetUsername();
+        var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+
+        return await _unitOfWork.TaskRepository.CanRateTaskAsync(user, nameTag);
+    }
+
     private async Task<bool> TaskExists(string nameTag)
     {
         return (await _unitOfWork.TaskRepository.GetTaskByNameTagAsync(nameTag) is not null);

@@ -20,12 +20,14 @@ export class TaskDetailComponent implements OnInit {
   validationErrors: string[] = [];
   fileContent: string = "";
   lang: string = 'cpp';
+  canRate: boolean;
 
   constructor(private route: ActivatedRoute, private tasksService: TasksService,
     private solutionsService: SolutionsService, private router: Router, public accountService: AccountService) { }
 
   ngOnInit(): void {
     this.getTask();
+    this.canRateTask();
     this.initializeForm();
     this.tab = this.router.url.split('/').pop();
   }
@@ -34,7 +36,13 @@ export class TaskDetailComponent implements OnInit {
     this.tasksService.getTask(this.route.snapshot.paramMap.get('nameTag')).subscribe(response => {
       this.task = response;
       this.markdown = this.replaceInlineCode(response.content);
-    })
+    });
+  }
+
+  canRateTask() {
+    this.tasksService.canRateTask(this.route.snapshot.paramMap.get('nameTag')).subscribe(response => {
+      this.canRate = response;
+    });
   }
 
   submitSolution() {
@@ -114,5 +122,9 @@ export class TaskDetailComponent implements OnInit {
 
   getCode(code: string) {
     this.submitSolutionForm.get("code").setValue(code);
+  }
+
+  hideForm() {
+    this.canRate = false;
   }
 }

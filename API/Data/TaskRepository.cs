@@ -130,4 +130,17 @@ public class TaskRepository : ITaskRepository
             .Where(r => r.Task == task)
             .FirstOrDefaultAsync();
     }
+
+    public async Task<bool> CanRateTaskAsync(AppUser user, string nameTag)
+    {
+        var task = await _context.Tasks.Include("Solutions.Author").FirstOrDefaultAsync(task => task.NameTag == nameTag);
+        var solved = task.Solutions.Where(s => s.Author == user).Any(s => s.Points == 100);
+        var rating = _context.Ratings
+            .Where(r => r.User == user)
+            .Where(r => r.Task == task);
+
+        if(solved && rating == null) return true;
+
+        return false;
+    }
 }

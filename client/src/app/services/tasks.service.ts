@@ -62,6 +62,10 @@ export class TasksService {
     );
   }
 
+  canRateTask(nameTag: string) {
+    return this.http.get<boolean>(this.baseUrl + 'tasks/canRateTask/' + nameTag);
+  }
+
   addTask(model: any) {
     return this.http.post(this.baseUrl + 'tasks', model);
   }

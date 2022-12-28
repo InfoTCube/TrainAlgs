@@ -130,3 +130,56 @@
         </form>
     </div>
 </div>
+
+<div *ngIf="canRate" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+  <div class="relative w-auto my-6 mx-auto max-w-6xl width-90p">
+    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none bg-gray-200 dark:bg-gray-700">
+      <!--header-->
+      <div class="flex items-start justify-between p-5 border-b border-solid border-slate-200 dark:border-slate-500 rounded-t">
+        <h3 class="text-3xl font-semibold text-gray-900 dark:text-white">
+          Help us improve the portal!
+        </h3>
+        <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" (click)="toggleCode()">
+          <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+            x
+          </span>
+        </button>
+      </div>
+      <div class="p-5 border-b border-solid border-slate-200 dark:border-slate-500 rounded-t">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+          Congratulations, you solved it!
+        </h3>
+        <div>
+          <p class="text-gray-900 dark:text-white">
+            The taskset isn't perfect, but we always aim to make it better. To do that we need your help. Please, fill this form and rate difficulty of this task.
+          </p>
+          <p class="font-semibold text-gray-900 dark:text-white float-left">
+            Thank you
+          </p>
+          <div class="text-gray-900 dark:text-white">
+            <svg class="float-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+              <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+      <!--body-->
+      <div class="p-4 text-center">
+        <h3 class="text-3xl font-semibold text-gray-900 dark:text-white mb-2">Difficulty</h3>
+        <div>
+          <input class="w-48 range range-lg" type="range" min="0" max="5">
+        </div>
+      </div>
+      <!--footer-->
+      <div class="flex items-center justify-between p-6 border-t border-solid border-slate-200 dark:border-slate-500 rounded-b">
+        <button class="text-green-500 hover:text-white background-transparent font-bold uppercase px-6 py-2 text-sm outline hover:bg-green-500 rounded-md focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="submit">
+          Submit
+        </button>
+        <button class="text-red-500 hover:text-white background-transparent font-bold uppercase px-6 py-2 text-sm outline hover:bg-red-500 rounded-md focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="hideForm()">
+          No thanks
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="canRate" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
