@@ -166,13 +166,18 @@
       <!--body-->
       <div class="p-4 text-center">
         <h3 class="text-3xl font-semibold text-gray-900 dark:text-white mb-2">Difficulty</h3>
-        <div>
-          <input class="w-48 range range-lg" type="range" min="0" max="5">
+        <div class="flex justify-center font-semibold text-gray-900 dark:text-white">
+          <h1 (click)="changeRate(0)" [ngClass]="{'text-blue-400': rate == 0}" class="text-5xl m-3 cursor-pointer hover:text-blue-600">0</h1>
+          <h1 (click)="changeRate(1)" [ngClass]="{'text-blue-400': rate == 1}" class="text-5xl m-3 cursor-pointer hover:text-blue-600">1</h1>
+          <h1 (click)="changeRate(2)" [ngClass]="{'text-blue-400': rate == 2}" class="text-5xl m-3 cursor-pointer hover:text-blue-600">2</h1>
+          <h1 (click)="changeRate(3)" [ngClass]="{'text-blue-400': rate == 3}" class="text-5xl m-3 cursor-pointer hover:text-blue-600">3</h1>
+          <h1 (click)="changeRate(4)" [ngClass]="{'text-blue-400': rate == 4}" class="text-5xl m-3 cursor-pointer hover:text-blue-600">4</h1>
+          <h1 (click)="changeRate(5)" [ngClass]="{'text-blue-400': rate == 5}" class="text-5xl m-3 cursor-pointer hover:text-blue-600">5</h1>
         </div>
       </div>
       <!--footer-->
       <div class="flex items-center justify-between p-6 border-t border-solid border-slate-200 dark:border-slate-500 rounded-b">
-        <button class="text-green-500 hover:text-white background-transparent font-bold uppercase px-6 py-2 text-sm outline hover:bg-green-500 rounded-md focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="submit">
+        <button (click)="sendRating()" [ngClass]="{'opacity-10': rate == -1}" class="text-green-500 hover:text-white background-transparent font-bold uppercase px-6 py-2 text-sm outline hover:bg-green-500 rounded-md focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
           Submit
         </button>
         <button class="text-red-500 hover:text-white background-transparent font-bold uppercase px-6 py-2 text-sm outline hover:bg-red-500 rounded-md focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="hideForm()">

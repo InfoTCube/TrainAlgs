@@ -69,4 +69,8 @@ export class TasksService {
   addTask(model: any) {
     return this.http.post(this.baseUrl + 'tasks', model);
   }
+
+  rateTask(nameTag: string, rate: number) {
+    return this.http.post(this.baseUrl + 'tasks/rateTask/' + nameTag + '?rating=' + rate, {});
+  }
 }

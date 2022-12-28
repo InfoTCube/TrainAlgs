@@ -68,7 +68,7 @@ public class TasksController : BaseApiController
     }
 
     [Authorize]
-    [HttpPost("RateTask")]
+    [HttpPost("RateTask/{nameTag}")]
     public async Task<ActionResult<int>> RateTask(string nameTag, int rating)
     {
         var task = await _unitOfWork.TaskRepository.GetTaskByNameTagAsync(nameTag);

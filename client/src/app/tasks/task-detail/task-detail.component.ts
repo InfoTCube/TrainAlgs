@@ -21,6 +21,7 @@ export class TaskDetailComponent implements OnInit {
   fileContent: string = "";
   lang: string = 'cpp';
   canRate: boolean;
+  rate: number = -1;
 
   constructor(private route: ActivatedRoute, private tasksService: TasksService,
     private solutionsService: SolutionsService, private router: Router, public accountService: AccountService) { }
@@ -126,5 +127,16 @@ export class TaskDetailComponent implements OnInit {
 
   hideForm() {
     this.canRate = false;
+  }
+
+  changeRate(rate: number) {
+    this.rate = rate;
+  }
+
+  sendRating() {
+    if(this.rate !== -1)
+      this.tasksService.rateTask(this.route.snapshot.paramMap.get('nameTag'), this.rate).subscribe(() => {
+        this.canRate = false;
+      });
   }
 }

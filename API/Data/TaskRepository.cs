@@ -137,9 +137,10 @@ public class TaskRepository : ITaskRepository
         var solved = task.Solutions.Where(s => s.Author == user).Any(s => s.Points == 100);
         var rating = _context.Ratings
             .Where(r => r.User == user)
-            .Where(r => r.Task == task);
+            .Where(r => r.Task == task)
+            .Any();
 
-        if(solved && rating == null) return true;
+        if(solved && !rating) return true;
 
         return false;
     }
