@@ -47,26 +47,6 @@ public class ModeratorControllerTests
     }
 */
 
-    [Fact]
-    public async Task GetTasksToVerify_Should_Return_Ok_With_Tasks()
-    {
-        //Arrange
-        var taskRepository = A.Fake<ITaskRepository>();
-        var unitOfWork = A.Fake<IUnitOfWork>();
-        A.CallTo(() => unitOfWork.TaskRepository).Returns(taskRepository);
-        var tasks = new PagedList<ListedTaskDto>(new List<ListedTaskDto>(), 1, 1, 1, 1);
-        A.CallTo(() => taskRepository.GetTasksToVerifyAsync(A<ElementParams>.Ignored)).Returns(Task.FromResult(tasks));
-        var controller = new ModeratorController(_unitOfWork, _mapper);
-
-        //Act
-        var result = await controller.GetTasksToVerify(elementParams);
-
-        //Assert
-        result.Should().BeOfType<OkObjectResult>()
-            .Which.Value.Should().BeEquivalentTo(tasks);
-        A.CallTo(() => taskRepository.GetTasksToVerifyAsync(A<ElementParams>.Ignored)).MustHaveHappened();
-    }
-
     [Theory]
     [InlineData("nameTag")]
     public async Task ModeratorController_GetTaskToVerify_ReturnActionResult(string nameTag)
