@@ -17,7 +17,7 @@ public class PythonController : BaseApiController
     }
 
     [HttpPost("TestTaskPython")]
-    public async Task<ActionResult<SolutionDto>> TestTaskCpp(AlgTaskDto algTask)
+    public async Task<ActionResult<SolutionDto>> TestTaskPython(AlgTaskDto algTask)
     {
         SolutionDto solution = await _pythonService.RunPython(algTask);
         return solution;

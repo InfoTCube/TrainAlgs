@@ -12,7 +12,7 @@ import { AccountService } from '../services/account.service';
 export class NavComponent implements OnInit {
   @Output() themeChangedEvent = new EventEmitter<string>();
   page = "/";
-  theme = localStorage.theme;
+  theme = 'light';
 
   constructor(public accountService: AccountService, private router: Router, private translate: TranslateService) {
     router.events.pipe(
@@ -23,6 +23,8 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    localStorage.theme = localStorage.theme == null ? 'light' : localStorage.theme;
+    this.theme = localStorage.theme;
   }
 
   logout() {

@@ -35,7 +35,7 @@ export class ModeratorService {
   getTasksToVerify(taskParams: ListingParams) {
     let params = getPaginationHeaders(taskParams.pageNumber, taskParams.pageSize)
 
-    return getPaginatedResult<ListedTask[]>(this.baseUrl + 'moderator/verify-tasks', params, this.http).pipe(
+    return getPaginatedResult<ListedTask[]>(this.baseUrl + 'moderator/verifytasks', params, this.http).pipe(
       map(response => {
         return response;
       })
@@ -43,10 +43,10 @@ export class ModeratorService {
   }
 
   getTaskToVerify(nameTag: string) {
-    return this.http.get<AlgTask>(this.baseUrl + 'moderator/verify-tasks/' + nameTag);
+    return this.http.get<AlgTask>(this.baseUrl + 'moderator/verifytasks/' + nameTag);
   }
 
   verifyTask(nameTag: string) {
-    return this.http.put(this.baseUrl + 'moderator/verify-tasks/' + nameTag, {});
+    return this.http.put(this.baseUrl + 'moderator/verifytasks/' + nameTag, {});
   }
 }
