@@ -25,6 +25,7 @@
     "@popperjs/core": "^2.11.4",
     "@swimlane/ngx-charts": "^20.1.0",
     "@tailwindcss/typography": "^0.5.2",
+    "flag-icons": "^6.6.6",
     "karma-brave-launcher": "^1.0.0",
     "moment": "^2.29.4",
     "ngx-markdown": "^13.1.0",

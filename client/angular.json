@@ -29,7 +29,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/ngx-spinner/animations/timer.css"
+              "node_modules/ngx-spinner/animations/timer.css",
+              "node_modules/flag-icons/css/flag-icons.min.css"
             ],
             "scripts": []
           },

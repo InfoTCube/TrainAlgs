@@ -13,7 +13,8 @@
       "SolvedLastMonth": "rozwiązane łącznie w ostatnim miesiącu",
       "InRowAllTime": "najwięcej z rzędu",
       "InRowLastYear": "najwięcej z rzędu w ostatnim roku",
-      "InRowLastMonth": "najwięcej z rzędu w ostatnim miesiącu"
+      "InRowLastMonth": "najwięcej z rzędu w ostatnim miesiącu",
+      "OnlineNow": "Teraz aktywny"
     }
   },
   "Menu": {
@@ -100,7 +101,9 @@
       "ShowCode": "Pokaż kod",
       "InitialTestingReport": "Wstępne sprawozdanie z testowania",
       "FinalTestingReport": "Końcowe sprawozdanie z testowania",
-      "PleaseProvideCode": "Proszę napisać kod"
+      "PleaseProvideCode": "Proszę napisać kod",
+      "Code": "Kod",
+      "Close": "Zamknij"
     }
   },
   "SignIn": {

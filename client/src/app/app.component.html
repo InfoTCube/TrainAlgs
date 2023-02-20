@@ -4,7 +4,7 @@
       <h3 class="text-white text-xl">Loading...</h3>
     </ngx-spinner>
 
-    <app-nav (themeChangedEvent)="changeTheme($event)"></app-nav>
+    <app-nav (themeChangedEvent)="changeTheme($event)" (langChangedEvent)="changeLang($event)"></app-nav>
 
     <div class="mt-5 pb-16">
       <router-outlet></router-outlet>

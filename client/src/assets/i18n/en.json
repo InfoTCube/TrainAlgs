@@ -13,7 +13,8 @@
       "SolvedLastMonth": "solved for the last month",
       "InRowAllTime": "in a row max",
       "InRowLastYear": "in a row max for the last year",
-      "InRowLastMonth": "in a row max for the last month"
+      "InRowLastMonth": "in a row max for the last month",
+      "OnlineNow": "Online now"
     }
   },
   "Menu": {
@@ -100,7 +101,9 @@
       "DownloadCode": "Download code",
       "ShowCode": "Show code",
       "InitialTestingReport": "Initial testing report",
-      "FinalTestingReport": "Final testing report"
+      "FinalTestingReport": "Final testing report",
+      "Code": "Code",
+      "Close": "Close"
     }
   },
   "SignIn": {

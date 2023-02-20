@@ -2,8 +2,8 @@
     <div class="container flex flex-wrap justify-between items-center mx-auto">
         <div class="flex md:order-2">
           <a *ngIf="(accountService.currentUser$ | async) === null" href="sign_in" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{{ "Menu.SignIn" | translate }}</a>
-          <app-dropdown *ngIf="(accountService.currentUser$ | async)" [Title]='("Menu.Account" | translate)' (OnChange)="takeAction($event)" [Items]="[('Menu.Profile' | translate), ('Menu.SignOut' | translate)]"></app-dropdown>
-          <div class="ml-3 inline-flex justify-center">
+          <app-dropdown class="self-center" *ngIf="(accountService.currentUser$ | async)" [Title]='("Menu.Account" | translate)' (OnChange)="takeAction($event)" [Items]="[('Menu.Profile' | translate), ('Menu.SignOut' | translate)]"></app-dropdown>
+          <div class="m-2 inline-flex justify-center">
             <button (click)="themeChanged()" class="text-gray-900 dark:text-white hover:text-gray-700 hover:dark:text-gray-400">
               <svg *ngIf="theme == 'dark'" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 22 22" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -13,6 +13,7 @@
               </svg>
             </button>
           </div>
+          <app-lang-dropdown class="self-center" [Title]='lang' (OnChange)="changeLang($event)" [Items]="['gb', 'pl']"></app-lang-dropdown>
           <button data-collapse-toggle="mobile-menu" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>

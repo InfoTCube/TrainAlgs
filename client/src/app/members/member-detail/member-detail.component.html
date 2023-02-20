@@ -17,7 +17,7 @@
               {{member.lastActive | timeago}}
             </span>
             <span *ngIf="(presenceService.onlineUsers$ | async).includes(member.username) || member.username === currentUserUsername" class="is-online">
-              Online now
+              {{ "Members.MemberDetail.OnlineNow" | translate }}
             </span>
           </p>
         </div>

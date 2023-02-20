@@ -11,8 +11,10 @@ import { AccountService } from '../services/account.service';
 })
 export class NavComponent implements OnInit {
   @Output() themeChangedEvent = new EventEmitter<string>();
+  @Output() langChangedEvent = new EventEmitter<string>();
   page = "/";
   theme = 'light';
+  lang = 'gb';
 
   constructor(public accountService: AccountService, private router: Router, private translate: TranslateService) {
     router.events.pipe(
@@ -24,7 +26,9 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     localStorage.theme = localStorage.theme == null ? 'light' : localStorage.theme;
+    localStorage.lang = localStorage.lang == null ? 'gb' : localStorage.lang;
     this.theme = localStorage.theme;
+    this.lang = localStorage.lang;
   }
 
   logout() {
@@ -43,6 +47,13 @@ export class NavComponent implements OnInit {
 
     if($event == this.translate.instant("Menu.Profile")) this.goToProfile();
     else if($event == this.translate.instant("Menu.SignOut")) this.logout();
+  }
+
+  changeLang($event) {
+    localStorage.lang = $event;
+
+    this.lang = localStorage.lang;
+    this.langChangedEvent.emit(this.lang);
   }
 
   themeChanged() {

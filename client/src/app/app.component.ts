@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { User } from './models/user';
 import { AccountService } from './services/account.service';
 import { PresenceService } from './services/presence.service';
@@ -10,11 +11,13 @@ import { PresenceService } from './services/presence.service';
 })
 export class AppComponent implements OnInit {
   theme = localStorage.theme;
+  lang = localStorage.lang;
 
-  constructor(private accountService: AccountService, private presenceService: PresenceService) {}
+  constructor(private accountService: AccountService, private presenceService: PresenceService, private translate: TranslateService) {}
 
   ngOnInit(): void {
     this.setCurrentUser();
+    this.setLang();
   }
 
   setCurrentUser() {
@@ -27,5 +30,21 @@ export class AppComponent implements OnInit {
 
   changeTheme(theme: string) {
     this.theme = theme;
+  }
+
+  changeLang(lang: string) {
+    this.lang = lang;
+    this.setLang();
+  }
+
+  setLang() {
+    switch(this.lang) {
+      case 'gb':
+        this.translate.use('en');
+        break;
+      case 'pl':
+        this.translate.use('pl');
+        break;
+    }
   }
 }

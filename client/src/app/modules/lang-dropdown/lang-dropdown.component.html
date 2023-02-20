@@ -1,0 +1,10 @@
+<div class="z-50 relative text-gray-900 dark:text-white">
+  <div (click)="toggle()" class="relative px-4 py-2 rounded-md flex justify-center items-center cursor-pointer">
+    <span [className]="'fi fi-' + Title"></span>
+  </div>
+  <div *ngIf="show" class="absolute py-1 mt-2 rounded-md cursor-pointer border border-1 border-gray-400 dark:border-gray-500 bg-gray-200 dark:bg-gray-700">
+      <div (click)="select(item)" *ngFor="let item of Items" class="py-2 px-4 w-full hover:bg-gray-300 dark:hover:bg-gray-800">
+          <span [className]="'fi fi-' + item"></span>
+      </div>
+  </div>
+</div>

@@ -35,58 +35,60 @@ import { TaskAddingComponent } from './tasks/task-adding/task-adding.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LangDropdownComponent } from "./modules/lang-dropdown/lang-dropdown.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-    SignInComponent,
-    SignUpComponent,
-    HomeComponent,
-    NotFoundComponent,
-    ServerErrorComponent,
-    MemberDetailComponent,
-    TasksComponent,
-    TaskDetailComponent,
-    FooterComponent,
-    SolutionsComponent,
-    SolutionDetailComponent,
-    DropdownComponent,
-    CodeViewerComponent,
-    CodeEditorComponent,
-    HasRoleDirective,
-    VerifyTasksComponent,
-    VerifyTaskDetailComponent,
-    TaskAddingComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    NgxSpinnerModule,
-    NgxPaginationModule,
-    BrowserAnimationsModule,
-    SharedModule,
-    NgxChartsModule,
-    MarkdownModule.forRoot(),
-    TimeagoModule.forRoot(),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      },
-      defaultLanguage: 'en'
-    }),
-  ],
-  providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NavComponent,
+        SignInComponent,
+        SignUpComponent,
+        HomeComponent,
+        NotFoundComponent,
+        ServerErrorComponent,
+        MemberDetailComponent,
+        TasksComponent,
+        TaskDetailComponent,
+        FooterComponent,
+        SolutionsComponent,
+        SolutionDetailComponent,
+        DropdownComponent,
+        LangDropdownComponent,
+        CodeViewerComponent,
+        CodeEditorComponent,
+        HasRoleDirective,
+        VerifyTasksComponent,
+        VerifyTaskDetailComponent,
+        TaskAddingComponent
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+    ],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        NgxSpinnerModule,
+        NgxPaginationModule,
+        BrowserAnimationsModule,
+        SharedModule,
+        NgxChartsModule,
+        MarkdownModule.forRoot(),
+        TimeagoModule.forRoot(),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            },
+            defaultLanguage: 'en'
+        }),
+    ]
 })
 export class AppModule {}
 
