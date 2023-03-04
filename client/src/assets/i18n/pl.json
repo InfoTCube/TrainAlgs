@@ -67,7 +67,8 @@
       "ThankYou": "Dziękujemy ci",
       "TheTasksetIsntPerfect": "Baza zadań nie jest idealna, ale cały czas staramy się ją ulepszać. Aby robić to skutecznie, potrzebujemy twojej pomocy. Wypełnij ten formularz i oceń trudność zadania.",
       "Difficulty": "Poziom trudności",
-      "NoThanks": "Nie, dziękuję"
+      "NoThanks": "Nie, dziękuję",
+      "Author": "Autor"
     },
     "TaskAdding": {
       "TaskName": "Nazwa zadania",

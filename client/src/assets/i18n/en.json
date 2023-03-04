@@ -68,7 +68,8 @@
       "ThankYou": "Thank you",
       "TheTasksetIsntPerfect": "The taskset isn't perfect, but we always aim to make it better. To do that we need your help. Please, fill this form and rate difficulty of this task.",
       "Difficulty": "Difficulty",
-      "NoThanks": "No thanks"
+      "NoThanks": "No thanks",
+      "Author": "Author"
     },
     "TaskAdding": {
       "TaskName": "Task name",

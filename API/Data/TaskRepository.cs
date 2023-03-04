@@ -34,6 +34,7 @@ public class TaskRepository : ITaskRepository
         var task =  await _context.Tasks
             .Include(task => task.TestGroups)
             .Include("TestGroups.Tests")
+            .Include(task => task.Author)
             .Where(task => task.NameTag == nameTag)
             .Where(task => task.Verified == true)
             .SingleOrDefaultAsync();

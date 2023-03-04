@@ -34,10 +34,12 @@
     </div>
 
     <h1 class="text-5xl text-gray-900 dark:text-white mb-2">{{task.name}} ({{task.nameTag}})</h1>
-    <div class="text-l text-gray-900 dark:text-white mb-7">
+    <div class="text-l text-gray-900 dark:text-white mb-7 flex justify-left">
       <p class="float-left mr-3">{{'Tasks.TaskDetail.TimeLimit' | translate}}: {{task.timeLimit/1000}}s</p>
       <p class="float-left mr-3">•</p>
-      <p>{{'Tasks.TaskDetail.MemoryLimit' | translate}}: {{task.memoryLimit}}MB</p>
+      <p class="mr-3">{{'Tasks.TaskDetail.MemoryLimit' | translate}}: {{task.memoryLimit}}MB</p>
+      <p class="mr-3">•</p>
+      <p>{{'Tasks.TaskDetail.Author' | translate}}: <a class="text-blue-500" href="members/{{task.authorUsername}}">{{task.authorUsername}}</a></p>
     </div>
 
     <div *ngIf="tab == 'statement'">
