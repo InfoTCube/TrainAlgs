@@ -14,7 +14,8 @@
       "InRowAllTime": "najwięcej z rzędu",
       "InRowLastYear": "najwięcej z rzędu w ostatnim roku",
       "InRowLastMonth": "najwięcej z rzędu w ostatnim miesiącu",
-      "OnlineNow": "Teraz aktywny"
+      "OnlineNow": "Teraz aktywny",
+      "ThisMemberDoesntExists": "Taki użytkownik nie istnieje"
     }
   },
   "Menu": {
@@ -45,7 +46,7 @@
       "Solved": "Rozwiązane",
       "Attempted": "Ruszone",
       "NotAttempted": "Nietknięte",
-      "Rating": "Trudność",
+      "Rating": "Poziom trudności",
       "TooLittleDataToCalculateRating": "Jest zbyt mało danych by obliczyć trudność tego zadania"
     },
     "TaskDetail": {
@@ -60,7 +61,13 @@
       "ProgrammingLanguage": "Język programowania",
       "SignInToSubmit": "Zaloguj się aby wysłać rozwiązanie",
       "MemoryLimit": "Limit pamięci",
-      "TimeLimit": "Limit czasu"
+      "TimeLimit": "Limit czasu",
+      "HelpUsImproveThePortal": "Pomóż nam ulepszyć tą stronę!",
+      "CongratulationsYouSolvedIt": "Brawo, za rozwiązanie tego zadania!",
+      "ThankYou": "Dziękujemy ci",
+      "TheTasksetIsntPerfect": "Baza zadań nie jest idealna, ale cały czas staramy się ją ulepszać. Aby robić to skutecznie, potrzebujemy twojej pomocy. Wypełnij ten formularz i oceń trudność zadania.",
+      "Difficulty": "Poziom trudności",
+      "NoThanks": "Nie, dziękuję"
     },
     "TaskAdding": {
       "TaskName": "Nazwa zadania",
@@ -89,7 +96,8 @@
       "Task": "Zadanie",
       "Language": "Język",
       "Status": "Status",
-      "Points": "Punkty"
+      "Points": "Punkty",
+      "ThereAreNoSolutionsToDisplay": "Nie ma jeszcze żadnych twoich rozwiązań tego zadania"
     },
     "SolutionDetail": {
       "Test": "Test",
@@ -139,5 +147,22 @@
     "PasswordMustContain": "Hasło musi zawierać przynajmniej: jedną małą literę, jedną dużą literę, cyfrę i znak specjalny.",
     "ProvideConfirmPassword": "Powtórz hasło.",
     "PasswordsMustBeSame": "\"Hasło\" i \"Powtórz hasło\" muszą być takie same."
+  },
+  "Moderator": {
+    "VerifyTasks": {
+      "Tag": "Tag",
+      "Name": "Nazwa",
+      "AuthorUsername": "Autor",
+      "Verify": "Zweryfikuj",
+      "Close": "Zamknij",
+      "Confirmation": "Potwierdzenie",
+      "AreYouSureYouWantToVerifyATask": "Czy na pewno chcesz zweryfikować zadanie?",
+      "ThereAreNoTasksToVerify": "Nie ma żadnych zadań do weryfikacji"
+    },
+    "VerifyTaskDetails": {
+      "Input": "Wejście",
+      "Output": "Wyjście",
+      "ExampleTests": "Testy przykładowe"
+    }
   }
 }

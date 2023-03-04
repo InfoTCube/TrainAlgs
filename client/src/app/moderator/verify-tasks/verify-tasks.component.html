@@ -4,16 +4,16 @@
         <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300 text-center">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Tag
+                  {{'Moderator.VerifyTasks.Tag' | translate}}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Name
+                  {{'Moderator.VerifyTasks.Name' | translate}}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Author Username
+                  {{'Moderator.VerifyTasks.AuthorUsername' | translate}}
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Verify
+                  {{'Moderator.VerifyTasks.Verify' | translate}}
               </th>
             </tr>
         </thead>
@@ -30,7 +30,7 @@
                     {{task.authorUsername}}
                 </td>
                 <td class="px-6 py-4">
-                  <a class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" (click)="toggleConfirm($event, task.nameTag)">Verify</a>
+                  <a class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" (click)="toggleConfirm($event, task.nameTag)">{{'Moderator.VerifyTasks.Verify' | translate}}</a>
               </td>
             </tr>
         </tbody>
@@ -39,7 +39,7 @@
 </div>
 
 <div *ngIf="tasks && tasks.length == 0" class="text-center text-gray-900 dark:text-white">
-  There are no tasks to verify...
+  {{'Moderator.VerifyTasks.ThereAreNoTasksToVerify' | translate}}...
 </div>
 
 <pagination-controls class="text-center styled-pagination dark:styled-pagination-dark" id="tasks" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="10"
@@ -52,18 +52,18 @@
     <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none bg-gray-200 dark:bg-gray-700">
       <div class="flex items-start justify-between p-5 border-b border-solid border-slate-200 dark:border-slate-500 rounded-t">
         <h3 class="text-3xl font-semibold text-gray-900 dark:text-white">
-          Code
+          {{'Moderator.VerifyTasks.Confirmation' | translate}}
         </h3>
       </div>
       <div class="relative p-6 flex-auto">
-        <p class="text-gray-900 dark:text-white">Are you sure, you want to verify a task?</p>
+        <p class="text-gray-900 dark:text-white">{{'Moderator.VerifyTasks.AreYouSureYouWantToVerifyATask' | translate}}</p>
       </div>
       <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 dark:border-slate-500 rounded-b">
         <button (click)="verifyTask($event)" class="mr-2 text-green-500 hover:text-white background-transparent font-bold uppercase px-6 py-2 mr-6 text-sm outline hover:bg-green-500 rounded-md focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
-          Verify
+          {{'Moderator.VerifyTasks.Verify' | translate}}
         </button>
         <button (click)="toggleConfirm($event)" class="ml-2 text-red-500 hover:text-white background-transparent font-bold uppercase px-6 py-2 text-sm outline hover:bg-red-500 rounded-md focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
-          Close
+          {{'Moderator.VerifyTasks.Close' | translate}}
         </button>
       </div>
     </div>

@@ -51,7 +51,7 @@
 </div>
 
 <div *ngIf="solutions && solutions.length == 0" class="text-center text-gray-900 dark:text-white">
-  There are no solutions to display...
+    {{'Solutions.Solutions.ThereAreNoSolutionsToDisplay' | translate}}...
 </div>
 
 <pagination-controls *ngIf="solutions && solutions.length != 0" class="text-center styled-pagination dark:styled-pagination" id="solutions" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="10"

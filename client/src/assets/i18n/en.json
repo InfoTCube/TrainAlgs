@@ -14,7 +14,8 @@
       "InRowAllTime": "in a row max",
       "InRowLastYear": "in a row max for the last year",
       "InRowLastMonth": "in a row max for the last month",
-      "OnlineNow": "Online now"
+      "OnlineNow": "Online now",
+      "ThisMemberDoesntExists": "This member doesn't exist"
     }
   },
   "Menu": {
@@ -61,7 +62,13 @@
       "PleaseProvideCode": "Please provide a code",
       "SignInToSubmit": "Sign in to submit",
       "MemoryLimit": "Memory limit",
-      "TimeLimit": "Time limit"
+      "TimeLimit": "Time limit",
+      "HelpUsImproveThePortal": "Help us improve the portal!",
+      "CongratulationsYouSolvedIt": "Congratulations, you solved it!",
+      "ThankYou": "Thank you",
+      "TheTasksetIsntPerfect": "The taskset isn't perfect, but we always aim to make it better. To do that we need your help. Please, fill this form and rate difficulty of this task.",
+      "Difficulty": "Difficulty",
+      "NoThanks": "No thanks"
     },
     "TaskAdding": {
       "TaskName": "Task name",
@@ -90,7 +97,8 @@
       "Task": "Task",
       "Language": "Language",
       "Status": "Status",
-      "Points": "Points"
+      "Points": "Points",
+      "ThereAreNoSolutionsToDisplay": "There are no solutions to display"
     },
     "SolutionDetail": {
       "Test": "Test",
@@ -139,5 +147,22 @@
     "PasswordMustContain": "Password must contain at least one lowercase letter, uppercase letter, digit and special character.",
     "ProvideConfirmPassword": "Please provide a confirm password.",
     "PasswordsMustBeSame": "Confirm password must be the same as password."
+  },
+  "Moderator": {
+    "VerifyTasks": {
+      "Tag": "Tag",
+      "Name": "Name",
+      "AuthorUsername": "Author username",
+      "Verify": "Verify",
+      "Close": "Close",
+      "Confirmation": "Confirmation",
+      "AreYouSureYouWantToVerifyATask": "Are you sure, you want to verify a task?",
+      "ThereAreNoTasksToVerify": "There are no tasks to verify"
+    },
+    "VerifyTaskDetails": {
+      "Input": "Input",
+      "Output": "Output",
+      "ExampleTests": "Example tests"
+    }
   }
 }

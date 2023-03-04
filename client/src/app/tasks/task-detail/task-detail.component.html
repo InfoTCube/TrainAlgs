@@ -45,7 +45,7 @@
 
         <div *ngIf="task.exampleTestGroup" class="content-center flex items-center justify-left mt-6 pb-4">
             <div>
-                <h1 class="text-gray-900 dark:text-white text-center">Example tests</h1>
+                <h1 class="text-gray-900 dark:text-white text-center">{{'Tasks.TaskDetail.ExampleTests' | translate}}</h1>
                 <div class="full relative overflow-x-auto shadow-md rounded-lg">
                     <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
                         <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300">
@@ -137,7 +137,7 @@
       <!--header-->
       <div class="flex items-start justify-between p-5 border-b border-solid border-slate-200 dark:border-slate-500 rounded-t">
         <h3 class="text-3xl font-semibold text-gray-900 dark:text-white">
-          Help us improve the portal!
+          {{'Tasks.TaskDetail.HelpUsImproveThePortal' | translate}}
         </h3>
         <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" (click)="toggleCode()">
           <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
@@ -147,14 +147,14 @@
       </div>
       <div class="p-5 border-b border-solid border-slate-200 dark:border-slate-500 rounded-t">
         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-          Congratulations, you solved it!
+          {{'Tasks.TaskDetail.CongratulationsYouSolvedIt' | translate}}
         </h3>
         <div>
           <p class="text-gray-900 dark:text-white">
-            The taskset isn't perfect, but we always aim to make it better. To do that we need your help. Please, fill this form and rate difficulty of this task.
+            {{'Tasks.TaskDetail.TheTasksetIsntPerfect' | translate}}
           </p>
           <p class="font-semibold text-gray-900 dark:text-white float-left">
-            Thank you
+            {{'Tasks.TaskDetail.ThankYou' | translate}}
           </p>
           <div class="text-gray-900 dark:text-white">
             <svg class="float-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -165,7 +165,7 @@
       </div>
       <!--body-->
       <div class="p-4 text-center">
-        <h3 class="text-3xl font-semibold text-gray-900 dark:text-white mb-2">Difficulty</h3>
+        <h3 class="text-3xl font-semibold text-gray-900 dark:text-white mb-2">{{'Tasks.TaskDetail.Difficulty' | translate}}</h3>
         <div class="flex justify-center font-semibold text-gray-900 dark:text-white">
           <h1 (click)="changeRate(0)" [ngClass]="{'text-blue-400': rate == 0}" class="text-5xl m-3 cursor-pointer hover:text-blue-600">0</h1>
           <h1 (click)="changeRate(1)" [ngClass]="{'text-blue-400': rate == 1}" class="text-5xl m-3 cursor-pointer hover:text-blue-600">1</h1>
@@ -178,10 +178,10 @@
       <!--footer-->
       <div class="flex items-center justify-between p-6 border-t border-solid border-slate-200 dark:border-slate-500 rounded-b">
         <button (click)="sendRating()" [ngClass]="{'opacity-10': rate == -1}" class="text-green-500 hover:text-white background-transparent font-bold uppercase px-6 py-2 text-sm outline hover:bg-green-500 rounded-md focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
-          Submit
+          {{'Tasks.TaskDetail.Submit' | translate}}
         </button>
         <button class="text-red-500 hover:text-white background-transparent font-bold uppercase px-6 py-2 text-sm outline hover:bg-red-500 rounded-md focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="hideForm()">
-          No thanks
+          {{'Tasks.TaskDetail.NoThanks' | translate}}
         </button>
       </div>
     </div>
