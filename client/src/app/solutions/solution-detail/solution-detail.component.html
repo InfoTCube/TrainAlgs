@@ -27,7 +27,7 @@
                         {{solution.date | date:'EE, d MMMM y HH:mm:ss':'GMT'}} GMT
                     </th>
                     <td class="px-6 py-4">
-                        {{solution.algTaskName}} ({{solution.algTaskTag}})
+                        <a class="hover:text-blue-500" href="tasks/{{solution.algTaskTag}}/statement">{{solution.algTaskName}} ({{solution.algTaskTag}})</a>
                     </td>
                     <td class="px-6 py-4">
                         <span class="badge lang p-2 rounded-lg">
