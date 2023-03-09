@@ -6,12 +6,12 @@
 <details>
   <summary>📸 Screenshots</summary>
   <div align="center">
-    <img src=""/>
-    <img src=""/>
-    <img src=""/>
-    <img src=""/>
-    <img src=""/>
-    <img src=""/>
+    <img src="./Screenshots/SolutionDetails.png"/>
+    <img src="./Screenshots/Solutions.png"/>
+    <img src="./Screenshots/TaskAdding.png"/>
+    <img src="./Screenshots/TaskDetails.png"/>
+    <img src="./Screenshots/UserDetails.png"/>
+    <img src="./Screenshots/SubmittingSolution.png"/>
   </div>
 </details>
 
