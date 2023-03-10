@@ -36,6 +36,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LangDropdownComponent } from "./modules/lang-dropdown/lang-dropdown.component";
+import { UsersComponent } from './admin/users/users.component';
 
 @NgModule({
     declarations: [
@@ -59,7 +60,8 @@ import { LangDropdownComponent } from "./modules/lang-dropdown/lang-dropdown.com
         HasRoleDirective,
         VerifyTasksComponent,
         VerifyTaskDetailComponent,
-        TaskAddingComponent
+        TaskAddingComponent,
+        UsersComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

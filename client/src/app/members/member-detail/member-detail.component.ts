@@ -26,7 +26,7 @@ export class MemberDetailComponent implements OnInit {
   years: string[] = [];
 
   constructor(private membersService: MembersService, private route: ActivatedRoute,
-      private accoutService: AccountService, public presenceService: PresenceService) { }
+      private accountService: AccountService, public presenceService: PresenceService) { }
 
   ngOnInit() {
     this.loadMember();
@@ -34,7 +34,7 @@ export class MemberDetailComponent implements OnInit {
   }
 
   loadMember() {
-    this.accoutService.currentUser$.subscribe(user => {
+    this.accountService.currentUser$.subscribe(user => {
       this.currentUserUsername = user.username;
     });
 

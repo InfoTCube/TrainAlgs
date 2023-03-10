@@ -40,7 +40,10 @@
                     </li>
                     <li class="nav-item" *appHasRole="['Moderator']">
                       <a routerLink="/moderator/verify-tasks" [ngClass]="{'active': page == '/moderator'}" class="py-4 px-5 text-gray-900 dark:text-white border-b-4 border-gray-500 dark:border-gray-200 font-semibold hover:text-blue-500 dark:hover:text-blue-500 transition duration-300">{{ "Menu.Moderate" | translate }}</a>
-                  </li>
+                    </li>
+                    <li class="nav-item" *appHasRole="['Admin']">
+                      <a routerLink="/admin/users" [ngClass]="{'active': page == '/admin'}" class="py-4 px-5 text-gray-900 dark:text-white border-b-4 border-gray-500 dark:border-gray-200 font-semibold hover:text-blue-500 dark:hover:text-blue-500 transition duration-300">{{ "Menu.Admin" | translate }}</a>
+                    </li>
                 </ul>
             </div>
         </div>

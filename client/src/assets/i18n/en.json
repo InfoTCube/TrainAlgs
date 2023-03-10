@@ -23,6 +23,7 @@
     "Tasks": "Tasks",
     "Solutions": "Solutions",
     "Moderate": "Moderate",
+    "Admin": "Admin",
     "Account": "Account",
     "Profile": "Profile",
     "SignOut": "Sign out",
@@ -164,6 +165,22 @@
       "Input": "Input",
       "Output": "Output",
       "ExampleTests": "Example tests"
+    }
+  },
+  "Admin": {
+    "Users": {
+      "Grant": "Grant",
+      "Close": "Close",
+      "Confirmation": "Confirmation",
+      "AreYouSure": "Are you sure you want to grant this user with moderator role?",
+      "NoUsersFound": "No users found",
+      "GrantModerator": "Grant moderator",
+      "OnlineNow": "Online now",
+      "LastActive": "Last active",
+      "MemberSince": "Member since",
+      "Country": "Country",
+      "SearchForUsers": "Search for users",
+      "TypeUsername": "Type username"
     }
   }
 }

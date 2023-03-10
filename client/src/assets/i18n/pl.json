@@ -23,6 +23,7 @@
     "Tasks": "Zadania",
     "Solutions": "Rozwiązania",
     "Moderate": "Zarządzaj",
+    "Admin": "Admin",
     "Account": "Konto",
     "Profile": "Profil",
     "SignOut": "Wyloguj",
@@ -164,6 +165,22 @@
       "Input": "Wejście",
       "Output": "Wyjście",
       "ExampleTests": "Testy przykładowe"
+    }
+  },
+  "Admin": {
+    "Users": {
+      "Grant": "Nadaj",
+      "Close": "Zamknij",
+      "Confirmation": "Potwierdzenie",
+      "AreYouSure": "Czy jesteś pewny, że chcesz nadać temu użytkownikowi uprawnienia moderatora?",
+      "NoUsersFound": "Nie znaleziono żadnych użytkowników",
+      "GrantModerator": "Nadaj rolę moderator",
+      "OnlineNow": "Teraz aktywny",
+      "LastActive": "Ostatnio aktywny",
+      "MemberSince": "Członek od",
+      "Country": "Narodowość",
+      "SearchForUsers": "Wyszukaj użytkowników",
+      "TypeUsername": "Wpisz nazwę użytkownika"
     }
   }
 }

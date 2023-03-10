@@ -1,5 +1,6 @@
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -36,6 +37,16 @@ public class UserRepository : IUserRepository
         return await _context.Users.SingleOrDefaultAsync(user => user.UserName == username);
     }
 
+    public async Task<PagedList<SearchedMemberDto>> SearchForMemberAsync(ElementParams elementParams, string searchText)
+    {
+        var query = _context.Users
+            .Where(user => user.NormalizedUserName.Contains(searchText.ToUpper()) == true)
+            .Include("UserRoles.Role")
+            .ProjectTo<SearchedMemberDto>(_mapper.ConfigurationProvider);
+
+        return await PagedList<SearchedMemberDto>.CreateAsync(query, elementParams.PageNumber, elementParams.PageSize);
+    }
+    
     public void Update(AppUser user)
     {
         _context.Entry(user).State = EntityState.Modified;

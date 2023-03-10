@@ -1,0 +1,78 @@
+<div class="w-full">
+    <div>
+        <div class="grid place-items-center">
+            <h1 class="text-2xl text-gray-900 dark:text-white">{{'Admin.Users.SearchForUsers' | translate}}</h1>
+            <input type="text" #usersSearchInput class="appearance-none block w-64 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm" placeholder="{{'Admin.Users.TypeUsername' | translate}}..." />
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div *ngIf="users">
+            <div class="col-3 flex justify-center" *ngFor="let user of users">
+                <div class="max-w-sm rounded overflow-hidden shadow-lg dark:shadow-gray-600 bg-gray-200 dark:bg-gray-800">
+                    <div class="px-6 py-4">
+                      <div class="font-bold text-xl mb-2 text-gray-900 dark:text-white">{{user.username}}</div>
+                      <p class="text-gray-900 dark:text-white text-base">{{'Admin.Users.Country' | translate}}: {{user.country}}</p>
+                      <p class="text-gray-900 dark:text-white text-base">{{'Admin.Users.MemberSince' | translate}}: {{user.created | timeago}}</p>
+              
+                      <div>
+                        <p class="text-gray-900 dark:text-white text-base">{{'Admin.Users.LastActive' | translate}}:
+                          <span *ngIf="!(presenceService.onlineUsers$ | async).includes(user.username) && user.username !== currentUserUsername">
+                            {{user.lastActive | timeago}}
+                          </span>
+                          <span *ngIf="(presenceService.onlineUsers$ | async).includes(user.username) || user.username === currentUserUsername" class="is-online">
+                            {{'Admin.Users.OnlineNow' | translate}}
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="px-6 pt-4 pb-2">
+                      <span *ngIf="user.isAdmin" class="inline-block rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 bg-amber-400">#Admin</span>
+                      <span *ngIf="user.isModerator" class="inline-block rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 bg-purple-600">#Moderator</span>
+                    </div>
+
+                    <button *ngIf="!user.isModerator && !user.isAdmin" (click)="toggleConfirm($event, user.username)" class="w-64 group relative w-full flex justify-center py-2 px-4 text-sm font-medium rounded-b-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>                              
+                        </span>
+                        {{'Admin.Users.GrantModerator' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="users && users.length == 0 && searchText && searchText.length >= 3">
+            <p class="text-center text-gray-900 dark:text-white">{{'Admin.Users.NoUsersFound' | translate}}</p>
+        </div>
+    </div>
+
+    <pagination-controls class="text-center styled-pagination dark:styled-pagination-dark" id="users" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="10"
+        directionLinks="true" autoHide="true" responsive="true" previousLabel="{{'Pagination.Previous' | translate}}" nextLabel="{{'Pagination.Next' | translate}}" screenReaderPaginationLabel="Pagination"
+        screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+    </pagination-controls>
+</div>
+
+<div *ngIf="confirm" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+    <div class="relative w-auto my-6 mx-auto max-w-6xl width-90p">
+    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none bg-gray-200 dark:bg-gray-700">
+        <div class="flex items-start justify-between p-5 border-b border-solid border-slate-200 dark:border-slate-500 rounded-t">
+        <h3 class="text-3xl font-semibold text-gray-900 dark:text-white">
+            {{'Admin.Users.Confirmation' | translate}}
+        </h3>
+        </div>
+        <div class="relative p-6 flex-auto">
+        <p class="text-gray-900 dark:text-white">{{'Admin.Users.AreYouSure' | translate}}
+        </div>
+        <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 dark:border-slate-500 rounded-b">
+        <button (click)="grantModerator($event)" class="mr-2 text-green-500 hover:text-white background-transparent font-bold uppercase px-6 py-2 mr-6 text-sm outline hover:bg-green-500 rounded-md focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+            {{'Admin.Users.Grant' | translate}}
+        </button>
+        <button (click)="toggleConfirm($event)" class="ml-2 text-red-500 hover:text-white background-transparent font-bold uppercase px-6 py-2 text-sm outline hover:bg-red-500 rounded-md focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+            {{'Admin.Users.Close' | translate}}
+        </button>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div *ngIf="confirm" class="opacity-25 fixed inset-0 z-40 bg-black"></div>

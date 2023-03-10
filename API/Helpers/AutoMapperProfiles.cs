@@ -14,6 +14,9 @@ public class AutoMapperProfiles : Profile
         CreateMap<AppUser, MemberDto>()
             .ForMember(user => user.GraphChart, opt => opt.MapFrom(src => GetSolutions(src.Solutions, src.UserName)))
             .ForMember(user => user.isModerator, opt => opt.MapFrom(src => src.UserRoles.Count(ur => ur.Role.Name == "Moderator") != 0));
+        CreateMap<AppUser, SearchedMemberDto>()
+            .ForMember(user => user.isModerator, opt => opt.MapFrom(src => src.UserRoles.Count(ur => ur.Role.Name == "Moderator") != 0))
+            .ForMember(user => user.isAdmin, opt => opt.MapFrom(src => src.UserRoles.Count(ur => ur.Role.Name == "Admin") != 0));
         CreateMap<NewTestDto, Test>();
         CreateMap<Test, TestDto>();
         CreateMap<NewTestGroupDto, TestGroup>();
