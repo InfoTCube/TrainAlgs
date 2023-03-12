@@ -21,7 +21,7 @@ export class AccountService {
       map((response: User) => {
         const user = response;
         if(user) {
-          this.setCurrentUser(user);
+          this.setCurrentUser(user, model.rememberMe);
           this.presenceService.createHubConnection(user);
         }
       })
@@ -32,22 +32,24 @@ export class AccountService {
     return this.http.post(this.baseUrl + 'account/register', model).pipe(
       map((user: User) => {
         if(user) {
-          this.setCurrentUser(user);
+          this.setCurrentUser(user, false);
           this.presenceService.createHubConnection(user);
         }
       })
     );
   }
 
-  setCurrentUser(user: User) {
+  setCurrentUser(user: User, rememberMe: boolean) {
     user.roles = [];
     const roles = this.getDecodedToken(user.token).role;
     Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
-    localStorage.setItem('user', JSON.stringify(user));
+    sessionStorage.setItem('user', JSON.stringify(user));
+    if(rememberMe) localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
   }
 
   logout() {
+    sessionStorage.removeItem('user');
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
     this.presenceService.stopHubConnection();

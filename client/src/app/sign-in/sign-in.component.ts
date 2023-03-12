@@ -23,7 +23,8 @@ export class SignInComponent implements OnInit {
   initializeForm() {
     this.signInForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(32), this.containsAllTypes()])
+      password: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(32), this.containsAllTypes()]),
+      rememberMe: new FormControl(false)
     });
   }
 
@@ -36,6 +37,7 @@ export class SignInComponent implements OnInit {
   login() {
     this.accountService.login(this.signInForm.value).subscribe(response => {
       this.router.navigateByUrl('/');
+      console.log(this.signInForm.getRawValue())
     }, error => {
       this.validationErrors = error;
     });

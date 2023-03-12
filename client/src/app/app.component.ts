@@ -21,9 +21,10 @@ export class AppComponent implements OnInit {
   }
 
   setCurrentUser() {
-    const user: User = JSON.parse(localStorage.getItem('user'));
+    var user: User = JSON.parse(sessionStorage.getItem('user'));
+    if(!user) user = JSON.parse(localStorage.getItem('user'));
     if(user) {
-      this.accountService.setCurrentUser(user);
+      this.accountService.setCurrentUser(user, false);
       this.presenceService.createHubConnection(user);
     }
   }
