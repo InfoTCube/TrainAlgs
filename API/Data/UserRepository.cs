@@ -17,6 +17,11 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
+    public void DeleteUser(AppUser user)
+    {
+        _context.Users.Remove(user);
+    }
+
     public async Task<MemberDto> GetMemberAsync(string username)
     {
         return await _context.Users

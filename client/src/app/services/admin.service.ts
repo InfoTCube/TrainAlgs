@@ -13,4 +13,8 @@ export class AdminService {
   assignModerator(username: string) {
     return this.http.put(this.baseUrl + 'admin/assignModerator/' + username, {});
   }
+
+  deleteUser(username: string) {
+    return this.http.delete(this.baseUrl + 'admin/deleteUser/' + username);
+  }
 }

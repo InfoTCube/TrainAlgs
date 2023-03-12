@@ -10,4 +10,5 @@ public interface IUserRepository
    Task<AppUser> GetUserByUsernameAsync(string username);
    Task<MemberDto> GetMemberAsync(string username);
    Task<PagedList<SearchedMemberDto>> SearchForMemberAsync(ElementParams elementParams, string searchText);
+   void DeleteUser(AppUser user);
 }

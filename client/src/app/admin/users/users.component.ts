@@ -21,7 +21,8 @@ export class UsersComponent implements OnInit {
   pagination: Pagination;
   currentUserUsername: string;
   searchText: string;
-  confirm: boolean;
+  moderatorConfirm: boolean;
+  deleteConfirm: boolean;
   currentUsername: string;
 
   constructor(private membersService: MembersService, private adminService: AdminService,
@@ -67,16 +68,22 @@ export class UsersComponent implements OnInit {
 
   grantModerator($event) {
     $event.stopPropagation();
-    this.adminService.assignModerator(this.currentUsername).subscribe(out => {
+    this.adminService.assignModerator(this.currentUsername).subscribe(() => {
       this.searchMembers(this.searchText);
-      this.toggleConfirm($event, "");
+      this.toggleModeratorConfirm($event, "");
     });
   }
 
-  toggleConfirm($event, username: string) {
+  toggleModeratorConfirm($event, username: string) {
     $event.stopPropagation();
     this.currentUsername = username;
-    this.confirm = !this.confirm;
+    this.moderatorConfirm = !this.moderatorConfirm;
+  }
+
+  toggleDeleteConfirm($event, username: string) {
+    $event.stopPropagation();
+    this.currentUsername = username;
+    this.deleteConfirm = !this.deleteConfirm;
   }
 
   searchMembers(textToSearch: string) {
@@ -84,5 +91,13 @@ export class UsersComponent implements OnInit {
       this.users = response.result;
       this.pagination = response.pagination;
     }, (err) => {});
+  }
+
+  deleteUser($event) {
+    $event.stopPropagation();
+    this.adminService.deleteUser(this.currentUsername).subscribe(() => {
+      this.toggleDeleteConfirm($event, "");
+      this.searchMembers(this.searchText);
+    });
   }
 }

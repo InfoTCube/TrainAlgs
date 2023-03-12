@@ -37,5 +37,20 @@ namespace API.Controllers
 
             return BadRequest("Failed to assign user as a moderator");
         }
+
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpDelete("deleteUser/{username}")]
+        public async Task<ActionResult> DeleteMember(string username)
+        {
+            AppUser user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+            if(user is null) return NotFound("This user doesn't exist!");
+            if((await _userManager.GetRolesAsync(user)).Any(role => role == "Admin")) return Unauthorized();
+
+            _unitOfWork.UserRepository.DeleteUser(user);
+
+            if (await _unitOfWork.Complete()) return Ok();
+
+            return BadRequest("Problem deleting the user");
+        }
     }
 }
