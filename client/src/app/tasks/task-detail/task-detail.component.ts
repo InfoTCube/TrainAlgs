@@ -52,9 +52,9 @@ export class TaskDetailComponent implements OnInit {
     model.language = this.submitSolutionForm.get("language").value;
     model.algTaskTag = this.task.nameTag;
     delete model.file
-    this.solutionsService.addSolution(model).subscribe(() => {
-      this.router.navigateByUrl(`/solutions`);
-    });
+    const solutionSubscription = this.solutionsService.addSolution(model).subscribe(() => {});
+    solutionSubscription.unsubscribe();
+    this.router.navigateByUrl(`/solutions`);
   }
 
   replaceInlineCode(md: string) : string {
