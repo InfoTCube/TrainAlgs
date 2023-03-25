@@ -1,11 +1,17 @@
-<div *ngIf="member" class="max-w-sm w-full lg:w-full lg:flex m-8">
-    <div class="border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-800 rounded p-10 flex flex-col justify-between leading-normal">
+<div *ngIf="member" class="mt-8 w-full lg:w-full lg:flex">
+    <div class="float-left border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-800 rounded mr-8 ml-8 p-10 flex flex-col justify-between leading-normal">
       <div>
         <div class="text-gray-900 dark:text-white font-bold text-5xl mb-2">
           {{member.username}}
           <svg *ngIf="member.isModerator == true" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 svg-icon" fill="none" viewBox="0 0 22 22" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
           </svg>
+
+          <button *ngIf="currentUserUsername == member.username" (click)="switchProfileEditing()" class="float-right">
+            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+            </svg>
+          </button>
         </div>
         <p class="text base text-gray-900 dark:text-white">{{ "Members.MemberDetail.Description" | translate }}: {{member.description}}</p>
         <p class="text-gray-900 dark:text-white text-base">{{ "Members.MemberDetail.Country" | translate }}: {{member.country}}</p>
@@ -84,6 +90,36 @@
         </div>
       </div>
     </div>
+
+    <div *ngIf="profileEditing" class="mr-8 border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-800 rounded p-10 w-full">
+      <div class="text-gray-900 dark:text-white font-bold text-5xl mb-2">
+        Edit profile:
+      </div>
+      <form [formGroup]="editProfileForm" class="mt-8 space-y-6" (ngSubmit)="editProfile()">
+        <p class="text base text-gray-900 dark:text-white">{{ "Members.MemberDetail.Description" | translate }}:</p>
+        <textarea formControlName="description" required type="text" maxlength="500" rows="5" name="description" id="description" class="mb-4 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-blue-500 focus:border-blue-700 focus:z-10 sm:text-sm"></textarea>
+
+        <p class="text-gray-900 dark:text-white text-base">{{ "Members.MemberDetail.Country" | translate }}:</p>
+        <select class="form-control" formControlName="country" required name="country" id="country" class="text-xs w-64 h-10 bg-gray-50 disabled:bg-gray-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1 dark:disabled:bg-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option value="" disabled selected>Select Country</option>
+          <option *ngFor="let country of countries" [value]="country.name">{{country.name}}</option>
+        </select>
+
+        <div class="m-1 text-red-600 text-sm">
+          <ol class="list-disc">
+            <div *ngIf="validationErrors.length > 0">
+              <li *ngFor="let error of validationErrors">
+                {{error}}
+              </li>
+            </div>
+          </ol>
+        </div>
+
+        <button [disabled]="!editProfileForm.valid" type="submit" class="group flex justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800">
+          {{ "Members.MemberDetail.UpdateProfile" | translate }}
+        </button>
+      </form>
+    </div>    
 </div>
 
 <div *ngIf="!member" class="flex justify-center">

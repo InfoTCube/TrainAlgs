@@ -1,5 +1,6 @@
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
@@ -9,8 +10,10 @@ namespace API.Controllers;
 public class UsersController : BaseApiController
 {
     private readonly IUnitOfWork _unitOfWork;
-    public UsersController(IUnitOfWork unitOfWork)
+    private readonly IMapper _mapper;
+    public UsersController(IUnitOfWork unitOfWork, IMapper mapper)
     {
+        _mapper = mapper;
         _unitOfWork = unitOfWork;
     }
 
@@ -18,6 +21,20 @@ public class UsersController : BaseApiController
     public async Task<ActionResult<MemberDto>> GetUser(string username)
     {
         return Ok(await _unitOfWork.UserRepository.GetMemberAsync(username));
+    }
+
+    [HttpPut]
+    public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+    {
+        var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+
+        _mapper.Map(memberUpdateDto, user);
+
+        _unitOfWork.UserRepository.Update(user);
+
+        if (await _unitOfWork.Complete()) return NoContent();
+
+        return BadRequest("Failed to update user");
     }
 
     [HttpGet("search/{searchText}")]

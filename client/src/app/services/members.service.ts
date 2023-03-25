@@ -34,6 +34,10 @@ export class MembersService {
     return this.http.get<Member>(this.baseUrl + 'users/' + username);
   }
 
+  updateMember(model: any) {
+    return this.http.put(this.baseUrl + 'users', model);
+  }
+
   searchMembers(listingParams: ListingParams, searchText: string) {
     let params = getPaginationHeaders(listingParams.pageNumber, listingParams.pageSize)
 

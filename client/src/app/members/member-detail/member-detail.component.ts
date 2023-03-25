@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { colorSets } from '@swimlane/ngx-charts';
 import * as moment from 'moment';
 import { Member } from 'src/app/models/member';
 import { AccountService } from 'src/app/services/account.service';
 import { MembersService } from 'src/app/services/members.service';
 import { PresenceService } from 'src/app/services/presence.service';
+import { countries } from './country-data-store';
 import { theme } from './theme';
 
 const monthName = new Intl.DateTimeFormat("en-us", { month: "short" });
@@ -24,13 +26,24 @@ export class MemberDetailComponent implements OnInit {
   heatmapMin: number = 0;
   heatmapMax: number = 10;
   years: string[] = [];
+  countries: any = countries
+  profileEditing: boolean = false;
+  editProfileForm: FormGroup;
+  validationErrors: string[] = [];
 
   constructor(private membersService: MembersService, private route: ActivatedRoute,
-      private accountService: AccountService, public presenceService: PresenceService) { }
+      private accountService: AccountService, public presenceService: PresenceService, private router: Router) { }
 
   ngOnInit() {
     this.loadMember();
     this.colorScheme = theme;
+  }
+
+  initializeForm() {
+    this.editProfileForm = new FormGroup({
+      description: new FormControl(this.member.description, [Validators.required, Validators.maxLength(500)]),
+      country: new FormControl(this.member.country, Validators.required),
+    });
   }
 
   loadMember() {
@@ -42,8 +55,17 @@ export class MemberDetailComponent implements OnInit {
       this.member = member;
       this.getCalendarData(null);
       this.getYears();
-      console.log(member);
     })
+  }
+
+  editProfile() {
+    this.membersService.updateMember(this.editProfileForm.value).subscribe(response => {
+      this.router.navigateByUrl('/',{skipLocationChange:true}).then(()=>{
+        this.router.navigateByUrl(`/members/${this.member.username}`);
+      });
+    }, error => {
+      this.validationErrors = error;
+    });
   }
 
   calendarAxisTickFormatting(mondayString: string) {
@@ -169,4 +191,8 @@ export class MemberDetailComponent implements OnInit {
       .filter((v, i, a) => a.indexOf(v) === i)
   }
 
+  switchProfileEditing() {
+    this.profileEditing = !this.profileEditing;
+    if(this.profileEditing) this.initializeForm();
+  }
 }

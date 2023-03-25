@@ -57,6 +57,7 @@ public class AutoMapperProfiles : Profile
                 src.Author.UserName))
             .ForMember(solution => solution.AlgTaskTag, opt => opt.MapFrom(src => 
                 src.Task.NameTag));
+        CreateMap<MemberUpdateDto, AppUser>();
     }
 
     private static short CalculateAverageResult(IEnumerable<Solution> solutions)

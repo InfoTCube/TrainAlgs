@@ -15,7 +15,8 @@
       "InRowLastYear": "in a row max for the last year",
       "InRowLastMonth": "in a row max for the last month",
       "OnlineNow": "Online now",
-      "ThisMemberDoesntExists": "This member doesn't exist"
+      "ThisMemberDoesntExists": "This member doesn't exist",
+      "UpdateProfile": "Update profile"
     }
   },
   "Menu": {
