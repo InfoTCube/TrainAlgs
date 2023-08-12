@@ -1,5 +1,7 @@
 # TrainAlgs
 
+**Deprecated** This project is no longer maintained by It's creator.
+
 ## General Info
 **TrainAlgs** is website with coding problems. It is distinguished by its appearance and functionality. In the future, the site will support multiple programming languages, contests, detailed user statistics, friends system, algorithm wiki, blog, forum, rankings and so on!
 
