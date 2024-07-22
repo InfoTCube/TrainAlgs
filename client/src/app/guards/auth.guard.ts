@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
+
 import { map, Observable } from 'rxjs';
 import { AccountService } from '../services/account.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard  {
   constructor(private accountService: AccountService) {}
 
   canActivate(): Observable<boolean> {
