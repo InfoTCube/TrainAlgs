@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlgTask } from 'src/app/models/task';
 import { AccountService } from 'src/app/services/account.service';
@@ -15,8 +15,8 @@ export class TaskDetailComponent implements OnInit {
   task: AlgTask;
   markdown = '';
   tab='statement';
-  addSolutionForm: FormGroup;
-  submitSolutionForm: FormGroup;
+  addSolutionForm: UntypedFormGroup;
+  submitSolutionForm: UntypedFormGroup;
   validationErrors: string[] = [];
   fileContent: string = "";
   lang: string = 'cpp';
@@ -75,10 +75,10 @@ export class TaskDetailComponent implements OnInit {
   }
 
   initializeForm() {
-    this.submitSolutionForm = new FormGroup({
-      file: new FormControl(''),
-      code: new FormControl('', Validators.required),
-      language: new FormControl(''),
+    this.submitSolutionForm = new UntypedFormGroup({
+      file: new UntypedFormControl(''),
+      code: new UntypedFormControl('', Validators.required),
+      language: new UntypedFormControl(''),
     });
     this.submitSolutionForm.get("language").setValue("C++");
     this.submitSolutionForm.get("file").valueChanges.subscribe(filename => {

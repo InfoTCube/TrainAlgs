@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
 
@@ -9,7 +9,7 @@ import { AccountService } from '../services/account.service';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
-  signUpForm: FormGroup;
+  signUpForm: UntypedFormGroup;
   validationErrors: string[] = [];
 
   constructor(private accountService: AccountService, private router: Router) { }
@@ -19,13 +19,13 @@ export class SignUpComponent implements OnInit {
   }
 
   initializeForm() {
-    this.signUpForm = new FormGroup({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      username: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(32), this.containsAllTypes()]),
-      confirmPassword: new FormControl('', [Validators.required, this.matchValues('password')])
+    this.signUpForm = new UntypedFormGroup({
+      firstName: new UntypedFormControl('', Validators.required),
+      lastName: new UntypedFormControl('', Validators.required),
+      email: new UntypedFormControl('', [Validators.required, Validators.email]),
+      username: new UntypedFormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]),
+      password: new UntypedFormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(32), this.containsAllTypes()]),
+      confirmPassword: new UntypedFormControl('', [Validators.required, this.matchValues('password')])
     });
     this.signUpForm.controls.password.valueChanges.subscribe(() => {
       this.signUpForm.controls.confirmPassword.updateValueAndValidity();

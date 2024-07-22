@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
@@ -11,7 +11,7 @@ import { AccountService } from '../services/account.service';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-  signInForm: FormGroup;
+  signInForm: UntypedFormGroup;
   validationErrors: string[] = [];
 
   constructor(private accountService: AccountService, private router: Router) { }
@@ -21,10 +21,10 @@ export class SignInComponent implements OnInit {
   }
 
   initializeForm() {
-    this.signInForm = new FormGroup({
-      username: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(32), this.containsAllTypes()]),
-      rememberMe: new FormControl(false)
+    this.signInForm = new UntypedFormGroup({
+      username: new UntypedFormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]),
+      password: new UntypedFormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(32), this.containsAllTypes()]),
+      rememberMe: new UntypedFormControl(false)
     });
   }
 

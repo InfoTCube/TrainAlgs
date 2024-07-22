@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TestGroup } from 'src/app/models/testGroup';
 import { CodeEditorComponent } from 'src/app/modules/code-editor/code-editor.component';
@@ -14,7 +14,7 @@ export class TaskAddingComponent implements OnInit {
   @ViewChild('codeEditor') codeEditor: CodeEditorComponent;
   content: string = "";
   markdown: string = "";
-  addTaskForm: FormGroup;
+  addTaskForm: UntypedFormGroup;
   validationErrors: string[] = [];
   tab='editor';
   testGroups: TestGroup[] = [];
@@ -67,10 +67,10 @@ export class TaskAddingComponent implements OnInit {
   }
 
   initializeForm() {
-    this.addTaskForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      timeLimit: new FormControl('', Validators.required),
-      memoryLimit: new FormControl('', Validators.required),
+    this.addTaskForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', Validators.required),
+      timeLimit: new UntypedFormControl('', Validators.required),
+      memoryLimit: new UntypedFormControl('', Validators.required),
     });
 
     this.testGroups.push({number: 0, points: 0, tests: [{number: 1, input: "", output: ""}]});

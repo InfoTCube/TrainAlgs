@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { colorSets } from '@swimlane/ngx-charts';
 import * as moment from 'moment';
@@ -28,7 +28,7 @@ export class MemberDetailComponent implements OnInit {
   years: string[] = [];
   countries: any = countries
   profileEditing: boolean = false;
-  editProfileForm: FormGroup;
+  editProfileForm: UntypedFormGroup;
   validationErrors: string[] = [];
 
   constructor(private membersService: MembersService, private route: ActivatedRoute,
@@ -40,9 +40,9 @@ export class MemberDetailComponent implements OnInit {
   }
 
   initializeForm() {
-    this.editProfileForm = new FormGroup({
-      description: new FormControl(this.member.description, [Validators.required, Validators.maxLength(500)]),
-      country: new FormControl(this.member.country, Validators.required),
+    this.editProfileForm = new UntypedFormGroup({
+      description: new UntypedFormControl(this.member.description, [Validators.required, Validators.maxLength(500)]),
+      country: new UntypedFormControl(this.member.country, Validators.required),
     });
   }
 
