@@ -113,7 +113,7 @@ public class CppService : ICppService
             System.Console.WriteLine(e.Message);
         }
 
-        File.Delete(path); File.Delete($"{path}.cpp"); // clean trash
+        File.Delete(path); File.Delete($"{path}.cpp"); File.Delete($"{path}.exe"); // clean trash
 
         solution.Points = solution.TestGroups.Sum(x => x.Points);
         solution.Status = "Preliminary checking: ";
