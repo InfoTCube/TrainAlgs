@@ -7,7 +7,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { HttpClient, HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
@@ -38,8 +38,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LangDropdownComponent } from "./modules/lang-dropdown/lang-dropdown.component";
 import { UsersComponent } from './admin/users/users.component';
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         AppComponent,
         NavComponent,
         SignInComponent,
@@ -63,18 +62,10 @@ import { UsersComponent } from './admin/users/users.component';
         TaskAddingComponent,
         UsersComponent
     ],
-    providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
-    ],
-    bootstrap: [AppComponent],
-    imports: [
-        BrowserModule,
+    bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpClientModule,
         NgxSpinnerModule,
         NgxPaginationModule,
         BrowserAnimationsModule,
@@ -89,9 +80,12 @@ import { UsersComponent } from './admin/users/users.component';
                 deps: [HttpClient]
             },
             defaultLanguage: 'en'
-        }),
-    ]
-})
+        })], providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {}
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
