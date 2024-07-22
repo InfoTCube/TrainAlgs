@@ -28,7 +28,7 @@
     "flag-icons": "^6.6.6",
     "karma-brave-launcher": "^1.0.0",
     "moment": "^2.29.4",
-    "ngx-markdown": "^13.1.0",
+    "ngx-markdown": "^18.0.0",
     "ngx-pagination": "^6.0.2",
     "ngx-spinner": "^13.1.1",
     "ngx-timeago": "^2.0.0",
@@ -38,8 +38,8 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^13.3.9",
-    "@angular/cli": "~13.2.3",
+    "@angular-devkit/build-angular": "^18.1.1",
+    "@angular/cli": "^18.1.1",
     "@angular/compiler-cli": "~13.2.0",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
