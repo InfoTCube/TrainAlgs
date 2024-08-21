@@ -118,7 +118,7 @@ export class MemberDetailComponent implements OnInit {
           }
 
           // value
-          const solutions = this.member.graphChart.solutions.find(s => Object.values(s)[0] === moment(date).format('DD/MM/yyyy'));
+          const solutions = this.member.graphChart.solutions.find(s => Object.values(s)[0] == moment(date).format('DD.MM.yyyy'))
 
           const value = solutions != undefined ? Object.values(solutions)[1] : 0;
 
@@ -164,7 +164,7 @@ export class MemberDetailComponent implements OnInit {
           continue;
         }
 
-        const solutions = this.member.graphChart.solutions.find(s => Object.values(s)[0] === moment(date).format('DD/MM/yyyy'));
+        const solutions = this.member.graphChart.solutions.find(s => Object.values(s)[0] === moment(date).format('DD.MM.yyyy'));
         const value = solutions != undefined ? Object.values(solutions)[1] : 0;
         maxValue = value > maxValue ? value : maxValue;
 
@@ -187,8 +187,8 @@ export class MemberDetailComponent implements OnInit {
 
   getYears() {
     this.years = this.member.graphChart.solutions
-      .map(s => Object.values(s)[0] = Object.values(s)[0].split("/").pop())
-      .filter((v, i, a) => a.indexOf(v) === i)
+      .map(s => Object.values(s)[0] = Object.values(s)[0].slice(-4)) //get year from each solution
+      .filter((v, i, a) => a.indexOf(v) === i); //filter out a duplicates
   }
 
   switchProfileEditing() {
