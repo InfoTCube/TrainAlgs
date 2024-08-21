@@ -37,9 +37,7 @@ export class SignInComponent implements OnInit {
   login() {
     this.accountService.login(this.signInForm.value).subscribe({
       next: (response) => {
-        console.log(response);
-        //this.router.navigateByUrl('/');
-        console.log(this.signInForm.getRawValue())
+        this.router.navigate(['/']);
       }, error: (error: string) => {
         this.router.navigateByUrl('/sign_in');
         this.signInForm.reset();
