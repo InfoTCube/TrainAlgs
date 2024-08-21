@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="(accountService.currentUser$ | async) !== null">
   <div class="inline-flex rounded-md shadow-sm float-left mx-5 mb-3" role="group">
     <button (click)="filterByProgress('Default')" type="button" class="py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-l-lg border border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
       {{ "Tasks.Tasks.All" | translate }}
@@ -14,7 +14,7 @@
     </button>
   </div>
 
-  <button *ngIf="(accountService.currentUser$ | async) !== null" routerLink="/tasks/add-task" class="group flex justify-center m-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800">
+  <button routerLink="/tasks/add-task" class="group flex justify-center m-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800">
     <span class="left-0 inset-y-0 flex items-center pr-2">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />

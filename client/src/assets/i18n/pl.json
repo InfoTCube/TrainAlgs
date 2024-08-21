@@ -125,7 +125,9 @@
     "Username": "Nazwa użytkownika",
     "Password": "Hasło",
     "DontHaveAccount": "Nie masz jeszcze konta?",
-    "SignUpNow": "Zarejestruj się już teraz"
+    "SignUpNow": "Zarejestruj się już teraz",
+    "ProvideUsername": "Wprowadź prawidłową nazwę użytkownika",
+    "ProvideValidPassword": "Wprowadź prawidłowe hasło"
   },
   "SignUp": {
     "CreateNewAccount": "Utwórz nowe konto",

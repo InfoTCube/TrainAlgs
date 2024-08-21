@@ -125,7 +125,9 @@
     "Username": "Username",
     "Password": "Password",
     "DontHaveAccount": "Don't have an account yet?",
-    "SignUpNow": "Sign up now"
+    "SignUpNow": "Sign up now",
+    "ProvideUsername": "Please provide a username",
+    "ProvideValidPassword": "Please provide a valid password"
   },
   "SignUp": {
     "CreateNewAccount": "Create a new account",

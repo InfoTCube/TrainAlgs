@@ -20,10 +20,10 @@
         <div class="m-1 text-red-600 text-sm">
           <ol class="list-disc">
             <li *ngIf="signInForm.get('username').invalid && (signInForm.get('username').dirty || signInForm.get('username').touched)">
-              Please provide a username.
+              {{'SignIn.ProvideUsername' | translate}}
             </li>
             <li *ngIf="signInForm.get('password').invalid && (signInForm.get('password').dirty || signInForm.get('password').touched)">
-              Please provide a correct password.
+              {{'SignIn.ProvideValidPassword' | translate}}
             </li>
             <div *ngIf="validationErrors.length > 0">
               <li *ngFor="let error of validationErrors">

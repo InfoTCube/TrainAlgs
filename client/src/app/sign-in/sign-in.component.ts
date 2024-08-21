@@ -30,16 +30,22 @@ export class SignInComponent implements OnInit {
 
   containsAllTypes(): ValidatorFn {
     return (control: AbstractControl) => {
-      return control?.value.match(/^(?=.*\d)(?=.*[@$!%*#?&])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{7,32}$/) ? null : {containsAllTypes: true};
+      return control?.value?.match(/^(?=.*\d)(?=.*[@$!%*#?&])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{7,32}$/) ? null : {containsAllTypes: true};
     }
   }
 
   login() {
-    this.accountService.login(this.signInForm.value).subscribe(response => {
-      this.router.navigateByUrl('/');
-      console.log(this.signInForm.getRawValue())
-    }, error => {
-      this.validationErrors = error;
+    this.accountService.login(this.signInForm.value).subscribe({
+      next: (response) => {
+        console.log(response);
+        //this.router.navigateByUrl('/');
+        console.log(this.signInForm.getRawValue())
+      }, error: (error: string) => {
+        this.router.navigateByUrl('/sign_in');
+        this.signInForm.reset();
+        if(error == '401') error = 'Username or password incorrect';
+        this.validationErrors = [error];
+      }
     });
   }
 }
