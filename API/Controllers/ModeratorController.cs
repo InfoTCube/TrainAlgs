@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
+
+[Authorize(Policy = "RequireModeratorRole")]
 public class ModeratorController : BaseApiController
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -22,7 +24,6 @@ public class ModeratorController : BaseApiController
         _unitOfWork = unitOfWork;
     }
 
-    [Authorize(Policy = "RequireModeratorRole")]
     [HttpGet("verifyTasks")]
     public async Task<ActionResult<IEnumerable<ListedTaskDto>>> GetTasksToVerify([FromQuery] ElementParams elementParams)
     {
@@ -34,7 +35,17 @@ public class ModeratorController : BaseApiController
         return Ok(tasks);
     }
 
-    [Authorize(Policy = "RequireModeratorRole")]
+    [HttpGet("verifyCompetitions")]
+    public async Task<ActionResult<IEnumerable<ListedTaskDto>>> GetCompetitionsToVerify([FromQuery] ElementParams elementParams)
+    {
+        var comps = await _unitOfWork.CompetitionRepository.GetCompetitionsToVerifyAsync(elementParams);
+
+        Response.AddPaginationHeader(comps.CurrentPage, comps.PageSize,
+            comps.TotalCount, comps.TotalPages);
+
+        return Ok(comps);
+    }
+
     [HttpGet("verifyTasks/{nameTag}")]
     public async Task<ActionResult<TaskDto>> GetTaskToVerify(string nameTag)
     {
@@ -42,7 +53,13 @@ public class ModeratorController : BaseApiController
         return _mapper.Map<TaskDto>(task);
     }
 
-    [Authorize(Policy = "RequireModeratorRole")]
+    [HttpGet("verifyCompetitions/{id}")]
+    public async Task<ActionResult<CompetitionDto>> GetCompetitionToVerify(int id)
+    {
+        var comp = await _unitOfWork.CompetitionRepository.GetCompetitionToVerifyByIdAsync(id);
+        return _mapper.Map<CompetitionDto>(comp);
+    }
+
     [HttpPut("verifyTasks/{nameTag}")]
     public async Task<ActionResult> VerifyTask(string nameTag)
     {
@@ -55,6 +72,21 @@ public class ModeratorController : BaseApiController
 
         if (await _unitOfWork.Complete()) return NoContent();
 
-        return BadRequest("Failed to update user");
+        return BadRequest("Failed to verify task");
+    }
+
+    [HttpPut("verifyCompetitions/{id}")]
+    public async Task<ActionResult> VerifyCompetition(int id)
+    {
+        Competition comp = await _unitOfWork.CompetitionRepository.GetCompetitionToVerifyByIdAsync(id);
+        if(comp is null) return NotFound("Competition with this name tag does not exist");
+        if(comp.Verified == true) return BadRequest("Competition is already verified");
+
+        comp.Verified = true;
+        _unitOfWork.CompetitionRepository.Update(comp);
+
+        if (await _unitOfWork.Complete()) return NoContent();
+
+        return BadRequest("Failed to verify competition");
     }
 }

@@ -58,6 +58,11 @@ public class AutoMapperProfiles : Profile
             .ForMember(solution => solution.AlgTaskTag, opt => opt.MapFrom(src => 
                 src.Task.NameTag));
         CreateMap<MemberUpdateDto, AppUser>();
+        CreateMap<NewCompetitionDto, Competition>();
+        CreateMap<Competition, CompetitionDto>()
+            .ForMember(comp => comp.OrganizerUsername, opt => opt.MapFrom(src => 
+                src.Organizer.UserName));
+        CreateMap<Competition, ListedCompetitionDto>();
     }
 
     private static short CalculateAverageResult(IEnumerable<Solution> solutions)

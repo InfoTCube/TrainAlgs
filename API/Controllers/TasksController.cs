@@ -95,12 +95,12 @@ public class TasksController : BaseApiController
 
     private async Task<bool> TaskExists(string nameTag)
     {
-        return (await _unitOfWork.TaskRepository.GetTaskByNameTagAsync(nameTag) is not null);
+        return await _unitOfWork.TaskRepository.GetTaskByNameTagAsync(nameTag) is not null;
     }
 
     private async Task<bool> AlreadyRatedTask(AppUser user, AlgTask task)
     {
-        return (await _unitOfWork.TaskRepository.GetRatingByTaskAndUser(user, task) is not null);
+        return await _unitOfWork.TaskRepository.GetRatingByTaskAndUser(user, task) is not null;
     }
 
     private async Task<string> GenerateNametag(string name)

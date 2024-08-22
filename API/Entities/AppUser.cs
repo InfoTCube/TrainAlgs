@@ -12,4 +12,6 @@ public class AppUser : IdentityUser<int>
     public string? Description { get; set; }
     public ICollection<AlgTask>? Tasks { get; set; }
     public ICollection<Solution>? Solutions { get; set; }
+    public ICollection<Competition>? CompetitionsOrganized { get; set; }
+    public ICollection<AppUserCompetition>? CompetitionsParticipated { get; set; }
 }

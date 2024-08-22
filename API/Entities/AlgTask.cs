@@ -16,4 +16,5 @@ public class AlgTask
     public ICollection<Rating>? Ratings { get; set; }
     public ICollection<TestGroup>? TestGroups { get; set; }
     public ICollection<Solution>? Solutions { get; set; }
+    public Competition? Competition { get; set; }
 }

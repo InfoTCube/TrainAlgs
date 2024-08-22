@@ -18,6 +18,7 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, int, IdentityUser
     public DbSet<AlgTask> Tasks { get; set; }
     public DbSet<Solution> Solutions { get; set; }
     public DbSet<Rating> Ratings { get; set; }
+    public DbSet<Competition> Competitions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -34,5 +35,16 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, int, IdentityUser
             .WithOne(u => u.Role)
             .HasForeignKey(ur => ur.RoleId)
             .IsRequired();
+
+        builder.Entity<AppUserCompetition>()
+            .HasKey(uc => new { uc.AppUserId, uc.CompetitionId });  
+        builder.Entity<AppUserCompetition>()
+            .HasOne(uc => uc.User)
+            .WithMany(au => au.CompetitionsParticipated)
+            .HasForeignKey(uc => uc.AppUserId);  
+        builder.Entity<AppUserCompetition>()
+            .HasOne(uc => uc.Competition)
+            .WithMany(c => c.Participants)
+            .HasForeignKey(uc => uc.CompetitionId);
     }
 }

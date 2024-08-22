@@ -18,6 +18,8 @@ public class UnitOfWork : IUnitOfWork
 
     public ISolutionRepository SolutionRepository => new SolutionRepository(_context, _mapper);
 
+    public ICompetitionRepository CompetitionRepository => new CompetitionRepository(_context, _mapper);
+
     public async Task<bool> Complete()
     {
         return await _context.SaveChangesAsync() > 0;

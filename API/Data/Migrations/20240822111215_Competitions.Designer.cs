@@ -3,6 +3,7 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240822111215_Competitions")]
+    partial class Competitions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.3");
@@ -92,6 +94,9 @@ namespace API.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("CompetitionId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
@@ -156,6 +161,8 @@ namespace API.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompetitionId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -211,9 +218,6 @@ namespace API.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("OrganizerId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("TEXT");
 
@@ -224,8 +228,6 @@ namespace API.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrganizerId");
 
                     b.ToTable("Competitions");
                 });
@@ -491,10 +493,17 @@ namespace API.Data.Migrations
                     b.Navigation("Competition");
                 });
 
+            modelBuilder.Entity("API.Entities.AppUser", b =>
+                {
+                    b.HasOne("API.Entities.Competition", null)
+                        .WithMany("Organizers")
+                        .HasForeignKey("CompetitionId");
+                });
+
             modelBuilder.Entity("API.Entities.AppUserCompetition", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "User")
-                        .WithMany("CompetitionsParticipated")
+                        .WithMany("Competitions")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -527,17 +536,6 @@ namespace API.Data.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("API.Entities.Competition", b =>
-                {
-                    b.HasOne("API.Entities.AppUser", "Organizer")
-                        .WithMany("CompetitionsOrganized")
-                        .HasForeignKey("OrganizerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Organizer");
                 });
 
             modelBuilder.Entity("API.Entities.Rating", b =>
@@ -674,9 +672,7 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
-                    b.Navigation("CompetitionsOrganized");
-
-                    b.Navigation("CompetitionsParticipated");
+                    b.Navigation("Competitions");
 
                     b.Navigation("Solutions");
 
@@ -687,6 +683,8 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.Competition", b =>
                 {
+                    b.Navigation("Organizers");
+
                     b.Navigation("Participants");
 
                     b.Navigation("Tasks");
