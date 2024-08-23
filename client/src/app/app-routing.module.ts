@@ -18,10 +18,12 @@ import { SolutionsComponent } from './solutions/solutions/solutions.component';
 import { TaskAddingComponent } from './tasks/task-adding/task-adding.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TasksComponent } from './tasks/tasks/tasks.component';
+import { CompetitionsComponent } from './competitions/competitions/competitions.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'tasks', component: TasksComponent},
+  {path: 'competitions', component: CompetitionsComponent},
   {path: 'tasks/:nameTag/statement', component: TaskDetailComponent},
   {path: 'tasks/add-task', component: TaskAddingComponent},
   {path: 'not-found', component: NotFoundComponent},

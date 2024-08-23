@@ -1,0 +1,11 @@
+.activeStatus {
+    animation-name: glow;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes glow {
+    0%   {background-color: rgb(37 99 235);}
+    50%  {background-color: rgb(147 197 253);}
+    100%  {background-color: rgb(37 99 235);}
+}

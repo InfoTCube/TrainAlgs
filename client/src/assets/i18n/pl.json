@@ -22,6 +22,7 @@
   "Menu": {
     "Home": "Strona główna",
     "Tasks": "Zadania",
+    "Competitions": "Konkursy",
     "Solutions": "Rozwiązania",
     "Moderate": "Zarządzaj",
     "Admin": "Admin",
@@ -115,6 +116,18 @@
       "PleaseProvideCode": "Proszę napisać kod",
       "Code": "Kod",
       "Close": "Zamknij"
+    }
+  },
+  "Competitions": {
+    "Competitions": {
+      "CreateYourOwnCompetition": "Stwórz swój własny konkurs",
+      "NoCompetitionsToDisplay": "Brak konkursów do wyświetlenia",
+      "Id": "ID",
+      "Name": "Nazwa",
+      "Status": "Status",
+      "Active": "Aktywny",
+      "Past": "Odbyty",
+      "Future": "Przyszły"
     }
   },
   "SignIn": {

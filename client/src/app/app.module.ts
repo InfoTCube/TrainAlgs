@@ -37,6 +37,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LangDropdownComponent } from "./modules/lang-dropdown/lang-dropdown.component";
 import { UsersComponent } from './admin/users/users.component';
+import { CompetitionsComponent } from './competitions/competitions/competitions.component';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -60,6 +61,7 @@ import { UsersComponent } from './admin/users/users.component';
         VerifyTasksComponent,
         VerifyTaskDetailComponent,
         TaskAddingComponent,
+        CompetitionsComponent,
         UsersComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,

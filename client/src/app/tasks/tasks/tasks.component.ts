@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { delay, Observable } from 'rxjs';
 import { PaginatedResult, Pagination } from 'src/app/models/pagination';
 import { ListedTask } from 'src/app/models/listedTask';
 import { TasksService } from 'src/app/services/tasks.service';

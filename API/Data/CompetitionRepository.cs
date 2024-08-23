@@ -47,6 +47,7 @@ public class CompetitionRepository : ICompetitionRepository
     {
         var query = _context.Competitions
             .Where(comp => comp.Verified == true)
+            .OrderByDescending(comp => comp.EndDate)
             .ProjectTo<ListedCompetitionDto>(_mapper.ConfigurationProvider);
 
         return await PagedList<ListedCompetitionDto>.CreateAsync(query, compParams.PageNumber, compParams.PageSize);

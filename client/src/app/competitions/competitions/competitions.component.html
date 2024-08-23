@@ -1,0 +1,62 @@
+<div *ngIf="(accountService.currentUser$ | async) !== null">
+    <button routerLink="/tasks/create-competition" class="group flex justify-center m-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800">
+        <span class="left-0 inset-y-0 flex items-center pr-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+        </span>
+        {{ "Competitions.Competitions.CreateYourOwnCompetition" | translate }}!
+    </button>
+</div>
+  
+  <div *ngIf="comps && comps.length > 0" class="w-full content-center flex items-center justify-center pb-4">
+    <div class="w-10/12 relative overflow-x-auto shadow-md rounded-lg">
+      <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
+          <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-300 text-center">
+              <tr>
+                  <th scope="col" class="px-6 py-3">
+                      {{ "Competitions.Competitions.Id" | translate }}
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      {{ "Competitions.Competitions.Name" | translate }}
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      {{ "Competitions.Competitions.Status" | translate }}
+                  </th>
+              </tr>
+          </thead>
+          <tbody *ngIf="pagination">
+              <tr (click)="compPage(comp.id)" *ngFor="let comp of comps | paginate: {id: 'competitions', itemsPerPage: pagination.itemsPerPage, currentPage: pagination.currentPage, totalItems: pagination.totalItems}"
+                class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer text-center">
+                  <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                      {{comp.id}}
+                  </th>
+                  <td class="px-6 py-4">
+                      {{comp.name}}
+                  </td>
+                  <td class="px-6 py-4">
+                      <div *ngIf="statusCheck(comp.startDate, comp.endDate) == 1" class="text-white badge rounded-lg p-2 bg-blue-600 activeStatus">
+                        {{ "Competitions.Competitions.Active" | translate }}
+                      </div>
+                      <div *ngIf="statusCheck(comp.startDate, comp.endDate) == 2" class="text-white badge rounded-lg p-2 bg-gray-600">
+                        {{ "Competitions.Competitions.Past" | translate }}
+                      </div>
+                      <div *ngIf="statusCheck(comp.startDate, comp.endDate) == 3" class="text-white badge rounded-lg p-2 bg-green-600">
+                        {{ "Competitions.Competitions.Future" | translate }}
+                      </div>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div *ngIf="comps && comps.length == 0" class="text-center text-gray-900 dark:text-white">
+    {{ "Competitions.Competitions.NoCompetitionsToDisplay" | translate }}...
+  </div>
+  
+  <pagination-controls class="text-center styled-pagination dark:styled-pagination-dark" id="competitions" (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="10"
+    directionLinks="true" autoHide="true" responsive="true" previousLabel="{{'Pagination.Previous' | translate}}" nextLabel="{{'Pagination.Next' | translate}}" screenReaderPaginationLabel="Pagination"
+    screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+  </pagination-controls>
+  

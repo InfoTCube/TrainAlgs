@@ -22,6 +22,7 @@
   "Menu": {
     "Home": "Home",
     "Tasks": "Tasks",
+    "Competitions": "Competitions",
     "Solutions": "Solutions",
     "Moderate": "Moderate",
     "Admin": "Admin",
@@ -115,6 +116,18 @@
       "FinalTestingReport": "Final testing report",
       "Code": "Code",
       "Close": "Close"
+    }
+  },
+  "Competitions": {
+    "Competitions": {
+      "CreateYourOwnCompetition": "Create your own competition",
+      "NoCompetitionsToDisplay": "No competitions to dispaly",
+      "Id": "ID",
+      "Name": "Name",
+      "Status": "Status",
+      "Active": "Active",
+      "Past": "Past",
+      "Future": "Future"
     }
   },
   "SignIn": {
